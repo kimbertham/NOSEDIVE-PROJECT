@@ -29,6 +29,7 @@ class LoginView(APIView):
             raise PermissionDenied({'message': 'Invalid Credentilais'})
 
     def post(self, request):
+        print('hi')
         username = request.data.get('username')
         password = request.data.get('password')
         user = self.get_user(username)
