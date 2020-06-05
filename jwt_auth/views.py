@@ -10,10 +10,11 @@ import jwt
 
 from .serializers import UserSerializer
 
+
 User = get_user_model()
 
 class RegisterView(APIView):
-
+    
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -29,7 +30,6 @@ class LoginView(APIView):
             raise PermissionDenied({'message': 'Invalid Credentilais'})
 
     def post(self, request):
-        print('hi')
         username = request.data.get('username')
         password = request.data.get('password')
         user = self.get_user(username)
@@ -39,3 +39,20 @@ class LoginView(APIView):
         token = jwt.encode({'sub': user.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
         return Response({'token': token, 'message': f'Welcome back {user.username}'})
+
+
+class ProfileDetailView(APIView):
+
+    # get own profile 
+    def get_current_user(self, request, pk):
+        user = User.objects.get(pk=request.user.id)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
+
+    #get other users profile
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
+
+

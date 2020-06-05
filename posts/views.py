@@ -13,7 +13,6 @@ User = get_user_model()
 
 # make a post
 # get all the posts from one user 
-
 class PostListView(APIView):
 
     def get(self, request):
@@ -32,6 +31,7 @@ class PostListView(APIView):
 
 class PostDetailView(APIView):
 
+    
     def get_post(self, pk):
         print('GET POST REQUEST')
         try:
@@ -42,6 +42,9 @@ class PostDetailView(APIView):
     def is_post_owner(self, post, user):
         if post.owner.id != user.id:
             raise PermissionDenied()
+    
+    # DELETE POST 
+    #delete request, /api/posts/id
 
     def delete(self, request, pk):
         post_to_delete = self.get_post(pk)
@@ -52,6 +55,7 @@ class PostDetailView(APIView):
 
 class PostUserView(APIView):
 
+    #GET ALL POSTS FROM ONE USER
     def get(self, request):
         users_posts = Post.objects.filter(owner_id=request.user)
         serailized_posts = PopulatedCommentSerializer(users_posts, many=True)
