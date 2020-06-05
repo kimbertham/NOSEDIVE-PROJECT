@@ -1,14 +1,13 @@
 from django.shortcuts import render
+from .models import Comments
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from .models import Post
-from comments.serializers import PopulatedCommentSerializer
 User = get_user_model()
 
-class PostSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
+        model = Comments
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,7 +15,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username')
 
-class PopulatedPostSerializer(PostSerializer):
+
+class PopulatedCommentSerializer(CommentSerializer):
     owner = UserSerializer()
-    comments = PopulatedCommentSerializer(many=True)
+
 

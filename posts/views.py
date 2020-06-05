@@ -7,7 +7,7 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.exceptions import NotFound,PermissionDenied
 
 from .models import Post
-from .serializers import PopulatedCommentSerializer
+from .serializers import PopulatedPostSerializer
 
 User = get_user_model()
 
@@ -17,7 +17,7 @@ class PostListView(APIView):
 
     def get(self, request):
         posts = Post.objects.all()
-        serailized_posts = PopulatedCommentSerializer(posts, many=True)
+        serailized_posts = PopulatedPostSerializer(posts, many=True)
         return Response(serailized_posts.data, status=HTTP_200_OK)
 
     def post(self,request):
@@ -31,6 +31,10 @@ class PostListView(APIView):
 
 class PostDetailView(APIView):
 
+    def get(self, request, pk):
+        users_posts = Post.objects.filter(owner_id=pk)
+        serailized_posts = PopulatedPostSerializer(users_posts, many=True)
+        return Response(serailized_posts.data, status=HTTP_200_OK)
     
     def get_post(self, pk):
         print('GET POST REQUEST')
@@ -53,11 +57,11 @@ class PostDetailView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class PostUserView(APIView):
+# class PostUserView(APIView):
 
-    #GET ALL POSTS FROM ONE USER
-    def get(self, request):
-        users_posts = Post.objects.filter(owner_id=request.user)
-        serailized_posts = PopulatedCommentSerializer(users_posts, many=True)
-        return Response(serailized_posts.data, status=HTTP_200_OK)
+#     #GET ALL POSTS FROM ONE USER
+#     def get(self, request, pk):
+#         users_posts = Post.objects.filter(owner_id=pk)
+#         serailized_posts = PopulatedPostSerializer(users_posts, many=True)
+#         return Response(serailized_posts.data, status=HTTP_200_OK)
 
