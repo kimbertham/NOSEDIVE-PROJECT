@@ -57,11 +57,3 @@ class PostDetailView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-# class PostUserView(APIView):
-
-#     #GET ALL POSTS FROM ONE USER
-#     def get(self, request, pk):
-#         users_posts = Post.objects.filter(owner_id=pk)
-#         serailized_posts = PopulatedPostSerializer(users_posts, many=True)
-#         return Response(serailized_posts.data, status=HTTP_200_OK)
-
