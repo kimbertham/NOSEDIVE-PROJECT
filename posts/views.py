@@ -15,14 +15,19 @@ User = get_user_model()
 # get all the posts from one user 
 class PostListView(APIView):
 
-    def get(self, request):
-        posts = Post.objects.all()
-        serailized_posts = PopulatedPostSerializer(posts, many=True)
-        return Response(serailized_posts.data, status=HTTP_200_OK)
+    # def get(self, request):
+    #     posts = Post.objects.all()
+    #     serailized_posts = PopulatedPostSerializer(posts, many=True)
+    #     return Response(serailized_posts.data, status=HTTP_200_OK)
+
+
 
     def post(self,request):
         print('POST REQUEST')
+        if not request.POST._mutable:
+            request.POST._mutable = True
         request.data['owner'] = request.user.id
+        print(request.data)
         created_post = PostSerializer(data=request.data)
         if created_post.is_valid():
             created_post.save()
@@ -31,6 +36,7 @@ class PostListView(APIView):
 
 class PostDetailView(APIView):
 
+        #GET ALL POSTS FROM ONE USER
     def get(self, request, pk):
         users_posts = Post.objects.filter(owner_id=pk)
         serailized_posts = PopulatedPostSerializer(users_posts, many=True)
@@ -55,5 +61,6 @@ class PostDetailView(APIView):
         self.is_post_owner(post_to_delete, request.user)
         post_to_delete.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+
 
 

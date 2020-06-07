@@ -3,7 +3,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Ratings(models.Model):
-    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    rating = models.FloatField()
+    avg_rating = models.FloatField()
 
     owner = models.ForeignKey(
         'jwt_auth.User',
