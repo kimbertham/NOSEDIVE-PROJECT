@@ -10,6 +10,7 @@ from .serializers import RatingSerializer,PopulatedRatingSerializer
 from jwt_auth.serializers import UserSerializer
 from jwt_auth.models import User
 from .models import Ratings
+from postRatings.models import PostRatings
 
 
 class RatingListView(APIView):
@@ -29,11 +30,17 @@ class RatingListView(APIView):
 
 
     #GET ALL A USERS PAST RATINGS 
+    #.. GET ALL ONE USERS POSTS- RATINGS
+    #GET ALL ONE USERS PROFILE RATINGS 
+    #FIND SUM OF BOTH 
+    # FIND AVERAGE OF BOTH 
     def get(self, request, pk):
-        user_rating = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+        user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+        user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+        user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
         users_ratings = Ratings.objects.filter(owner_id=pk)
         serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
-        return Response(({'ratings':serailized_ratings.data, 'avg':user_rating['rating__avg'] }), status=HTTP_200_OK)
+        return Response(({'ratings':serailized_ratings.data, 'avg':user_rating_score }), status=HTTP_200_OK)
     
 
     

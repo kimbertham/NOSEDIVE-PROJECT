@@ -21,5 +21,6 @@ urlpatterns = [
     path('api/post/', include('posts.urls')),
     path('api/comments/', include('comments.urls')),
     path('api/ratings/', include('ratings.urls')),
+    path('api/postratings/', include('postRatings.urls')),
     path('api/', include('jwt_auth.urls'))
 ]
