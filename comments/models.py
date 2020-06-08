@@ -8,7 +8,12 @@ class Comments(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    owner = models.ForeignKey(
+    comment_owner = models.ForeignKey( #the person commenting 
+    'jwt_auth.User',
+    related_name='comment', 
+    on_delete=models.CASCADE)
+
+    post_owner = models.ForeignKey( #the person commenting 
     'jwt_auth.User',
     related_name='comments', 
     on_delete=models.CASCADE)
@@ -19,4 +24,4 @@ class Comments(models.Model):
     on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'comment - {self.owner}'
+        return f'comment - {self.comment_owner}'

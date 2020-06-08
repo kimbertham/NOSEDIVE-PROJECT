@@ -16,13 +16,16 @@ class RatingListView(APIView):
 
     
     def post(self, request, pk):
+        if not request.POST._mutable:
+            request.POST._mutable = True
         request.data['rated'] = pk
         request.data['owner'] = request.user.id
+        print(request.data)
         created_rating = RatingSerializer(data=request.data)
         if created_rating.is_valid():
             created_rating.save()
             return Response(created_rating.data,status=HTTP_201_CREATED)
-        return Response( status=HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response( created_rating.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 
     #GET ALL A USERS PAST RATINGS 
