@@ -17,8 +17,7 @@ class Ratings(models.Model):
         on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.owner} Rated {self.rated} {self.rating}'

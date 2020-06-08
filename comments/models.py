@@ -5,7 +5,7 @@ User = get_user_model()
 
 class Comments(models.Model):
     content = models.CharField(max_length=500)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     comment_owner = models.ForeignKey( #the person commenting 

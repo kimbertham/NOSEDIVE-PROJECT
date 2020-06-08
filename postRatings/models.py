@@ -19,10 +19,10 @@ class PostRatings(models.Model):
         related_name='ratings', 
         on_delete=models.CASCADE)
 
-
+    updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
 
     def __str__(self):
-        return f'{self.owner} {self.rating}'
+        return f'{self.post_owner} {self.rating}'
