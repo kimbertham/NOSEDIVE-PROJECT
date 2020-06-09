@@ -2,14 +2,14 @@ from django.shortcuts import render
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from .models import Post
-from comments.serializers import PopulatedCommentSerializer
+from .models import Photos
+
 User = get_user_model()
 
-class PostSerializer(serializers.ModelSerializer):
+class PhotoSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Post
+        model = Photos
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     
 
-class PopulatedPostSerializer(PostSerializer):
+class PopulatedPhotosSerializer(PhotoSerializer):
     owner = UserSerializer()
-    comments = PopulatedCommentSerializer(many=True)
+
 

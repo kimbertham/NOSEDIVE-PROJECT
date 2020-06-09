@@ -24,6 +24,10 @@ class PostRatingSerializer(serializers.ModelSerializer):
 
 
 class PopulatedPostRatingSerializer(PostRatingSerializer):
+#     count = serializers.IntegerField(
+#     source='post_set.count', 
+#     read_only=True
+# )
     post_owner = UserSerializer()
     rating_owner = UserSerializer()
     post = PostSerializer()
