@@ -23,5 +23,6 @@ urlpatterns = [
     path('api/ratings/', include('ratings.urls')),
     path('api/postratings/', include('postRatings.urls')),
     path('api/photos/', include('photos.urls')),
+    path('api/follow/',include('follow.urls')),
     path('api/', include('jwt_auth.urls'))
 ]

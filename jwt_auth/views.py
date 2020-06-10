@@ -9,9 +9,7 @@ from django.conf import settings
 import jwt
 
 from .serializers import UserSerializer
-
-
-User = get_user_model()
+from jwt_auth.models import User
 
 class RegisterView(APIView):
     
@@ -42,17 +40,10 @@ class LoginView(APIView):
 
 
 class ProfileDetailView(APIView):
-
     # get own profile 
-    def get_current_user(self, request, pk):
-        user = User.objects.get(pk=request.user.id)
-        serialized_user = UserSerializer(user)
-        return Response(serialized_user.data)
-
-    #get other users profile
     def get(self, request, pk):
+        print('test')
         user = User.objects.get(pk=pk)
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
-
 

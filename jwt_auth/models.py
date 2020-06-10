@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from follow.models import Contact
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=50)
@@ -11,6 +12,10 @@ class User(AbstractUser):
     career = models.CharField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
     age = models.IntegerField(blank=True, null=True)
+
+    following = models.ManyToManyField('self', through=Contact, related_name='followers',symmetrical=False)
+
+
     RELATIONSHIP_CHOICES = (
         ('Single', 'Single'),
         ('Relationship', 'In a Realtionship'),
