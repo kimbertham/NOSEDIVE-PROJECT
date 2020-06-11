@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'ratings',
     'postRatings',
     'photos',
-    'follow'
+    'follow',
+    'wishlist'
     
 ]
 
