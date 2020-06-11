@@ -16,8 +16,18 @@ class Ratings(models.Model):
         related_name='rating',
         on_delete=models.CASCADE)
 
+    FEEDBACK_CHOICES = (
+        ('Unattractive', 'Unattractive'),
+        ('Rude Interaction', 'Rude Interaction'),
+        ('Unpleasant Smell', 'Unpleasant Smell'),
+        ('Impoverished Vibes', 'Impoverished Vibes'),
+        ('Disciminatory', 'Disciminatory'),
+    )
+    feedback = models.CharField(max_length=100, blank=True, choices=FEEDBACK_CHOICES)
+    
+
     created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f'{self.owner} Rated {self.rated} {self.rating}'

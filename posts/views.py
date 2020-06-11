@@ -11,6 +11,7 @@ from django.db.models import Count
 from .models import Post
 from postRatings.models import PostRatings
 from postRatings.serializers import PopulatedPostRatingSerializer
+from follow.models import Contact
 from .serializers import PopulatedPostSerializer
 
 User = get_user_model()
@@ -23,9 +24,11 @@ class PostListView(APIView):
         posts = Post.objects.all()
         newest_posts = posts.order_by('-created_at')
         serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True)
-        # top_rated_posts = PostRatings.objects.filter(rating=5).annotate(count=Count('post')).order_by('-count')
-        return Response( serailized_newest_posts.data , status=HTTP_200_OK)
+        top_rated_posts = PostRatings.objects.filter(rating=5).order_by('created_at')
+        serailized_top_posts = PostSerializer(top_rated_posts, many=True)
+        return Response(  serailized_newest_posts.data, status=HTTP_200_OK)
 
+    
 
     def post(self,request):
         if not request.POST._mutable:

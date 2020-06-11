@@ -22,8 +22,6 @@ class User(AbstractUser):
         ('Complicated', 'Complicated'),
         ('Widowed', 'Widowed'),
         ('Engaged', 'Engaged'),
-        
-        
     )
     relationship = models.CharField(max_length=100, blank=True, choices=RELATIONSHIP_CHOICES)
     

@@ -47,3 +47,5 @@ class ProfileDetailView(APIView):
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
 
+
+
