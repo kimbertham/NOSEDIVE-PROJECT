@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'postRatings',
     'photos',
     'follow',
-    'wishlist'
+    'wishlist',
+    # 'message'
     
 ]
 

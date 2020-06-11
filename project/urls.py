@@ -25,5 +25,6 @@ urlpatterns = [
     path('api/photos/', include('photos.urls')),
     path('api/follow/',include('follow.urls')),
     path('api/wishlist/',include('wishlist.urls')),
+    # path('api/messages/',include('message.urls')),
     path('api/', include('jwt_auth.urls'))
 ]

@@ -5,6 +5,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 from rest_framework.exceptions import NotFound
 from django.db.models import Avg, Sum
 import math
+from django.db.models import Count
 
 from .serializers import RatingSerializer,PopulatedRatingSerializer
 from jwt_auth.serializers import UserSerializer
@@ -28,20 +29,30 @@ class RatingListView(APIView):
             return Response(created_rating.data,status=HTTP_201_CREATED)
         return Response( created_rating.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
+class RatingDetailView(APIView):
 
     #GET ALL A USERS PAST RATINGS 
     #.. GET ALL ONE USERS POSTS- RATINGS
     #GET ALL ONE USERS PROFILE RATINGS 
     #FIND SUM OF BOTH 
     # FIND AVERAGE OF BOTH 
-    def get(self, request, pk):
-        user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
-        user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
-        user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
-        users_ratings = Ratings.objects.filter(owner_id=pk)
-        serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
-        return Response(({'ratings':serailized_ratings.data, 'avg':user_rating_score }), status=HTTP_200_OK)
-    
+    def get(self, request,action,  pk):
+        if action == 'ratedata':
+            user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+            user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+            user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
+            users_ratings = Ratings.objects.filter(owner_id=pk)
+            serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
+            return Response(({'ratings':serailized_ratings.data, 'avg':user_rating_score }), status=HTTP_200_OK)
+        if action == 'datedata':
+            num_by_date=Ratings.objects.filter(rated=pk).values('created_at').annotate(rating_count=Count('rating')).order_by('created_at')
+            return Response( num_by_date , status=HTTP_200_OK)
+
+
+    # #GET RATINGS PER DAY DATA
+    # def get(self, request, pk):
+    #     num_by_date=Ratings.objects.filter(rated=pk).values('created_at').annotate(rating_count=Count('rating'))
+    #     return Response( num_by_date , status=HTTP_200_OK)
 
     
 
