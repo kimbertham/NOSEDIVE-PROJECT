@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'photos',
     'follow',
     'wishlist',
-    # 'message'
+    # 'message',
+    'forum'
     
 ]
 
