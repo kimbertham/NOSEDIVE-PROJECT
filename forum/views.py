@@ -25,7 +25,16 @@ class  ForumListView(APIView):
 
     #GET ALL FUSERS MESSAGES 
     def get(self, request):
+
         threads = Forum.objects.all().order_by('-id')
         serialized_forum = PopulatedForumSerializer(threads, many=True)
         return Response( serialized_forum.data , status=HTTP_200_OK)
+
+class  ForumDetailView(APIView):
+    def get(self, request, pk):
+        thread = Forum.objects.filter(pk=pk)
+        serialized_forum = PopulatedForumSerializer(thread,many=True)
+        return Response( serialized_forum.data , status=HTTP_200_OK)
+
+        
 
