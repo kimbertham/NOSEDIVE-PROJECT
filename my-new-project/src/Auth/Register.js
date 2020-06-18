@@ -15,7 +15,7 @@ class Register extends React.Component{
       const errors = { ...this.state.errors, [event.target.name]: '' }
       this.setState({ formData, errors })
     } catch (err) {
-      this.setState({ errors: err.response.data.errors })
+      console.log(err)
     }
   }
 
