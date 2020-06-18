@@ -10,7 +10,7 @@ state = {
 
 async componentDidMount() {
   const userId = getUserId()
-  const res = await axios.get(`/api/postratings/${userId}`)
+  const res = await axios.get(`/api/postratings/${userId}/`)
   const interactions = res.data.splice(0).reverse()
   this.setState({ interactions })
 }

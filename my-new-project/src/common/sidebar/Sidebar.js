@@ -33,7 +33,7 @@ render(){
 
         <div className='sidebar-section'>
           <h1> New Posts</h1>
-          {/* {newPosts.map(post => {
+          {newPosts.map(post => {
             return (
               <SidebarPosts 
                 key={post.id} 
@@ -41,7 +41,7 @@ render(){
                 userId={post.owner.id} 
                 postId={post.id}/>
             )
-          })} */}
+          })}
         </div>
 
 
