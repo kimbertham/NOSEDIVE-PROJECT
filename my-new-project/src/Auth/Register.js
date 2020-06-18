@@ -19,13 +19,6 @@ class Register extends React.Component{
     }
   }
 
-  getSubmitErrors = (arr) => {
-    function reducer(a, errItem) {
-      return { ...a, [errItem[0]]: errItem[1].message.replace('Path ', '') }
-    }
-    const error = arr.reduce(reducer, {})
-    this.setState({ errors: error })
-  }
 
   handleSubmit = async event => {
     event.preventDefault()
