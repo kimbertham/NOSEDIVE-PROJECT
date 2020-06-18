@@ -19,7 +19,8 @@ const App = () => {
     <>
       <BrowserRouter>
     
-        <Route component={Sidebar}/> 
+        {token ?  <Route component={Sidebar}/> : ''}
+
         <Switch>
         
           <Route path='/login' component={Login} />
