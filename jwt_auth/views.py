@@ -6,10 +6,26 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 import jwt
+from django.db.models import Avg, Sum
 
 from .serializers import UserSerializer
 from jwt_auth.models import User
+from photos.models import Photos
+from photos.serializers import PhotoSerializer
+from wishlist.models import Wishlist
+from wishlist.serializers import WishlistSerializer
+from follow.models import Contact
+from follow.serializers import PopulatedFollowerSerializer, PopulatedFollowingSerializer
+from posts.models import Post
+from posts.serializers import PopulatedPostSerializer
+from ratings.models import Ratings
+from ratings.serializers import RatingSerializer, PopulatedRatingSerializer
+from postRatings.models import PostRatings
+from comments.models import Comments
+from comments.serializers import PopulatedCommentSerializer
+
 
 class RegisterView(APIView):
     
@@ -45,7 +61,49 @@ class ProfileDetailView(APIView):
         print('test')
         user = User.objects.get(pk=pk)
         serialized_user = UserSerializer(user)
-        return Response(serialized_user.data)
+        photos = Photos.objects.filter(owner=pk)
+        serailized_photos = PhotoSerializer(photos, many=True)
+
+        wishlist = Wishlist.objects.filter(owner=pk)
+        serailized_wishlist = WishlistSerializer(wishlist, many=True)
+
+        following = Contact.objects.filter(user_from=pk)
+        serialized_following = PopulatedFollowingSerializer(following, many=True)
+
+        followers = Contact.objects.filter(user_to=pk)
+        serialized_followers = PopulatedFollowerSerializer(followers, many=True)
+        users_posts = Post.objects.filter(owner_id=pk)
+        serailized_posts = PopulatedPostSerializer(users_posts, many=True)
+
+        user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+        user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+        if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
+            user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
+        elif not user_profile_ratings['rating__avg']:
+            user_rating_score = user_post_ratings['rating__avg']
+        elif not user_post_ratings['rating__avg']:
+            user_rating_score = user_profile_ratings['rating__avg']
+        else: 
+            user_rating_score = 0
+        users_ratings = Ratings.objects.filter(owner_id=pk)
+        serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
+
+        all_comments = Comments.objects.filter(comment_owner=pk)
+        serailized_comments = PopulatedCommentSerializer(all_comments, many=True)
+
+        return Response({  
+            'bio': serialized_user.data,
+            'ratings':serailized_ratings.data,
+            'avg':user_rating_score,
+            'posts': serailized_posts.data,
+            'comments':serailized_comments.data,
+            'photos':serailized_photos.data,
+            'following':serialized_following.data,
+            'followers':serialized_followers.data,
+            'wishlist':serailized_wishlist.data} , status=HTTP_200_OK)
+        
+
+
 
 
 
