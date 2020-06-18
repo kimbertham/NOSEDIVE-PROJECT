@@ -1,0 +1,32 @@
+.forum-thread{
+  padding: 8px;
+  justify-content: space-between;
+  h1{
+    font-size: 22px;
+  }
+  .forum-icon{
+    height: 80px;
+    border-radius: 10px;
+    margin:10px 20px;
+  }
+.thread-small{
+  margin:10px 0;
+  font-size: 12px;
+}
+}
+
+.thread-limits{
+    color: red;
+    margin:10px;
+  }
+
+.thread-img{
+  border-radius: 20px;
+  width:200px;
+  margin: 20px 20px 10px 0  ;
+}
+.thread-content{
+  margin: 20% 0 0 0;
+  font-size: 40px;
+
+}
