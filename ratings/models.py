@@ -21,7 +21,7 @@ class Ratings(models.Model):
         ('Rude Interaction', 'Rude Interaction'),
         ('Unpleasant Smell', 'Unpleasant Smell'),
         ('Impoverished Vibes', 'Impoverished Vibes'),
-        ('Disciminatory', 'Disciminatory'),
+        ('Discriminatory', 'Discriminatory'),
     )
     feedback = models.CharField(max_length=100, blank=True, choices=FEEDBACK_CHOICES)
     

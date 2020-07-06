@@ -1,8 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { setToken } from '../lib/auth'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { getUserId } from '../lib/auth'
+
 
 
 class Login extends React.Component{
@@ -106,4 +107,4 @@ class Login extends React.Component{
   }
 }
 
-export default Login
+export default withRouter(Login)

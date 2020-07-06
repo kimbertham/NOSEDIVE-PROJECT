@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 import PostContent from './PostContent'
 import MakeComments from './PostComments/MakeComments'
 import PostComments from './PostComments/PostComments'
 import PostsRatingStars from './PostsRatingStars'
-import { getUserId } from '../lib/auth'
 
 class Posts extends React.Component {
   state = {
@@ -18,55 +18,58 @@ class Posts extends React.Component {
   }
 
   async componentDidMount() {
+    this.getPostRatings()
+  }
+
+  getPostRatings = async () => {
     const postId = this.props.posts.id
-    const userId = getUserId()
-    const ratings = await axios.get(`/api/postratings/profile/${userId}/post/${postId}`) 
+    const userId = this.props.user.bio.id
+    const ratings = await axios.get(`/api/postratings/profile/${userId}/post/${postId}/`) 
     this.setState({ ratings: ratings.data })
-    
   }
 
   render(){
-    const { posts, data, updateProfile } = this.props
-    const { ratings } = this.state
+    const { posts, updateProfile, currentUserId } = this.props
+    const { ratings,comments } = this.state
     return (
       <div className='posts'>
           
         <div className='post-stars'>
+
           <PostsRatingStars
-            postId={posts.id} 
-            userId={posts.owner.id} 
+            posts={posts}
             updateProfile={updateProfile} 
-            data={data}/>
+            getPostRatings={this.getPostRatings}/>
         </div>
 
         <PostContent 
           posts={posts}
           ratings={ratings}
-          showComments={this.showComments} />
+          showComments={this.showComments} 
+          currentUserId={currentUserId}
+          updateProfile={updateProfile}/>
             
 
-        <div className=
-          {this.state.comments === true ?
-            'display-block' : 'display-none'}>
+        <div className={comments ?
+          'display-block' : 'display-none'}>
 
           {posts.comments.map(comment => {
             return (
               <PostComments 
                 key={comment.id} 
-                comment={comment}/>
+                comment={comment}
+                updateProfile={updateProfile}/>
             )
           })}
 
           <MakeComments 
-            ownerId={posts.owner.id} 
-            postId={posts.id} 
-            data={data}/>
+            posts={posts}
+            updateProfile={updateProfile}/>
 
         </div>
-
       </div>
     )
   }
 }
 
-export default Posts
+export default withRouter(Posts)

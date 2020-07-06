@@ -13,7 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name','last_name', 'profile_image')
+        fields = ('id', 'username', 'profile_image')
 
 
 class PopulatedCommentSerializer(CommentSerializer):

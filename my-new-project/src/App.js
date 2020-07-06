@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter , Switch, Route } from 'react-router-dom'
 
 import ProfilePage from './Profiles /ProfilePage'
+import ProfileBioEdit from './Profiles /ProfileSections/ProfileBio/ProfileBioEdit'
 import Sidebar from './common/sidebar/Sidebar'
 import  Login  from './Auth/Login'
 import Register from './Auth/Register'
@@ -15,28 +16,27 @@ const token = getToken()
 
 
 const App = () => {
+
+  
   return (
     <>
       <BrowserRouter>
-    
+      
         {token ?  <Route component={Sidebar}/> : ''}
 
         <Switch>
-        
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-        
+          <Route path='/profile/:id/edit' component={ProfileBioEdit}/>
+          
           <div className='left-section'>
             <Route path='/stats/:id' component={Stats}/>
             <Route path='/profile/:id' component={ProfilePage}/>
             <Route path='/community' component={Forum} /> 
             <Route path='/forum/:id' component={ForumThreads} /> 
-
           </div>
+
         </Switch>
-
-
-      
       </BrowserRouter>
 
     </>

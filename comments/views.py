@@ -35,18 +35,23 @@ class CommentDetailView(APIView):
         if comment.comment_owner.id != user.id:
             raise PermissionDenied()
 
+
+
+class CommentView(APIView):
+#GET ALL COMMENTS FROM ONE USER
+    # def get(self,request, pk):
+    #     all_comments = Comments.objects.filter(comment_owner=pk)
+    #     serailized_comments = PopulatedCommentSerializer(all_comments, many=True)
+    #     return Response(serailized_comments.data, status=HTTP_200_OK)
+
     def delete(self, request, pk):
         comment_to_delete = Comments.objects.get(pk=pk)
-        self.is_comment_comment_owner(comment_to_delete, request.user)
+        print(comment_to_delete.comment_owner.id )
+        print(request.user.id)
+        if comment_to_delete.comment_owner.id != request.user.id:
+            raise PermissionDenied()
         comment_to_delete.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
-
-class CommentProfileView(APIView):
-#GET ALL COMMENTS FROM ONE USER
-    def get(self,request, pk):
-        all_comments = Comments.objects.filter(comment_owner=pk)
-        serailized_comments = PopulatedCommentSerializer(all_comments, many=True)
-        return Response(serailized_comments.data, status=HTTP_200_OK)
 
 

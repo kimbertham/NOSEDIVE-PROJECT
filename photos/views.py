@@ -30,3 +30,10 @@ class PhotosDetailView(APIView):
         serailized_photos = PhotoSerializer(photos, many=True)
         return Response( serailized_photos.data , status=HTTP_200_OK)
 
+    def delete(self, request, pk):
+        photo_to_delete = Photos.objects.get(pk=pk)
+        if photo_to_delete.owner.id != request.user.id:
+            raise PermissionDenied()
+        photo_to_delete.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+

@@ -20,8 +20,8 @@ class ImageUpload extends React.Component {
     const photoRes = await axios.post(uploadUrl, data)
     this.setState({ formData: { image: photoRes.data.url } },
       async () => {
-        const res = await axios.post('/api/photos/', this.state.formData, headers())
-        console.log(res.data)
+        await axios.post('/api/photos/', this.state.formData, headers())
+        this.props.updateProfile()
       }
     )
   }

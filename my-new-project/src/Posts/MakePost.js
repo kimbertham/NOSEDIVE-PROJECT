@@ -18,15 +18,15 @@ class MakePost extends React.Component {
     event.preventDefault()
     try {
       await axios.post('/api/post/', this.state.form, headers())
-      this.setState({ form: { content: '' } }, () => {
-        // this.props.data()
-      })
+      this.setState({ form: { content: '' } })
+      this.props.updateProfile()
     } catch (err) {
       console.log(err)
     }
   }
 
   render(){
+
     return (
       <div className='make-post-container dark-border'>
         <form 

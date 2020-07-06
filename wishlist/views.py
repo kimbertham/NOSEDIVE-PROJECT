@@ -32,3 +32,10 @@ class WishlistDetailView(APIView):
         wishlist = Wishlist.objects.filter(owner=pk)
         serailized_wishlist = WishlistSerializer(wishlist, many=True)
         return Response( serailized_wishlist.data , status=HTTP_200_OK)
+
+    def delete(self, request, pk):
+        item_to_delete = Wishlist.objects.get(pk=pk)
+        if item_to_delete.owner.id != request.user.id:
+            raise PermissionDenied()
+        item_to_delete.delete()
+        return Response(status=HTTP_204_NO_CONTENT)

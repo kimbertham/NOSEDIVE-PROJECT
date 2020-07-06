@@ -20,7 +20,6 @@ class PostRatingListView(APIView):
         request.data['post'] = pk
         request.data['post_owner'] = id
         request.data['rating_owner'] = request.user.id
-        print(request.data)
         created_post_rating = PostRatingSerializer(data=request.data)
         if created_post_rating.is_valid():
             created_post_rating.save()

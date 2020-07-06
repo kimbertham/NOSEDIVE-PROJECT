@@ -32,4 +32,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+class EditUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User 
+        fields = ('first_name','last_name','description','tagline','career','location','age','relationship' )
 

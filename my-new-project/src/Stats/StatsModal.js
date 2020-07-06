@@ -8,7 +8,7 @@ const StatsModal = ({ advice, weakness, handleModal, modal }) => {
 
   return (
 
-    <div className={`modal ${modalClass}`}
+    <div className={`modal center ${modalClass}`}
       onClick={handleModal}>
 
 

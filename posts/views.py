@@ -48,25 +48,16 @@ class PostDetailView(APIView):
         serailized_posts = PopulatedPostSerializer(users_posts, many=True)
         return Response(serailized_posts.data, status=HTTP_200_OK)
     
-    def get_post(self, pk):
-        print('GET POST REQUEST')
-        try:
-            return Post.objects.get(pk=pk)
-        except Post.DoesNotExist:
-            raise NotFound()
-
-    def is_post_owner(self, post, user):
-        if post.owner.id != user.id:
-            raise PermissionDenied()
-    
     # DELETE POST 
     #delete request, /api/posts/id
-
     def delete(self, request, pk):
-        post_to_delete = self.get_post(pk)
-        self.is_post_owner(post_to_delete, request.user)
+        post_to_delete = Post.objects.get(pk=pk)
+        if post_to_delete.owner.id != request.user.id:
+            raise PermissionDenied()
         post_to_delete.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+
+
 
 
 

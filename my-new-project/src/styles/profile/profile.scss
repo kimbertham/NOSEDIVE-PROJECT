@@ -1,11 +1,26 @@
+.modal-pop{
+  margin: 0 auto;
+  background-color: white;
+  width:30%;
+  border-radius: 10px;
+  text-align: center;
+  padding:50px;
+  }
+
+.img-settings{
+  position: absolute;
+  margin:0.5% 0 0 4% ;
+  border-radius:50%;
+  opacity:0.8;
+  width: 2%;
+}
 
 .profile-section {
-width: 75%;
+padding:10px
 }
 .profile-head{
   z-index: 1;
-
-  padding:10px 10px;
+  padding:20px 10px 0 10px;
 
 }
 .profile-ratings{
@@ -16,22 +31,16 @@ width: 75%;
   margin: 2%;
   font-style: italic;
 }
-.feedback-pop{
-  width:50%;
-  height:80%;
-  position:absolute;
-  background-color: rgba(255,255,255, 0.9);
-  margin-left: 400px;
 
- 
-}
 
-.profile-modal{
-  background-color: rgba(0,0,0, 0.6);
-  position: absolute;
-  height:100%;
-  width: 52%;
-}
+
+  .feedback-pop{
+    width:50%;
+    height:80%;
+    // position:absolute;
+  }
+
+
 
 // ProfileIno.js 
 
@@ -39,13 +48,13 @@ width: 75%;
   display: flex;
   justify-content: space-between;
   .profile-image {
-    height: 200px;
+    height: 20vh;
     margin-right: 20px;
   }
   
   .profile-text {
     h1 {
-      font-size: 70px;
+      font-size: 4em;
     }
     .profile-details {
       h1{
@@ -64,28 +73,33 @@ width: 75%;
   display: flex;
   justify-content: space-between;
   font-style: italic;
-  font-size: 25px;
-  border-bottom: 1px solid black;
+  font-size: 2vh;
+  padding:0.5%;
+  margin-top:10px;
+  border-radius: 10px;
+  background-color:rgba(255,255,255, 0.7);
 }
 
 //Profile-interactions.js
 
+.profile-posts {
+  width: 80%;
+}
+
 .profile-interactions {
-  h1{
-    font-size: 20px;
-    font-style: underline;
-    position: sticky;
-    top:0;
+  margin-left:20px;
+  top:260px;
+  .int-h1{
+    font-size: 15px;
+    padding:10px;
+    background-color: transparent;
   }
   background-color:rgba(255,255,255, 0.3);
   border-radius: 10px;
-  padding:15px;
-  margin-top:30px;
+  padding:0 15px;
   height: 60vh;
-  overflow-y: scroll;
   text-align: center;
 
-  margin:20px 30px;
   .posts-interactions {
     padding:5px 10px;
     margin:5px 0;
@@ -95,13 +109,27 @@ width: 75%;
   }
 }
 
+//ProfileBio.js
+
+.small-right{
+  width: 5%;
+  float: right;
+}
+
+//editProfile.js
+
+.edit-profile {
+  margin: 100px 200px  !important;
+}
+
 //ProfilePhotos.js
 
 .profile-photos{
 
 display: flex;  
 flex-wrap: wrap;
-margin: 20px 0;
+justify-content: center;
+align-items: center;
 
 
 .users-photos {
@@ -109,10 +137,44 @@ margin: 20px 0;
   margin:2px;
   background-size: cover;
   background-position: center;
-  width:200px;
-  height:200px;
+  width:210px;
+  height:210px;
 }
 }
+
+
+
+.gallery-container {
+  width:80%;
+  height:80%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  margin-right: 10%;
+  position: static;
+  .gallery-image{
+    max-width:100%;
+    max-height:100%;
+  }
+  .gallery-button{
+    width:50px;
+    border:none;
+    color: white;
+    font-size: 20px;
+    background: #ffc2b7 ;
+    position: relative;
+  }
+}
+
+.gallery-contents{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
 
 
 // profileFollowers.js
@@ -120,6 +182,7 @@ margin: 20px 0;
 .followers-container{
 margin:20px 0;
 .follow-field {
+  background-color: rgba(255,255,255, 0.3);
   padding:10px;
   margin:5px;
   .follow-pic {
@@ -133,16 +196,21 @@ margin:20px 0;
   }
 }
 
+// .follow-button{
+//   margin:10px;
+//   height: 10%;
+// }
+
 
 
 // profileWishList.js
-.wishlist-section {
-  width:100%;
-
-
+.wishlist-section{
+  height: 70vh;
 }
+
 .products-container {
   flex-wrap: wrap;
+justify-content: center;
   h1{
     margin:10px 0;
     font-size: 15px;
@@ -150,11 +218,10 @@ margin:20px 0;
   .product-field{
     margin:5px;
     padding:10px;
-    width: 20%;
+    width: 15%;
+
     border-radius: 10px;
     background-color: rgba(255,255,255, 0.6);
-
-  
   }
 }
 
@@ -169,11 +236,8 @@ margin:20px 0;
   }
 }
 
-.modal-pop{
-  margin: 0 auto;
-  background-color: white;
-  width:30%;
-  border-radius: 10px;
-  text-align: center;
-  padding:50px;
-  }
+.wishlist-button {
+margin:10px;
+  float: right;
+}
+

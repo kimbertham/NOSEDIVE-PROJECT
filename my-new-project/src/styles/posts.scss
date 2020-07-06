@@ -1,8 +1,8 @@
 .posts {
-  // *{border:2px solid red;}
   padding:20px 0;
   border-bottom: 1px solid rgb(143, 24, 43);
   margin-right:2%; 
+
   h1{
     font-size: 18px;
   }
@@ -17,7 +17,11 @@
   }
 
   h1{
-    font-size: 20px;
+    font-size: 15px;
+  }
+
+  .comment-button{
+    padding:0 3px;
   }
 
   .date-text{
@@ -39,6 +43,25 @@
   .post-interactions {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+  }
+
+}
+
+.post-settings {
+
+  justify-content: space-between;
+
+  .settings-icon {
+    position: relative;
+    width:10%;
+    justify-content: flex-end;
+  }
+
+  .post-delete{
+    margin-top:20%;
+    position: absolute;
+    padding:0 0.3em;
   }
 
 }
@@ -51,18 +74,22 @@ justify-content: flex-end;
 
 //MakePost.js
 .make-post-container {
+
   background-color:rgba(255,255,255, 0.3);
   padding: 20px;
   border-radius: 20px;
-  margin:25px 0 ;
+  margin:0 0 10px 0 ;
+
   .post-form{
     width: 100%;
     }
   }
+
   .post-texarea{
     width: 90%;
     border-radius: 10px;
   }
+
   .post-button {
     height:30px;
     margin: 10px;
@@ -76,10 +103,12 @@ justify-content: flex-end;
   background-color: rgba(255,255,255, 0.6);
   padding:5px;
   border-radius: 10px;
-  margin:5px 0 ;
+  margin:1% 0 ;
+
   small{
     font-size: 11px;
   }
+
   .comment-details{
     display: flex;
     justify-content: space-between;
@@ -88,14 +117,23 @@ justify-content: flex-end;
 
 // makeComments.js
 
+.comment-content{
+display: flex;
+justify-content: space-between;
+
+  small{
+    margin:2px;
+  }
+}
 
 .comment-input{
-  width:88%;
+  width:80%;
   height:20px;
   border-radius: 5px;
   margin: 10px 0;
 }
+
 .comment-button {
-  margin: 9px;
+  margin-left: 9px;
 }
 

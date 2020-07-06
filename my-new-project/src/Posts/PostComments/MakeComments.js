@@ -19,11 +19,11 @@ class MakeComments extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      const postOwner = this.props.ownerId 
-      const postId = this.props.postId
-      await axios.post(`/api/comments/${postOwner}/${postId}`, this.state.form, headers())
+      const postOwner = this.props.posts.owner.id
+      const postId = this.props.posts.id
+      await axios.post(`/api/comments/${postOwner}/${postId}/`, this.state.form, headers())
       this.setState({ form: { content: '' } })
-      this.props.data()
+      this.props.updateProfile()
     } catch (err) {
       console.log(err)
     }
@@ -33,7 +33,7 @@ class MakeComments extends React.Component {
     return (
 
       <form onSubmit={this.handleSubmit}
-        className='make-comment-container'>
+        className='make-comment-container bordered-box'>
         <input
           name='content'
           className='comment-input dark-border'

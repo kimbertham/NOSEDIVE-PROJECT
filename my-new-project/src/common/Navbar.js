@@ -1,21 +1,34 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { getUserId } from '../lib/auth'
+
 
 const userId = getUserId()
 
-const Navbar = () => {
+class Navbar extends React.Component {
   
+handleLogout = () => {
+  localStorage.removeItem('token')
+  this.props.history.push('/login')
+  window.location.reload()
+}
 
+handleProfileNav = () => {
+  this.props.history.push(`/profile/${userId}/activity`)
+  window.location.reload()
+}
+
+render(){
   return (
     <div className='navbar'> 
     
-      <Link 
-        to={`/profile/${userId}/activity`}>
-        <img src='https://bit.ly/3cVoKCU'
-          className='nav-icon'
-          alt='user-profile'/>
-      </Link>
+      
+      <img 
+        onClick={this.handleProfileNav}
+        src='https://bit.ly/3cVoKCU'
+        className='nav-icon'
+        alt='user-profile'/>
+
 
       <Link 
         to='/home'> 
@@ -43,8 +56,25 @@ const Navbar = () => {
           alt='stats'/>
       </Link>
 
+      <Link
+        to={`/profile/${userId}/edit`}>
+        <img src='https://i.imgur.com/BvhVhb3.jpg' 
+          className='nav-icon'
+          alt='user-profile'/>
+      </Link>
+      
+
+      <img 
+        onClick={this.handleLogout}
+        src='https://i.imgur.com/fgiTuvG.jpg' 
+        className='nav-icon'
+        alt='user-profile'/>
+
+  
+
     </div>
   )
 }
+}
 
-export default Navbar
+export default withRouter(Navbar)

@@ -1,14 +1,15 @@
 import React from 'react'
-import { defaultImage } from '../../lib/commonFiles'
+import { defaultImage } from '../../../lib/commonFiles'
 
 
-const ProfileFollowers = ({ followers, getData }) => {
+const ProfileFollowers = ({ user, getData }) => {
 
+  const { followers } = user
   if (!followers ) return ''
   return (
 
     <div className='followers-container fill-width flex'>
-
+      
       {followers.map(follower => {
         return (
 
@@ -20,7 +21,7 @@ const ProfileFollowers = ({ followers, getData }) => {
             <div 
               className="follow-pic" 
               style ={ { backgroundImage: `url(${follower.user_from.profile_image ? 
-                follower.user_from.profile_image : defaultImage})` } }></div>
+                follower.user_from.profile_image : defaultImage})` } }/>
 
             <h1 
               className='italic'> 
@@ -28,7 +29,7 @@ const ProfileFollowers = ({ followers, getData }) => {
             </h1>
 
             <small> 
-                Friends since {follower.created.slice(0, 10).split('-').reverse().join(' ')}
+                Friends since {follower.created.split('-').reverse().join(' ')}
             </small>
 
           </div>

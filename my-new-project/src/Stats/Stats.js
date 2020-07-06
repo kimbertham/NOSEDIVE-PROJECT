@@ -102,6 +102,8 @@ class Stats extends React.Component{
   }
 
   render() {
+    const win = window.innerWidth
+    console.log(win)
  
     return (
       <>
@@ -119,7 +121,7 @@ class Stats extends React.Component{
 
 
 
-        <div className='bordered-box dark-border stats-text full-width'>Id exercitation officia cupidatat minim velit esse exercitation consequat ad anim veniam labore ut consectetur.Do voluptate sint aliqua eu enim reprehenderit nostrud dolore.Velit quis duis et laborum do occaecat.Sit Lorem incididunt incididunt laboris voluptate amet duis aliquip laborum.Adipisicing pariatur sint qui irure.Aute consequat dolore voluptate deserunt voluptate adipisicing proident ea.Voluptate exercitation ex sint adipisicing.Qui incididunt exercitation ex ex aliquip tempor veniam ea ad qui sunt tempor ad exercitation.Id deserunt consectetur deserunt dolore fugiat culpa non est ea minim consectetur.</div>
+        <div className='bordered-box dark-border stats-text'>Id exercitation officia cupidatat minim velit esse exercitation consequat ad anim veniam labore ut consectetur.Do voluptate sint aliqua eu enim reprehenderit nostrud dolore.Velit quis duis et laborum do occaecat.Sit Lorem incididunt incididunt laboris voluptate amet duis aliquip laborum.Adipisicing pariatur sint qui irure.Aute consequat dolore voluptate deserunt voluptate adipisicing proident ea.Voluptate exercitation ex sint adipisicing.Qui incididunt exercitation ex ex aliquip tempor veniam ea ad qui sunt tempor ad exercitation.Id deserunt consectetur deserunt dolore fugiat culpa non est ea minim consectetur.</div>
 
         <div className='stats-container flex'>
           
@@ -132,7 +134,7 @@ class Stats extends React.Component{
                     options={this.state.dateOptions}
                     series={this.state.dateSeries}
                     type="line"
-                    width="630"
+                    width={window.innerWidth / 3.2}
   
                   />
                 </div>
@@ -149,7 +151,7 @@ class Stats extends React.Component{
                     options={this.state.feedbackOptions}
                     series={this.state.feedbackSeries}
                     type="bar"
-                    width="630"
+                    width={window.innerWidth / 3.2}
                   />
                 </div>
               </div>

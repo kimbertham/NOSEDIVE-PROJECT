@@ -1,62 +1,54 @@
 import React from 'react'
 import { defaultImage } from '../lib/commonFiles'
-import ProfileRatingStars from './ProfileRatingStars'
+import ProfileRatingStars from './ProfileSections/ProfileActivity/ProfileRatingStars'
+import ProfileFollowAction from './ProfileSections/ProfileFollowing/ProfileFollowAction'
 
 
 
-const ProfileInfo = ({ user, rating, data, handleModal, modal }) => {
+const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
 
-  const modalClass = modal ? 'display-block' : 'display-none'
+  const { bio, avg, followers } = user
+
   if (!user) return ''
   return (
-    <>
-      <div className='profile-info'>
-      
-        <div className='flex'>
-          <img 
-            src={user.profile_image ? user.profile_image : defaultImage} 
-            className='circle profile-image'
-            alt='profile-pic'
-          />
+  
+    <div className='profile-info'>
+      <div className='flex'>
 
-          <div className='profile-text'>
-            <h1> {user.first_name} {user.last_name} </h1>
-            <div className='profile-details'>
-              <h1>{rating ? rating.toString().slice(0, 3) : 0}
-                <small>{rating ? rating.toString().slice(3,5) : 0}</small> 
-              </h1>
-              <p> {user.tagline} </p>
-            </div>
+        <img 
+          className='circle profile-image'
+          alt='profile-pic'
+          src={bio.profile_image ? 
+            bio.profile_image : defaultImage}/>
+
+        <div className='profile-text'>
+          <div className='center'>
+            <h1> {bio.first_name} {bio.last_name}</h1>
+
+            <ProfileFollowAction
+              updateProfile={updateProfile}
+              following={followers}/>
+          </div>
+
+          <div className='profile-details'>
+            <h1>{avg ? avg.toString().slice(0, 3) : 0}
+              <small>{avg ? avg.toString().slice(3,5) : 0}</small> 
+            </h1>
+            <p>{bio.tagline}</p>
           </div>
         </div>
-
-
-        <div>
-          <div >
-            <ProfileRatingStars id={user.id} data={data}/>
-            <div className='center'
-            >
-              <small onClick={handleModal}>leave feedback</small>
-            </div>
-          </div>
-    
-          <div className={`${modalClass} center`}
-          >
-            <div>
-              <select defaultValue={''} id="feedback">
-                <option value="" disabled></option>
-                <option value="1">Unpleasant Smell</option>
-                <option value="2">Rude Interaction</option>
-                <option value="3">Unattractive</option>
-                <option value="3">Impoverished Vibes</option>
-                <option value="3">Discriminatory</option>
-              </select>
-            </div>
-          </div>
-        </div>
+        
       </div>
+      <div>
 
-    </>
+        <ProfileRatingStars 
+          user={user} 
+          updateProfile={updateProfile}
+          modal={modal}
+          handleModal={handleModal}/>
+      </div>
+    </div>
+    
   )
 }
 

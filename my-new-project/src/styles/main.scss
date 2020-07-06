@@ -3,10 +3,12 @@
   margin:0;
   text-decoration: none;
   // border: 1px solid red;
-
   a{
     color: black;
   }
+  button{
+    outline: none !important;
+   }
 }
 
 .border-check{
@@ -15,6 +17,13 @@
 
 body {
 background: rgba(249,215,205,1) ;
+position: relative;
+}
+
+
+.scroll{
+  overflow-y: scroll;
+  height: 52vh;
 }
 
 .bordered-box {
@@ -22,8 +31,12 @@ background: rgba(249,215,205,1) ;
   margin:10px 0;
   border-radius: 10px;
   background-color:rgba(255,255,255, 0.3);
+  border: 1px solid rgba(159, 115, 115, 0.7);
 }
 
+.long-textarea{
+  height: 100px !important;
+}
 
 .circle {
   border-radius: 100%;
@@ -44,7 +57,7 @@ background: rgba(249,215,205,1) ;
   border-radius: 50%;
   width:40px;
   height: 40px;
-  margin-right: 5px;
+  margin-right: 2%;
 }
 
 .flex{
@@ -54,39 +67,48 @@ background: rgba(249,215,205,1) ;
 .dark-border {
   border: 1px solid rgba(159, 115, 115, 0.7);
   
-
 }
-
-
 
 .italic {
   font-style: italic;
 }
 
-.modal {
-  background-color: rgba(0,0,0,0.7);
-  height: 100%;
-  width:100%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.modal{
+  background-color: rgba(0,0,0, 0.6);
+  position: fixed;
+  height:110%;
+  width: 110%;
+  top:10px;
   z-index: 10;
-  margin:-50px -50px;
+  margin:-50px -60px;
+}
+
+.dots-container {
+  margin:3px 0;
+  
+  .dots{
+    width:5px;
+    height:5px;
+    background-color:  rgba(159, 115, 115, 0.7);
+    border-radius: 50%;
+    margin: 1px;
+  }
   }
 
-  .is-blurred {
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
-  }
+
+  // .is-blurred {
+  //   filter: blur(2px);
+  //   -webkit-filter: blur(2px);
+  // }
   
   .display-none {
     display: none;
   }
 
 .left-section{
-  padding:50px;
+  padding:10px 30px 50px 50px;
   width:70%;
+  min-height: 100vh;
 }
 
 .sticky{
@@ -95,10 +117,14 @@ background: rgba(249,215,205,1) ;
   top: 0px;
 }
 .button {
+  margin:10px;
   background-color: transparent;
   border-radius: 10px;
   font-style: italic;
   border: 1px solid rgba(159, 115, 115, 0.7);
+  &:hover{
+    background-color: white;
+  }
 }
 
 .full-width{
@@ -109,9 +135,10 @@ background: rgba(249,215,205,1) ;
   display: flex;
   justify-content: space-between;
   margin: 0 30px 10px 0;
+  
   .nav-icon {
-    width:35px;
-    margin:0 5x;
+    width:2vw;
+    margin:0 5px;
     
   }
 }
@@ -128,10 +155,7 @@ background: rgba(249,215,205,1) ;
   position: relative; 
   color: #c47878;
   font-size: 1.8rem;
-  font-weight: normal;
   line-height: 1;
-  margin: 0;
-  border: 2px solid #fff;
   border: solid 2px;
   border-radius:20px;
   padding: 25px;
