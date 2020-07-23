@@ -6,7 +6,8 @@ class MakePost extends React.Component {
   state = {
     form: {
       content: ''
-    }
+    },
+    page: ''
   }
 
   handleChange = event => {
@@ -14,19 +15,33 @@ class MakePost extends React.Component {
     this.setState({ form })
   }
   
+
+  componentDidMount = () => {
+    this.setState({ page: this.props.page })
+  }
+
   handleSubmit = async event => {
     event.preventDefault()
+    const { page } = this.state
     try {
-      await axios.post('/api/post/', this.state.form, headers())
+      if (page === 'thread-post') {
+        console.group('called')
+        const threadId = this.props.threadId
+        await axios.post(`/api/forum/${threadId}/0`, this.state.form, headers())
+        this.props.getComments()
+      } 
+      if (page === 'profile-post'){
+        await axios.post('/api/post/', this.state.form, headers())
+        this.props.updateProfile()
+      }
       this.setState({ form: { content: '' } })
-      this.props.updateProfile()
+
     } catch (err) {
       console.log(err)
     }
   }
 
   render(){
-
     return (
       <div className='make-post-container dark-border'>
         <form 

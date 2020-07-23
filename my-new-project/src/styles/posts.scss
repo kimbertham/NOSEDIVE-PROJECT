@@ -21,7 +21,8 @@
   }
 
   .comment-button{
-    padding:0 3px;
+    padding:0 10px;
+    margin: 0;
   }
 
   .date-text{
@@ -117,23 +118,27 @@ justify-content: flex-end;
 
 // makeComments.js
 
+.make-comment {
+  padding: 1%;
+}
 .comment-content{
 display: flex;
 justify-content: space-between;
-
+padding:2px;
   small{
     margin:2px;
   }
 }
 
 .comment-input{
-  width:80%;
+  width:75%;
   height:20px;
   border-radius: 5px;
   margin: 10px 0;
 }
 
-.comment-button {
-  margin-left: 9px;
-}
 
+.ratings-modal {
+overflow-y: scroll;
+height: 70vh;
+}

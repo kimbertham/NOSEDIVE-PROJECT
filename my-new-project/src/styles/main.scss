@@ -8,7 +8,15 @@
   }
   button{
     outline: none !important;
-   }
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.blurred{
+  backdrop-filter: blur(5px);
 }
 
 .border-check{
@@ -20,6 +28,14 @@ background: rgba(249,215,205,1) ;
 position: relative;
 }
 
+.right {
+  float:right; 
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
 
 .scroll{
   overflow-y: scroll;
@@ -80,7 +96,7 @@ position: relative;
   width: 110%;
   top:10px;
   z-index: 10;
-  margin:-50px -60px;
+  margin:-50px -100px;
 }
 
 .dots-container {
@@ -96,18 +112,15 @@ position: relative;
   }
 
 
-  // .is-blurred {
-  //   filter: blur(2px);
-  //   -webkit-filter: blur(2px);
-  // }
+
   
   .display-none {
     display: none;
   }
 
 .left-section{
-  padding:10px 30px 50px 50px;
-  width:70%;
+  padding:1% 3% 2% 2%;
+  width:72%;
   min-height: 100vh;
 }
 

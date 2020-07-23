@@ -2,12 +2,11 @@ import React from 'react'
 import { defaultImage } from '../lib/commonFiles'
 import PostSettings from './PostSettings'
 
-const PostContent = ({ posts, showComments, ratings,updateProfile, currentUserId }) => { 
+const PostContent = ({ posts, showComments, ratings ,updateProfile, currentUserId, showRatings }) => { 
 
   return (
 
     <div className='post-view flex'>
-
       <img className='post-icon'
         alt='post-owner-pic'
         src={posts.owner.profile_image ? 
@@ -23,18 +22,23 @@ const PostContent = ({ posts, showComments, ratings,updateProfile, currentUserId
             posts={posts}
             currentUserId={currentUserId}
             updateProfile={updateProfile}/> 
-
         </div>
-
+        
         <p className='post-content italic'>{posts.content}</p>
           
         <div className='post-interactions'>
-          <small>rated by {ratings.length}</small>
-          <div onClick={showComments}>
-            <small className='button comment-button'> 
-            Comments ({posts.comments.length})
-            </small>
-          </div>
+
+          <small 
+            className='button pointer comment-button'
+            onClick={() => {
+              showRatings(ratings)
+            }}>rated by {ratings.length}</small>
+
+          <small 
+            onClick={showComments}
+            className='button pointer comment-button'> 
+            Comments ({posts.comments.length})</small>
+  
         </div>
       </div>
     </div>

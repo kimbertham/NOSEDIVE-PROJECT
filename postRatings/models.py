@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class PostRatings(models.Model):
@@ -19,8 +20,8 @@ class PostRatings(models.Model):
         related_name='ratings', 
         on_delete=models.CASCADE)
 
-    updated_at = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at =  models.DateField(default=datetime.date.today)
+    created_at =  models.DateField(default=datetime.date.today)
 
 
 

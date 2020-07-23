@@ -7,17 +7,21 @@ const ForumCard = ({ thread }) => {
   return (
     <>
       <Link to={`forum/${thread.id}`}>
+
         <div key={thread.id}
-          className=' forum-thread bordered-box dark-border  flex'>
+          className='forum-thread bordered-box dark-border flex'>
 
-          <div className='flex'>
-            <img src={thread.image}
-              className='forum-icon
-                dark-border'
-              alt='forum-pic'/>
+          <div className='flex full-width'>
+            <img src={thread.image} alt='forum-pic'
+              className='forum-icon dark-border'/>
 
-            <div>
-              <h1>{thread.title}</h1>
+            <div className='full-width'>
+              <div className='flex-between'> 
+                <h1>{thread.title}</h1>
+                {thread.limitations ? 
+                  <p className='thread-limits'> NO { thread.limitations } STARS ALLOWED </p> 
+                  : null}
+              </div>
               <p>{thread.description}</p>
               <div className='thread-small'>
                 <p>Created by: {thread.forum_owner.first_name} {thread.forum_owner.last_name} </p>
@@ -25,10 +29,7 @@ const ForumCard = ({ thread }) => {
               </div>
             </div>
           </div>
-          {thread.limitations ? 
-            <p className='thread-limits'>
-                NO { thread.limitations } STARS ALLOWED 
-            </p> : ''}
+  
         </div>
       </Link>
 

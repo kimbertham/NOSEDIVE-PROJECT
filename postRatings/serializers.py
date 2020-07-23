@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 from .models import PostRatings
-from posts.serializers import PostSerializer
+# from posts.serializers import PostSerializer
 from ratings.serializers import PopulatedRatingSerializer
 
 
@@ -24,13 +24,9 @@ class PostRatingSerializer(serializers.ModelSerializer):
 
 
 class PopulatedPostRatingSerializer(PostRatingSerializer):
-#     count = serializers.IntegerField(
-#     source='post_set.count', 
-#     read_only=True
-# )
     post_owner = UserSerializer()
     rating_owner = UserSerializer()
-    post = PostSerializer()
+    # post = PostSerializer()
     
 
     

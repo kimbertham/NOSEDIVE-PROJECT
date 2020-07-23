@@ -10,7 +10,7 @@ from django.db.models import Count
 
 from .models import Post
 from postRatings.models import PostRatings
-from postRatings.serializers import PopulatedPostRatingSerializer
+from postRatings.serializers import PostRatingSerializer
 from follow.models import Contact
 from .serializers import PopulatedPostSerializer
 
@@ -21,14 +21,15 @@ User = get_user_model()
 class PostListView(APIView):
 
     def get(self, request):
-        posts = Post.objects.all()
-        newest_posts = posts.order_by('-created_at')
+        newest_posts = Post.objects.all().order_by('-created_at')
         serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True)
-        top_rated_posts = PostRatings.objects.filter(rating=5).order_by('created_at')
-        serailized_top_posts = PostSerializer(top_rated_posts, many=True)
-        return Response(  serailized_newest_posts.data, status=HTTP_200_OK)
-
-    
+        top_rated_posts = PostRatings.objects.filter(rating=5).values('post').annotate(itemcount=Count('post')).order_by('-itemcount')
+        top_rated = []
+        postValues =  [li['post'] for li in top_rated_posts]
+        for value in postValues:
+            top_rated.append(Post.objects.get(pk=value))
+        serailized_top_posts = PopulatedPostSerializer(top_rated , many=True)
+        return Response( { 'new_posts': serailized_newest_posts.data , 'top_posts': serailized_top_posts.data}, status=HTTP_200_OK)
 
     def post(self,request):
         if not request.POST._mutable:

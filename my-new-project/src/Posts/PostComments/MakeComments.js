@@ -19,31 +19,57 @@ class MakeComments extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      const postOwner = this.props.posts.owner.id
-      const postId = this.props.posts.id
-      await axios.post(`/api/comments/${postOwner}/${postId}/`, this.state.form, headers())
+
+      if (this.props.page === 'thread') {
+        const parent = this.props.parent === null ? 
+          0 : this.props.parent
+        const forum = this.props.forum
+        await axios.post(`/api/forum/${forum}/${parent}`, 
+          this.state.form, headers())
+        this.props.getComments()
+        this.props.toggleReply()
+        this.props.toggleReplies(true)
+        
+      }
+
+      if (this.props.page === 'profile') {
+        const postOwner = this.props.posts.owner.id
+        const postId = this.props.posts.id
+        await axios.post(`/api/comments/${postOwner}/${postId}/`,
+          this.state.form, headers())
+        this.props.updateProfile()
+      }
+
       this.setState({ form: { content: '' } })
-      this.props.updateProfile()
+
     } catch (err) {
       console.log(err)
     }
   }
 
   render () {
+    const { user } = this.props
     return (
+      <>
+        
+        <form onSubmit={this.handleSubmit}
+        
+          className='bordered-box make-comment center'>
+          <div className={user ? 'display-block' : 'display-none'}>
+            <img src={user ? user.bio.profile_image : null} 
+              className='small-icon' />
+          </div>
 
-      <form onSubmit={this.handleSubmit}
-        className='make-comment-container bordered-box'>
-        <input
-          name='content'
-          className='comment-input dark-border'
-          placeholder='Post a comment'
-          onChange={this.handleChange}
-          value={this.state.form.content}
-        />
-        <button className='button comment-button italic'> Comment</button>
-      </form>
-
+          <input
+            name='content'
+            className='comment-input dark-border'
+            placeholder='Post a comment'
+            onChange={this.handleChange}
+            value={this.state.form.content}
+          />
+          <button className='button comment-button italic'> Comment</button>
+        </form>
+      </>
     
     )
   }

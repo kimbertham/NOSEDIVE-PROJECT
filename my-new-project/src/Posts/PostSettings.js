@@ -32,11 +32,12 @@ render() {
             <div className='dots'/>
           </div>
           <div 
+ 
             onClick={() => {
               this.deletePost(posts.id)
             }}
             className={settings ? 
-              'post-delete button' : 'display-none'}>
+              'post-delete button pointer' : 'display-none'}>
             <p>Delete</p>
           </div>     
         </>  

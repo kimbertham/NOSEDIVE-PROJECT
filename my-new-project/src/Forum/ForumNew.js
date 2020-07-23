@@ -93,7 +93,6 @@ class Register extends React.Component{
 
             <button className='form-button button'> Create New Thread</button>
 
-
           </form>
         </div>
       </>
@@ -102,3 +101,5 @@ class Register extends React.Component{
 }
 
 export default Register
+
+

@@ -50,11 +50,12 @@ class ProfileBioEdit extends React.Component {
       return (
         <>
 
+          <div className='edit-container bordered-box'>     
+            <h1>Edit Profile</h1>
+          </div>
 
-          <div className='auth-form center pop-up edit-profile'>
-            
+          <div className='auth-form center edit-profile pop-up'>
             <form onSubmit= {this.handleSubmit}>
-              <h1>Edit Profile</h1>
 
               <div className='form-field'>            
                 <label className='label'>First Name</label>

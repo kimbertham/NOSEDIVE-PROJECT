@@ -19,6 +19,7 @@ from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/messaging/',include('messaging.urls')),
     path('api/post/', include('posts.urls')),
     path('api/comments/', include('comments.urls')),
     path('api/ratings/', include('ratings.urls')),

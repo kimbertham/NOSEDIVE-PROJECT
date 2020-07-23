@@ -1,34 +1,33 @@
 import React from 'react'
 
 
-class ProfileWish extends React.Component {
+const ProfileWish = ({ handleChange, handleSubmit,search,user, currentUserId }) => {
 
-  render() {
-    const { handleChange,handleSubmit,search,user, currentUserId } = this.props
-    return (
-      <>
+  return (
+    <>
 
-        {currentUserId === user.bio.id ? 
+      {currentUserId === user.bio.id ? 
     
-          <form 
-            className='post-form bordered-box dark-border center'
-            onSubmit={handleSubmit}
-          >
-            <textarea
-              className='post-texarea dark-border'
-              placeholder={'What\'s happening?'}
-              name='search'
-              onChange={handleChange}
-              value={search}
-            />
-            <br/>
-            <button className='dark-border post-button button'> Send!</button>
-          </form>
-          : ''}
+        <form 
+          className='post-form bordered-box dark-border center'
+          onSubmit={handleSubmit}>
 
-      </>
-    )
-  }
+          <textarea
+            className='post-texarea dark-border'
+            placeholder={'What\'s happening?'}
+            name='search'
+            onChange={handleChange}
+            value={search}/>
+
+          <br/>
+
+          <button className='dark-border post-button button'>Send!</button>
+        </form>
+
+        : ''}
+
+    </>
+  )
 }
 
 export default ProfileWish

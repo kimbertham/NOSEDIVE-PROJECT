@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'photos',
     'follow',
     'wishlist',
-    # 'message',
+    'messaging',
+    'conversations',
     'forum'
     
 ]
@@ -125,9 +126,11 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
+
+# DATETIME_FORMAT="%Y-%m-%d%H:%M:%S"
 
 REST_FRAMEWORK = {  # added this to get rest framework to use our custom authentication classes
     'DEFAULT_RENDERER_CLASSES': [
@@ -137,6 +140,7 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'jwt_auth.authentication.JWTAuthentication'
     ],
+    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%fZ",
 }
 
 

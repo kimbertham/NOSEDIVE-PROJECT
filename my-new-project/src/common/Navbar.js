@@ -22,16 +22,18 @@ render(){
   return (
     <div className='navbar'> 
     
-      
-      <img 
-        onClick={this.handleProfileNav}
-        src='https://bit.ly/3cVoKCU'
-        className='nav-icon'
-        alt='user-profile'/>
+    
+
+      <Link
+        onClick={this.handleProfileNav}>
+        <img src='https://bit.ly/3h8vdNh'
+          className='nav-icon'
+          alt='user-profile'/>
+      </Link>
 
 
       <Link 
-        to='/home'> 
+        to={`/home/${userId}`}> 
         <img src='https://i.imgur.com/kkeEHVw.jpg'
           className='nav-icon'
           alt='home'/>
@@ -63,12 +65,13 @@ render(){
           alt='user-profile'/>
       </Link>
       
-
-      <img 
-        onClick={this.handleLogout}
-        src='https://i.imgur.com/fgiTuvG.jpg' 
-        className='nav-icon'
-        alt='user-profile'/>
+      <Link>
+        <img 
+          onClick={this.handleLogout}
+          src='https://i.imgur.com/fgiTuvG.jpg' 
+          className='nav-icon'
+          alt='user-profile'/>
+      </Link>
 
   
 

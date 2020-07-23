@@ -99,8 +99,6 @@ state={
           </div>
         </div>
 
-
-
         <div className='profile-photos bordered-box dark-border'>
           {photos ? photos.map((image,i) => {
             return <div 
@@ -114,7 +112,6 @@ state={
         </div>
 
       </>
-
     )
   }
 }

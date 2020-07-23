@@ -26,29 +26,28 @@ class ProfileRatingStars extends React.Component {
   render(){
     const { modal, handleModal } = this.props
     return (
-
       <div className='feedback-container'>
+
         <BeautyStars
           value={this.state.rating}
           size={'30px'}
-          onChange={this.handleChange}
-        />
+          onChange={this.handleChange}/>
 
         <div className='center' 
           onClick={() => {
             handleModal('feedback')
           }}>
           <button className='button'> 
-            <p>Leave feedback...</p>
+          Leave feedback...
           </button>
         </div>
 
         <div className={modal === 'feedback' ? 
           'center' : 'display-none'}>
-          <select
+          <select id="feedback"
             value={this.state.feedback}
-            onChange={this.handleFeedback} 
-            id="feedback">
+            onChange={this.handleFeedback} >
+            <option value=''></option>
             <option value="Unpleasant Smell">Unpleasant Smell</option>
             <option value="Rude Interaction">Rude Interaction</option>
             <option value="Unattractive">Unattractive</option>
@@ -56,8 +55,8 @@ class ProfileRatingStars extends React.Component {
             <option value="Discriminatory">Discriminatory</option>
           </select>
         </div>
-      </div>
 
+      </div>
     )
   }
 }

@@ -1,3 +1,11 @@
+//editProfile.js
+
+.edit-container {
+  width:70vw;
+  .edit-profile{
+  }
+}
+
 .modal-pop{
   margin: 0 auto;
   background-color: white;
@@ -5,6 +13,13 @@
   border-radius: 10px;
   text-align: center;
   padding:50px;
+  }
+
+  .profile-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
   }
 
 .img-settings{
@@ -21,8 +36,9 @@ padding:10px
 .profile-head{
   z-index: 1;
   padding:20px 10px 0 10px;
-
+  width:100%;
 }
+
 .profile-ratings{
   float: right;
 
@@ -32,14 +48,10 @@ padding:10px
   font-style: italic;
 }
 
-
-
   .feedback-pop{
     width:50%;
     height:80%;
-    // position:absolute;
   }
-
 
 
 // ProfileIno.js 
@@ -88,17 +100,18 @@ padding:10px
 
 .profile-interactions {
   margin-left:20px;
-  top:260px;
+  top:30%;
+  background-color:rgba(255,255,255, 0.3);
+  border-radius: 10px;
+  padding:0 15px;
+  height: 65vh;
+  text-align: center;
+
   .int-h1{
     font-size: 15px;
     padding:10px;
     background-color: transparent;
   }
-  background-color:rgba(255,255,255, 0.3);
-  border-radius: 10px;
-  padding:0 15px;
-  height: 60vh;
-  text-align: center;
 
   .posts-interactions {
     padding:5px 10px;
@@ -114,12 +127,6 @@ padding:10px
 .small-right{
   width: 5%;
   float: right;
-}
-
-//editProfile.js
-
-.edit-profile {
-  margin: 100px 200px  !important;
 }
 
 //ProfilePhotos.js
@@ -171,11 +178,7 @@ align-items: center;
   height: 100%;
   display: flex;
   justify-content: space-between;
-
-
 }
-
-
 
 // profileFollowers.js
 
@@ -196,33 +199,31 @@ margin:20px 0;
   }
 }
 
-// .follow-button{
-//   margin:10px;
-//   height: 10%;
-// }
-
-
-
 // profileWishList.js
 .wishlist-section{
-  height: 70vh;
+  height: 100vh;
 }
 
 .products-container {
   flex-wrap: wrap;
-justify-content: center;
+  padding:10px;
+
   h1{
     margin:10px 0;
     font-size: 15px;
   }
   .product-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     margin:5px;
     padding:10px;
-    width: 15%;
-
+    width: 15vw;
+    min-height:100%;
     border-radius: 10px;
     background-color: rgba(255,255,255, 0.6);
   }
+
 }
 
 .product-img-container{
@@ -237,7 +238,7 @@ justify-content: center;
 }
 
 .wishlist-button {
-margin:10px;
+  margin:10px;
   float: right;
 }
 

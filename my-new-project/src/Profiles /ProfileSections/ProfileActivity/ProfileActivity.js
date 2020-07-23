@@ -3,49 +3,43 @@ import Posts from '../../../Posts/Posts'
 import MakePost from '../../../Posts/MakePost'
 import ProfileInteractions from './ProfileInteractions'
 
-class ProfileActivity extends React.Component {
+const ProfileActivity = ({   user, updateProfile, currentUserId }) => {
 
-  render() {
+  const { posts,ratings } = user
 
-    const { 
-      user, 
-      updateProfile, 
-      currentUserId } = this.props
+  if (!posts) return ''
+  return (
+    <>
 
-    const { posts,ratings } = user
-
-    if (!posts) return ''
-    return (
-      <>
-
-        {currentUserId === user.bio.id ?
-          <MakePost 
-            updateProfile={updateProfile}/>
-          : ''}
+      {currentUserId === user.bio.id ?
+        <MakePost 
+          updateProfile={updateProfile}
+          page='profile-post'/>
+        : ''}
 
 
-        <div className='flex'>
-          <div className=' profile-posts bordered-box'>
-            {posts.slice(0).reverse().map(post => {
-              return <Posts 
-                key={post.id} 
-                user={user}
-                posts={post}
-                currentUserId={currentUserId} 
-                updateProfile={updateProfile}/>
-            })}
-          </div>
-
-          <div className='sticky'>
-            <ProfileInteractions
+      <div className='flex'>
+        <div className=' profile-posts bordered-box'>
+          {posts.slice(0).reverse().map(post => {
+            return <Posts 
+              key={post.id} 
               user={user}
-              ratings={ratings}/>
-          </div>
+              posts={post}
+              currentUserId={currentUserId} 
+              updateProfile={updateProfile}/>
+          })}
         </div>
 
-      </>
-    )
-  }
+        <div className='sticky'>
+          <ProfileInteractions
+            user={user}
+            ratings={ratings}/>
+        </div>
+      </div>
+
+    </>
+  )
 }
+
 
 export default ProfileActivity

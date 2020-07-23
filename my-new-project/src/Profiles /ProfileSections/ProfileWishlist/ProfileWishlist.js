@@ -5,7 +5,7 @@ import { headers } from '../../../lib/auth'
 import { amazonBaseURL, amazonHeaders } from '../../../lib/commonFiles'
 import ProfileWishlistAdd from './ProfileWishlistAdd'
 import WishlistProduct from './WishlistProduct'
-
+import Loading from '../../../common/Loader'
 
 class ProfileWish extends React.Component {
 state = {
@@ -61,6 +61,7 @@ handleWishList = async (price, thumbnail, url, title ) => {
       this.setState({ modal: 'Item Added to Wishlist' })
     })
   }
+  this.props.updateProfile()
 }
 
 handleDelete = async (product) => {
@@ -83,6 +84,7 @@ render() {
     <> 
       <div className='wishlist-section scroll'>
 
+        <Loading />
         <ProfileWishlistAdd 
           user={user}
           currentUserId={currentUserId}
