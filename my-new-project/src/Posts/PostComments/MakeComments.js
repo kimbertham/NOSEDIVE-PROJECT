@@ -57,7 +57,7 @@ class MakeComments extends React.Component {
           className='bordered-box make-comment center'>
           <div className={user ? 'display-block' : 'display-none'}>
             <img src={user ? user.bio.profile_image : null} 
-              className='small-icon' />
+              className='small-icon' alt='profile-img' />
           </div>
 
           <input

@@ -18,7 +18,7 @@ const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
               className='bordered-box flex center'
               key={ratings.id}>
               <img 
-                className='small-icon'
+                className='small-icon' alt='profile-img'
                 src={ratings.rating_owner.profile_image} />
               <p>{ratings.rating_owner.first_name} {ratings.rating_owner.last_name} rated this post {ratings.rating} stars</p>
             </div>

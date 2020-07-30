@@ -24,12 +24,12 @@ render(){
     
     
 
-      <Link
+      <div
         onClick={this.handleProfileNav}>
         <img src='https://bit.ly/3h8vdNh'
           className='nav-icon'
           alt='user-profile'/>
-      </Link>
+      </div>
 
 
       <Link 
@@ -65,14 +65,13 @@ render(){
           alt='user-profile'/>
       </Link>
       
-      <Link>
-        <img 
-          onClick={this.handleLogout}
-          src='https://i.imgur.com/fgiTuvG.jpg' 
-          className='nav-icon'
-          alt='user-profile'/>
-      </Link>
-
+   
+      <img 
+        onClick={this.handleLogout}
+        src='https://i.imgur.com/fgiTuvG.jpg' 
+        className='nav-icon'
+        alt='user-profile'/>
+ 
   
 
     </div>

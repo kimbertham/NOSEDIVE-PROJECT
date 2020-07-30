@@ -1,0 +1,102 @@
+.conv-container {
+  height:97vh;
+  width:30vw;
+  .conv-field {
+    margin:3% 0;
+    align-items: center;
+    padding:10px 20px;
+
+  }
+
+  .conv-header {
+    padding:10px 20px;
+  }
+}
+
+.chat-container{
+  background-color: rgba(205, 154, 154, 0.4);
+  width:80vw;
+  height:100vh;
+
+  .chat-name {
+  background-color:  rgba(249,215,205,1) ;
+  border:1px solid rgba(205, 154, 154, 0.4);
+  align-items: center;
+  height:5vh;
+  padding: 10px 20px;
+  font-size: 1vh;
+  }
+  .chat-messages{
+  height:82vh;
+  display: flex;
+  flex-direction: column-reverse;
+  }
+}
+
+
+  .message-pop{
+    background-color: rgba(249,215,205,1) ;
+    display:inline-block;
+    padding:10px;
+  }
+
+.msg-icon{
+margin:2vh;
+}
+
+
+.message-user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.message-sender{
+  display: flex;
+  align-items: center;
+}
+
+.selected-chat {
+  background-color:  rgba(205, 154, 154, 0.4);
+  border-right:1px solid rgba(249,215,205,1) ;
+}
+
+.msg-post{
+  height:10vh;
+  background-color:  rgba(249,215,205,1) ;
+  border:1px solid rgba(205, 154, 154, 0.4);
+  
+  .msg-input {
+    width:85%;
+    height: 40%;
+    border-radius: 10px;
+    border:none;
+    
+  }
+}
+
+
+.newConvo-container {
+
+  padding:2vw;
+
+  .msg-search{
+    border:none;
+    border-radius: 5px;
+    height:3vh;
+    width:90%;
+  }
+  
+  .search-user{ 
+    margin: 2px 0;
+    padding: 3px;
+    width:90%;
+    &:hover {
+      background-color:  rgba(249,215,205,1) ;
+    }
+  }
+
+  .search-btn {
+margin-left:10px;
+  }
+}
+

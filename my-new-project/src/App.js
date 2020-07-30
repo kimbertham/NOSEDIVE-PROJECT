@@ -9,10 +9,10 @@ import Register from './Auth/Register'
 import Stats from './Stats/Stats'
 import Forum from './Forum/Forum'
 import Newsfeed from './Newsfeed/Newsfeed'
-import Messages from './Messages/Messages'
 
 import { getToken } from './lib/auth'
 import ForumThreads from './Forum/ForumThreads/ForumThreads'
+import Messages from './Messages/Messages'
 
 
 const token = getToken()
@@ -30,10 +30,11 @@ const App = () => {
         <Switch>
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/messages' component={Messages}/>
 
           <div className='left-section'>
             <Route exact path='/profile/:id/edit' component={ProfileBioEdit}/>
-            <Route path='/messages' component={Messages}/>
+
             <Route path='/home/:id' component={Newsfeed}/>
             <Route path='/stats/:id' component={Stats}/>
             <Route path='/profile/:id' component={ProfilePage}/>
