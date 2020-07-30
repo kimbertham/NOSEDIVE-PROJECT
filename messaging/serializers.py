@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 from .models import Messaging
+from conversations.serializers import PopulatedConversationsSerializer
 User = get_user_model()
 
 class MessagingSerializer(serializers.ModelSerializer):

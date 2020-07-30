@@ -37,3 +37,9 @@ class EditUserSerializer(serializers.ModelSerializer):
         model = User 
         fields = ('first_name','last_name','description','tagline','career','location','age','relationship' )
 
+class BasicUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User 
+        fields = ('first_name','last_name','id','profile_image','id' )
+
+

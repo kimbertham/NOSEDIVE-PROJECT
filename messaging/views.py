@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY, HTTP_200_OK,HTTP_204_NO_CONTENT
+from django.db.models import Q
 
 from .serializers import MessagingSerializer, PopulatedMessagingSerializer
 from .models import Messaging
@@ -30,12 +31,18 @@ class MessagingDetailView(APIView):
             return Response(created_message.data, status=HTTP_201_CREATED)
         return Response(created_message.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-        #Get all one users messages 
+        # Get all one users messages 
     def get(self, request, pk):
-        messages = Messaging.objects.filter(reciever=pk)
+        messages = Messaging.objects.filter(conversation=pk)
         serialized_messages = PopulatedMessagingSerializer(messages, many=True)
         return Response(serialized_messages.data, status=HTTP_200_OK)
 
+    #get all messages between two selected participants 
+        # def get(self, request, pk, id):
+
+        # messages = Messages.objects.filter(Q(='candy')|Q(body__icontains='candy'))
+        # serialized_messages = PopulatedMessagingSerializer(messages, many=True)
+        # return Response(serialized_messages.data, status=HTTP_200_OK)
 
 
 

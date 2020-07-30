@@ -8,7 +8,7 @@ class User(AbstractUser):
     email = models.CharField(max_length=50, unique=True, blank=True)
     description = models.CharField(max_length=500, blank=True)
     tagline = models.CharField(max_length=500, blank=True)
-    profile_image = models.CharField(max_length=500, blank=True)
+    profile_image = models.CharField(max_length=500, default='https://bit.ly/30vhZFs', blank=True)
     career = models.CharField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
     age = models.IntegerField(blank=True, null=True)

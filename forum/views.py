@@ -47,6 +47,7 @@ class ThreadCommentView(APIView):
             serialized_comments = PopulatedForumCommentSerializer(comments, many=True)
             return Response ( serialized_comments.data , status=HTTP_200_OK)
 
+
     def delete(self, request, forum_id):
         comment_to_delete = ForumComments.objects.get(pk=forum_id)
         if comment_to_delete.comment_owner.id != request.user.id:

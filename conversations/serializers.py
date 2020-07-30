@@ -6,7 +6,7 @@ from .models import Conversations
 User = get_user_model()
 
 class ConversationsSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Conversations
         fields = '__all__'
@@ -14,9 +14,9 @@ class ConversationsSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name','last_name', 'profile_image')
+        fields = ('id','first_name','last_name', 'profile_image',)
 
 class PopulatedConversationsSerializer(ConversationsSerializer):
-    participants = UserSerializer()
+    participants = UserSerializer(many=True)
 
 

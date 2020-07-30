@@ -10,7 +10,7 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 import jwt
 from django.db.models import Avg, Sum
 
-from .serializers import UserSerializer, EditUserSerializer
+from .serializers import UserSerializer, EditUserSerializer, BasicUserSerializer
 from jwt_auth.models import User
 from photos.models import Photos
 from photos.serializers import PhotoSerializer
@@ -58,6 +58,10 @@ class LoginView(APIView):
 class ProfileDetailView(APIView):
     # get own profile 
     def get(self, request, pk, action):
+        if action =='all': 
+            users = User.objects.all()
+            serialized_users = BasicUserSerializer(users, many=True)
+            return Response(serialized_users.data, status=HTTP_200_OK)
         if action == 'simple':
             print('test')
             user = User.objects.get(pk=pk)    
