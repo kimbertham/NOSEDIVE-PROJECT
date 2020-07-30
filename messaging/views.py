@@ -43,6 +43,20 @@ class MessagingDetailView(APIView):
         # messages = Messages.objects.filter(Q(='candy')|Q(body__icontains='candy'))
         # serialized_messages = PopulatedMessagingSerializer(messages, many=True)
         # return Response(serialized_messages.data, status=HTTP_200_OK)
+    def put(self, request, pk):
+        message_to_read = Messaging.objects.get(pk=pk)
+        update_message = MessagingSerializer(message_to_read, data=request.data)
+        print(request.data)
+        if update_message.is_valid():
+            update_message.save()
+            return Response(update_message.data, status=HTTP_200_OK)
+        return Response(update_message.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        
 
 
 
+                
+
+
+
+        

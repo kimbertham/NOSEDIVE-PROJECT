@@ -21,6 +21,7 @@ class Messaging(models.Model):
         'conversations.Conversations',
         related_name='messages',
         on_delete=models.CASCADE)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return f' {self.sender} to {self.reciever}'

@@ -28,10 +28,25 @@ class NewConvo extends React.Component {
     }
   }
   
+  handleNew = async (id) => { 
+    const conv = this.props.conversations
+    const i = conv.findIndex(c => {
+      return c.participants.id === id
+    })
+    if (i >= 0) {
+      this.props.setChat(i)
+    } else {
+      await axios.post(`/api/conversations/${id}/`,
+        { userId: this.props.userId })
+      await this.props.getConvos()
+      const i = conv.length 
+      this.props.setChat(i)
+    }
+  }
 
   render () {
     const { input,searchUsers } = this.state
-    const { newConvo, handleNew } = this.props
+    const { newConvo } = this.props
 
     return (
   
@@ -55,7 +70,7 @@ class NewConvo extends React.Component {
                 key={user.id}
                 className=' search-user pointer flex'
                 onClick={() => {
-                  handleNew(user.id)
+                  this.handleNew(user.id)
                 }}>
                 <img src={user.profile_image} className='small-icon'/>
                 <p> {user.first_name} {user.last_name}</p>

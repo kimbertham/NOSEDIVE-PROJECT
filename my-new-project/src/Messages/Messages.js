@@ -12,9 +12,7 @@ class Messages extends React.Component {
   state = {
     conversations: [],
     chat: '',
-    selectedChat: '',
-    selectedInfo: false,
-    messages: [],
+    convo: '',
     newConvo: false
   }
   
@@ -24,57 +22,46 @@ class Messages extends React.Component {
 
   getConvos = async  () => {
     const res = await axios.get(`/api/conversations/${userId}/`)
-    res.data.map(conv => {
-      conv.participants = conv.participants.filter(
-        user => user.id !== userId
+    res.data.map(c => {
+      c.participants = c.participants.find(
+        u => u.id !== userId
       )
     })
     this.setState({ conversations: res.data })
   }
 
 
-  setChat = async (id,info, update) => {
-    this.setState({ newConvo: false })
-    if (update) {
-      id = this.state.selectedChat
-    } 
-    const res = await axios.get(`/api/messaging/${id}/`)
+  setChat = async (i, update) => {
+    i =  update ? this.state.index : i
     this.setState({ 
-      messages: res.data,
-      selectedChat: id,
-      selectedInfo: info })
+      index: i,
+      newConvo: false,
+      convo: this.state.conversations[i]
+    })
+  }
+
+
+  readMessages = () => {
+    // async () => {
+    //   await this.state.convo.messages.map(async m => {
+    //     if (m.read === false) {
+    //       const read = { ...m, sender: m.sender.id, reciever: m.reciever.id, read: true }
+    //       await axios.put(`/api/messaging/${m.id}/`, read , headers())
+    //     }
+    //   })
+    // })
   }
 
   setNew = () => {
     this.setState({ 
-      newConvo: !this.state.newConvo, 
-      selectedInfo: false
-    })
-  }
-
-  handleNew = async (id) => { 
-    const conv = this.state.conversations
-    const u = conv.find(c => {
-      return c.participants.some(u => u.id === id)
-    })
-    if (u) {
-      this.setChat(u.id, u.participants[0])
-    } else {
-      await axios.post(`/api/conversations/${id}/`,
-        { userId: userId })
-      this.getConvos()
-      this.setNew()
-    }
+      newConvo: !this.state.newConvo, convo: false })
   }
   
   render () {
     const { 
       conversations,
-      chat,
-      selectedChat,
-      messages,
-      selectedInfo ,
-      newConvo } = this.state
+      newConvo,
+      convo } = this.state
 
     return (
 
@@ -84,7 +71,6 @@ class Messages extends React.Component {
           conv={conversations}
           userId={userId}
           setChat={this.setChat}
-          selectedChat={selectedChat}
           setNew={this.setNew}/>
 
         <div className='chat-container'>
@@ -92,24 +78,24 @@ class Messages extends React.Component {
           <NewConvo 
             userId={userId}
             newConvo={newConvo}
+            conversations={conversations}
             handleNew={this.handleNew}
-            conversations={conversations}/>
+            setChat={this.setChat}
+            getConvos={this.getConvos}/>
             
           <Chat
-            chat={chat}
-            selectedInfo={selectedInfo}
             userId={userId}
-            messages={messages}/>
+            convo={convo}/>
 
           <MessagePost
-            selectedInfo={selectedInfo}
-            selectedChat={selectedChat} 
+            convo={convo}
+            getConvos={this.getConvos}
             setChat={this.setChat}/>
 
         </div>
         
       </div>
-      
+
     )
   }
 }
@@ -117,3 +103,5 @@ class Messages extends React.Component {
 
 
 export default Messages
+
+

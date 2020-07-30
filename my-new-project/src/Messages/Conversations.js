@@ -3,10 +3,14 @@ import React from 'react'
 
 
 const Conversations = ({ conv, setChat, selectedChat,setNew }) => {
-  
+
+  const unread  = (messages) => {
+    const u = messages.filter(m => m.read === false).length 
+    return u === 0 ? null : u
+  }
+
   if (!conv) return null
   return (
-
 
     <div className='conv-container' >
 
@@ -16,25 +20,22 @@ const Conversations = ({ conv, setChat, selectedChat,setNew }) => {
       </button>
 
       <h1 className='conv-header'> Conversations</h1>
+      {conv.map((convo,index) => {
+        return (
+          <div key={convo.id}
+            className={`flex conv-field
+              ${convo.id === selectedChat ? 'selected-chat' : ''}` }
+            onClick={()=> setChat(index)}>
 
-
-      {conv.map(convo => {
-        const convoId = convo.id
-        return convo.participants.map(user => {
-          return (
-            <div key={convoId}
-              className={`flex conv-field
-              ${convoId === selectedChat ? 'selected-chat' : ''}` }
-              onClick={()=> setChat(convoId, user)}>
-
-              <img src={user.profile_image} 
-                alt='profile-img' className='small-icon' />
-
-              <p>{user.first_name} {user.last_name}</p>
+            <img src={convo.participants.profile_image} 
+              alt='profile-img' className='small-icon' />
+            <div className='space-between'>
+              <p>{convo.participants.first_name} {convo.participants.last_name}</p>
+              <p>{unread(convo.messages)} </p>
             </div>
+          </div>
 
-          )
-        })
+        )
       })}
     </div>
   )

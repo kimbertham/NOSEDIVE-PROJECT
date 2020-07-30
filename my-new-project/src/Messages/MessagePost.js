@@ -20,11 +20,12 @@ class MessagePost extends React.Component {
 
   handleSubmit = async () => {
     try {
-      const form = { ...this.state.form, conversation: this.props.selectedChat } 
+      const form = { ...this.state.form, conversation: this.props.convo.id } 
       this.setState({ form }, async () => {
-        const id = this.props.selectedInfo.id
+        const id = this.props.convo.participants.id
         await axios.post(`/api/messaging/${id}/`, this.state.form, headers())
-        this.props.setChat(0,this.props.selectedInfo ,1)
+        await this.props.getConvos()
+        await this.props.setChat(0,1)
         const form = { ...this.state.form, content: '', conversation: '' }
         this.setState({ form })  
       })
@@ -35,10 +36,10 @@ class MessagePost extends React.Component {
 
   
   render () {
-    const { selectedInfo } = this.props
+    const { convo } = this.props
     return (
 
-      <div className={selectedInfo ? 'msg-post center' : 'display-none'}>
+      <div className={convo ? 'msg-post center' : 'display-none'}>
     
         <input
           className='msg-input'
