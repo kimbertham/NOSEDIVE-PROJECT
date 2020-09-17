@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import PostContent from './PostContent'
 import MakeComments from './PostComments/MakeComments'
@@ -10,20 +9,9 @@ import RatingModal from './RatingModal'
 class Posts extends React.Component {
   state = {
     comments: false,
-    ratings: [],
+    // ratings: [],
     ratingModal: false,
     ratingPop: ''
-  }
-
-  async componentDidMount() {
-    this.getPostRatings()
-  }
-
-  getPostRatings = async () => {
-    const postId = this.props.posts.id
-    const userId = this.props.user.bio.id
-    const ratings = await axios.get(`/api/postratings/profile/${userId}/post/${postId}/`) 
-    this.setState({ ratings: ratings.data })
   }
 
   showComments = () => {
@@ -38,22 +26,20 @@ class Posts extends React.Component {
   }
 
   render(){
-    const { posts, updateProfile, currentUserId, user } = this.props
-    const { ratings,comments, ratingModal,ratingPop } = this.state
+    const { post, updateProfile, currentUserId, user, page } = this.props
+    const { comments, ratingModal,ratingPop } = this.state
 
     return (
       <div className='posts'>
           
         <div className='post-stars'>
           <PostsRatingStars
-            posts={posts}
-            updateProfile={updateProfile} 
-            getPostRatings={this.getPostRatings}/>
+            post={post}
+            updateProfile={updateProfile} />
         </div>
 
         <PostContent 
-          posts={posts}
-          ratings={ratings}
+          post={post}
           showRatings={this.showRatings}
           showComments={this.showComments} 
           currentUserId={currentUserId}
@@ -62,7 +48,7 @@ class Posts extends React.Component {
 
         <div className={comments ?
           'display-block' : 'display-none'}>
-          {posts.comments.map(comment => {
+          {post.comments ? post.comments.map(comment => {
             return (
               <PostComments 
                 key={comment.id} 
@@ -70,20 +56,20 @@ class Posts extends React.Component {
                 updateProfile={updateProfile}
                 page={'profile'}/>
             )
-          })}
+          }) : null}
 
           <MakeComments 
-            posts={posts}
+            post={post}
             user={user}
-            updateProfile={updateProfile}/>
+            updateProfile={updateProfile}
+            page={page}
+          />
         </div>
-
 
         <RatingModal
           ratingPop={ratingPop}
           ratingModal={ratingModal}
           showRatings={this.showRatings}/>
-
 
       </div>
 

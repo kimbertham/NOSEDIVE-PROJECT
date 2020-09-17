@@ -11,12 +11,12 @@ from .models import Messaging
 # Create your views here.
 
 
-class MessagingListView(APIView):   
-    #get all messages 
-    def get(self, request):
-        messages = Messaging.objects.all()
-        serialized_messages = PopulatedMessagingSerializer(messages, many=True)
-        return Response(serialized_messages.data, status=HTTP_200_OK)
+# class MessagingListView(APIView):   
+#     #get all messages 
+#     def get(self, request):
+#         messages = Messaging.objects.all()
+#         serialized_messages = PopulatedMessagingSerializer(messages, many=True)
+#         return Response(serialized_messages.data, status=HTTP_200_OK)
 
 
 class MessagingDetailView(APIView):
@@ -32,10 +32,10 @@ class MessagingDetailView(APIView):
         return Response(created_message.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
         # Get all one users messages 
-    def get(self, request, pk):
-        messages = Messaging.objects.filter(conversation=pk)
-        serialized_messages = PopulatedMessagingSerializer(messages, many=True)
-        return Response(serialized_messages.data, status=HTTP_200_OK)
+    # def get(self, request, pk):
+    #     messages = Messaging.objects.filter(conversation=pk).order_by('created_at')
+    #     serialized_messages = PopulatedMessagingSerializer(messages, many=True)
+    #     return Response(serialized_messages.data, status=HTTP_200_OK)
 
     #get all messages between two selected participants 
         # def get(self, request, pk, id):
@@ -43,6 +43,7 @@ class MessagingDetailView(APIView):
         # messages = Messages.objects.filter(Q(='candy')|Q(body__icontains='candy'))
         # serialized_messages = PopulatedMessagingSerializer(messages, many=True)
         # return Response(serialized_messages.data, status=HTTP_200_OK)
+
     def put(self, request, pk):
         message_to_read = Messaging.objects.get(pk=pk)
         update_message = MessagingSerializer(message_to_read, data=request.data)

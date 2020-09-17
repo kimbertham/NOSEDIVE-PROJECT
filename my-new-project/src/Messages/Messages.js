@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserId } from '../lib/auth'
+import { getUserId, headers } from '../lib/auth'
 import axios from 'axios'
 import Chat from './Chat'
 import Conversations from './Conversations'
@@ -23,13 +23,10 @@ class Messages extends React.Component {
   getConvos = async  () => {
     const res = await axios.get(`/api/conversations/${userId}/`)
     res.data.map(c => {
-      c.participants = c.participants.find(
-        u => u.id !== userId
-      )
+      return c.participants = c.participants.find(u => u.id !== userId)
     })
     this.setState({ conversations: res.data })
   }
-
 
   setChat = async (i, update) => {
     i =  update ? this.state.index : i
@@ -40,16 +37,18 @@ class Messages extends React.Component {
     })
   }
 
-
-  readMessages = () => {
-    // async () => {
-    //   await this.state.convo.messages.map(async m => {
-    //     if (m.read === false) {
-    //       const read = { ...m, sender: m.sender.id, reciever: m.reciever.id, read: true }
-    //       await axios.put(`/api/messaging/${m.id}/`, read , headers())
-    //     }
-    //   })
-    // })
+  setRead = async (messages) => {
+    
+    const read =  messages.map(async m  => { 
+      if (m.read === false && m.reciever.id === userId) {
+        const read = { ...m, sender: m.sender.id, reciever: m.reciever.id, read: true }
+        await axios.put(`/api/messaging/${m.id}/`, read , headers())
+      }
+    })
+    Promise.all(read)
+      .then(() => {
+        this.getConvos()
+      })
   }
 
   setNew = () => {
@@ -64,14 +63,14 @@ class Messages extends React.Component {
       convo } = this.state
 
     return (
-
       <div className='flex'>
 
         <Conversations
           conv={conversations}
           userId={userId}
           setChat={this.setChat}
-          setNew={this.setNew}/>
+          setNew={this.setNew}
+          setRead={this.setRead}/>
 
         <div className='chat-container'>
 

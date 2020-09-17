@@ -17,18 +17,19 @@ class MessagePost extends React.Component {
     this.setState({ form })
   }
   
+  handleClear = () => {
+    const form = { ...this.state.form, content: '', conversation: '' }
+    this.setState({ form })  
+  }
 
   handleSubmit = async () => {
     try {
-      const form = { ...this.state.form, conversation: this.props.convo.id } 
-      this.setState({ form }, async () => {
-        const id = this.props.convo.participants.id
-        await axios.post(`/api/messaging/${id}/`, this.state.form, headers())
-        await this.props.getConvos()
-        await this.props.setChat(0,1)
-        const form = { ...this.state.form, content: '', conversation: '' }
-        this.setState({ form })  
-      })
+      const f = { ...this.state.form, conversation: this.props.convo.id } 
+      const id = this.props.convo.participants.id
+      await axios.post(`/api/messaging/${id}/`, f, headers())
+      await this.props.getConvos()
+      await this.props.setChat(0,1)
+      this.handleClear()
     } catch (err) {
       console.log(err)
     }

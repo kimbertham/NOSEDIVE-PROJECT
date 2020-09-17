@@ -31,7 +31,7 @@ render(){
           alt='user-profile'/>
       </div>
 
-
+   
       <Link 
         to={`/home/${userId}`}> 
         <img src='https://i.imgur.com/kkeEHVw.jpg'
@@ -59,7 +59,7 @@ render(){
       </Link>
 
       <Link
-        to={`/profile/${userId}/edit`}>
+        to={`/edit/${userId}`}>
         <img src='https://i.imgur.com/BvhVhb3.jpg' 
           className='nav-icon'
           alt='user-profile'/>

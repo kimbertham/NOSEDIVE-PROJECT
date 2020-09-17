@@ -50,34 +50,41 @@ class NewConvo extends React.Component {
 
     return (
   
-      <div className={newConvo ? ' newConvo-container' : 'display-none'}>
+      <div className={newConvo ? ' newConvo-container ' : 'display-none'}>
 
-        <h1> New Chat</h1>
-        <input 
-          className='msg-search'
-          value={input} 
-          placeholder='Search for a user...' 
-          onChange={this.handleChange} />
+        <div className='flex center'>
+          <h1> New Chat</h1>
+          <img className='search-btn small-icon'
+            src='https://i.imgur.com/NFkcPiE.jpg' alt='pp-img'/>
+        </div>
+        
+        <div className='bordered-box'>
+          <input 
+            className='msg-search'
+            value={input} 
+            placeholder='Search for a user...' 
+            onChange={this.handleChange} />
 
-        <img className='search-btn small-icon'
-          src='https://i.imgur.com/NFkcPiE.jpg'/>
     
 
-        <div className='results-container'>
-          {searchUsers.map(user => {
-            return (
-              <div 
-                key={user.id}
-                className=' search-user pointer flex'
-                onClick={() => {
-                  this.handleNew(user.id)
-                }}>
-                <img src={user.profile_image} className='small-icon'/>
-                <p> {user.first_name} {user.last_name}</p>
-              </div>
-            )
-          })}
+          <div className='results-container'>
+            {searchUsers.map(user => {
+              return (
+                <div 
+                  key={user.id}
+                  className=' search-user pointer flex'
+                  onClick={() => {
+                    this.handleNew(user.id)
+                  }}>
+                  <img src={user.profile_image}
+                    className='small-icon' alt='pp-img'/>
+                  <p> {user.first_name} {user.last_name}</p>
+                </div>
+              )
+            })}
+          </div>
         </div>
+ 
 
       </div>
       

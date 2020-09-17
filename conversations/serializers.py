@@ -24,6 +24,7 @@ class PopulatedMessagingSerializer(MessagingSerializer):
     sender = UserSerializer()
 
 
+
 class ConversationsSerializer(serializers.ModelSerializer):
 
     class Meta:

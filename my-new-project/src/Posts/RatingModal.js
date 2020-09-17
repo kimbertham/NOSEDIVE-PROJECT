@@ -20,7 +20,8 @@ const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
               <img 
                 className='small-icon' alt='profile-img'
                 src={ratings.rating_owner.profile_image} />
-              <p>{ratings.rating_owner.first_name} {ratings.rating_owner.last_name} rated this post {ratings.rating} stars</p>
+              <p>{ratings.rating_owner.first_name} 
+                {ratings.rating_owner.last_name} rated this post {ratings.rating} stars</p>
             </div>
           )
         }) : ''

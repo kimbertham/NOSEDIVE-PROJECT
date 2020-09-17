@@ -2,7 +2,7 @@ import React from 'react'
 
 const Chat = ({ userId, convo } ) => {
   if (!convo) return ''
-
+  console.log(convo.messages)
   return (
     <>
   
@@ -13,15 +13,15 @@ const Chat = ({ userId, convo } ) => {
       </div>
 
       <div className='chat-messages scroll'>
-        {convo.messages ? convo.messages.reverse().map(message => {
+        {convo.messages ? convo.messages.map(message => {
           if (message.sender.id === userId) {
             return <div key={message.id} className='message-user'> 
               <p className='message-pop bordered-box'>{message.content} </p>
-              <img src={message.sender.profile_image} className='msg-icon small-icon' />
+              <img src={message.sender.profile_image} className='msg-icon small-icon' alt='pp-img' />
             </div>
           } else {
             return <div key={message.id} className=' message-sender'> 
-              <img src={message.sender.profile_image} className='msg-icon small-icon' />
+              <img src={message.sender.profile_image} className='msg-icon small-icon' alt='pp-img'/>
               <p className='message-pop bordered-box'>{message.content} </p>
             </div> 
           }

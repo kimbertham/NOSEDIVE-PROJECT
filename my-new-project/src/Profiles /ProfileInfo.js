@@ -15,11 +15,18 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
     <div className='profile-info'>
       <div className='flex'>
 
-        <img 
+
+        <div 
+          style={{  
+            backgroundImage: `url(${bio.profile_image ? 
+              bio.profile_image : defaultImage})`
+          }} className='profile-image'/>
+
+        {/* <img 
           className='circle profile-image'
           alt='profile-pic'
           src={bio.profile_image ? 
-            bio.profile_image : defaultImage}/>
+            bio.profile_image : defaultImage}/> */}
 
         <div className='profile-text'>
           <div className='center'>

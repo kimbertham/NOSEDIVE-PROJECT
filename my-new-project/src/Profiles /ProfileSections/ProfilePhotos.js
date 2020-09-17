@@ -7,7 +7,8 @@ class ProfilePhotos extends React.Component {
 state={
   image: '',
   i: '',
-  gallery: false
+  gallery: false,
+  loading: false
 }
 
 

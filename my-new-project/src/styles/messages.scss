@@ -1,26 +1,32 @@
 .conv-container {
   height:97vh;
   width:30vw;
+
   .conv-field {
-    margin:3% 0;
     align-items: center;
     padding:10px 20px;
-
   }
 
   .conv-header {
     padding:10px 20px;
   }
+
+  .read-notif {
+    background-color:rgb(255, 255, 255);
+    color: rgb(191, 113, 113);
+    border-radius: 50%;
+    width:20px;
+    height: 20px;
+  }
 }
 
 .chat-container{
-  background-color: rgba(205, 154, 154, 0.4);
+  background-color: rgba(215, 164, 164, 0.4);
   width:80vw;
   height:100vh;
 
   .chat-name {
-  background-color:  rgba(249,215,205,1) ;
-  border:1px solid rgba(205, 154, 154, 0.4);
+  background-color:   rgb(252, 228, 221) ;
   align-items: center;
   height:5vh;
   padding: 10px 20px;
@@ -33,9 +39,8 @@
   }
 }
 
-
   .message-pop{
-    background-color: rgba(249,215,205,1) ;
+    background-color: rgb(240, 213, 205) ;
     display:inline-block;
     padding:10px;
   }
@@ -55,10 +60,10 @@ margin:2vh;
   align-items: center;
 }
 
-.selected-chat {
-  background-color:  rgba(205, 154, 154, 0.4);
-  border-right:1px solid rgba(249,215,205,1) ;
-}
+// .selected-chat {
+//   background-color:  rgba(205, 154, 154, 0.4);
+//   border-right:1px solid rgba(249,215,205,1) ;
+// }
 
 .msg-post{
   height:10vh;
@@ -83,15 +88,16 @@ margin:2vh;
     border:none;
     border-radius: 5px;
     height:3vh;
-    width:90%;
+    width:95%;
+    margin-top:3%;
   }
   
   .search-user{ 
-    margin: 2px 0;
-    padding: 3px;
-    width:90%;
+    margin: 3px 0;
+    padding: 5px;
+    width:95%;
     &:hover {
-      background-color:  rgba(249,215,205,1) ;
+      background-color:  rgb(255, 255, 255) ;
     }
   }
 
@@ -100,3 +106,11 @@ margin-left:10px;
   }
 }
 
+.profile-pic-test{
+  width:300px;
+  height:300px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

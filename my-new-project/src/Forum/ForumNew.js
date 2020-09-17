@@ -72,13 +72,21 @@ class Register extends React.Component{
             <div className='form-field'>            
               <label className='label'>Limit Acces (Optional)</label>
               <br/>
-              <input
+              <select id="feedback"
                 className='form-input'
                 placeholder="Limit Acces"
                 name="limitations"
-                onChange={this.handleChange}
-              />
+                onChange={this.handleChange}>
+                <option value=''></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </div>
+
+          
 
             <div className='form-field'>            
               <label className='label'>Post</label>

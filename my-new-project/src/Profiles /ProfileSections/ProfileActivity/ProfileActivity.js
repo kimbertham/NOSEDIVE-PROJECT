@@ -22,9 +22,10 @@ const ProfileActivity = ({   user, updateProfile, currentUserId }) => {
         <div className=' profile-posts bordered-box'>
           {posts.slice(0).reverse().map(post => {
             return <Posts 
+              page='profile'
               key={post.id} 
               user={user}
-              posts={post}
+              post={post}
               currentUserId={currentUserId} 
               updateProfile={updateProfile}/>
           })}

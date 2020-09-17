@@ -8,10 +8,9 @@ class Loading extends React.Component {
     return (
       <Loader
         type="Puff"
-        color="#00BFFF"
+        color="#ce9b8e"
         height={100}
-        width={100}
-        timeout={3000} //3 secs
+        width={80}
       />
     )
   }

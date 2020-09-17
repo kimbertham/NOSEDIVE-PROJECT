@@ -17,13 +17,13 @@ deletePost = (id) => {
 }
 
 render() {
-  const { posts, currentUserId } = this.props
+  const { post, currentUserId } = this.props
   const { settings } = this.state
   return (
 
     <div className='settings-icon flex'>
         
-      {posts.owner.id === currentUserId ?
+      {post.owner.id === currentUserId ?
         <>
           <div className='flex dots-container' 
             onClick={this.toggleSettings}>
@@ -34,7 +34,7 @@ render() {
           <div 
  
             onClick={() => {
-              this.deletePost(posts.id)
+              this.deletePost(post.id)
             }}
             className={settings ? 
               'post-delete button pointer' : 'display-none'}>

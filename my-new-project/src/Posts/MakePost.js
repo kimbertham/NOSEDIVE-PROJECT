@@ -6,8 +6,7 @@ class MakePost extends React.Component {
   state = {
     form: {
       content: ''
-    },
-    page: ''
+    }
   }
 
   handleChange = event => {
@@ -16,21 +15,18 @@ class MakePost extends React.Component {
   }
   
 
-  componentDidMount = () => {
-    this.setState({ page: this.props.page })
-  }
+
 
   handleSubmit = async event => {
     event.preventDefault()
-    const { page } = this.state
+    const p = this.props.page
     try {
-      if (page === 'thread-post') {
-        console.group('called')
+      if (p === 'thread-post') {
         const threadId = this.props.threadId
         await axios.post(`/api/forum/${threadId}/0`, this.state.form, headers())
         this.props.getComments()
       } 
-      if (page === 'profile-post'){
+      if (p === 'profile-post' || p === 'newsfeed-post'){
         await axios.post('/api/post/', this.state.form, headers())
         this.props.updateProfile()
       }

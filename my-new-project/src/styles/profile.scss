@@ -1,9 +1,16 @@
 //editProfile.js
 
-.edit-container {
-  width:70vw;
-  .edit-profile{
+.edit-cont {
+  width: 80% !important ;
+
+  .edit-img{
+    width:30%;
+    border-radius: 50%;
   }
+}
+
+#edit-input {
+  width:100%;
 }
 
 .modal-pop{
@@ -25,9 +32,8 @@
 .img-settings{
   position: absolute;
   margin:0.5% 0 0 4% ;
-  border-radius:50%;
-  opacity:0.8;
   width: 2%;
+  mix-blend-mode: multiply;
 }
 
 .profile-section {
@@ -59,9 +65,16 @@ padding:10px
 .profile-info {
   display: flex;
   justify-content: space-between;
+
   .profile-image {
-    height: 20vh;
-    margin-right: 20px;
+
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 20vh;
+      width: 20vh;
+      margin: 0 20px;
   }
   
   .profile-text {
@@ -77,7 +90,6 @@ padding:10px
     }
   }
 }
-
 
 //ProfileNav.js
 
@@ -149,7 +161,9 @@ align-items: center;
 }
 }
 
-
+.img-up {
+margin-right:20px;
+}
 
 .gallery-container {
   width:80%;
@@ -223,7 +237,6 @@ margin:20px 0;
     border-radius: 10px;
     background-color: rgba(255,255,255, 0.6);
   }
-
 }
 
 .product-img-container{
@@ -240,5 +253,9 @@ margin:20px 0;
 .wishlist-button {
   margin:10px;
   float: right;
+}
+
+.wish-loader {
+margin: 100px;
 }
 

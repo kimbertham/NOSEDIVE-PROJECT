@@ -2,10 +2,11 @@ import React from 'react'
 
 
 
-const Conversations = ({ conv, setChat, selectedChat,setNew }) => {
+const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) => {
 
   const unread  = (messages) => {
-    const u = messages.filter(m => m.read === false).length 
+    const u = messages.filter(m => 
+      m.read === false && m.reciever.id === userId).length 
     return u === 0 ? null : u
   }
 
@@ -20,18 +21,24 @@ const Conversations = ({ conv, setChat, selectedChat,setNew }) => {
       </button>
 
       <h1 className='conv-header'> Conversations</h1>
+
       {conv.map((convo,index) => {
         return (
           <div key={convo.id}
             className={`flex conv-field
               ${convo.id === selectedChat ? 'selected-chat' : ''}` }
-            onClick={()=> setChat(index)}>
+            onClick={()=> {
+              setRead(convo.messages)
+              setChat(index)
+            } }>
 
             <img src={convo.participants.profile_image} 
               alt='profile-img' className='small-icon' />
-            <div className='space-between'>
+            <div className='full-width flex-between'>
               <p>{convo.participants.first_name} {convo.participants.last_name}</p>
-              <p>{unread(convo.messages)} </p>
+              {unread(convo.messages) ? 
+                <div className='center read-notif'>{unread(convo.messages)}</div> 
+                : null}
             </div>
           </div>
 

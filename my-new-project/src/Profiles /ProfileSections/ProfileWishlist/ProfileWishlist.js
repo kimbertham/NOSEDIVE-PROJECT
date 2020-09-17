@@ -24,7 +24,8 @@ state = {
   },
 
   wishlist: [],
-  modal: false
+  modal: false,
+  loading: false
 }
 
 
@@ -33,15 +34,18 @@ handleChange = event => {
   this.setState({ form })
 }
 
-handleSubmit = async event => {
+handleSubmit =  event => {
   event.preventDefault()
-  try {
-    const res = await axios(`${amazonBaseURL}${this.state.form.search}`, amazonHeaders )
-    const products = res.data.products
-    this.setState({ products , form: { search: '' } })
-  } catch (err) {
-    console.log(err)
-  }
+  this.setState({ loading: true }, 
+    async ()  => {
+      try {
+        const res = await axios(`${amazonBaseURL}${this.state.form.search}`, amazonHeaders )
+        const products = res.data.products
+        this.setState({ products , form: { search: '' }, loading: false })
+      } catch (err) {
+        console.log(err)
+      } 
+    })
 }
 
 handleWishList = async (price, thumbnail, url, title ) => {
@@ -75,7 +79,7 @@ handleModal = () => {
 
 render() {
 
-  const { products, modal, search } = this.state
+  const { products, modal, search, loading } = this.state
   const { user,currentUserId } = this.props
   const { wishlist } = user
 
@@ -83,8 +87,9 @@ render() {
   return (
     <> 
       <div className='wishlist-section scroll'>
+      
+        <h1>{user.bio.first_name}&apos;s Wishlist</h1>
 
-        <Loading />
         <ProfileWishlistAdd 
           user={user}
           currentUserId={currentUserId}
@@ -93,9 +98,13 @@ render() {
           search={search}/>
 
 
-        <h1>Wishlist</h1>
-        <div className='products-container flex'>
+        {loading === true ? 
+          <div className='center wish-loader'> 
+            <Loading />
+          </div> : null}
+    
 
+        <div className='products-container flex'>
           {products.map(product => {
             return (
               <WishlistProduct 
@@ -105,7 +114,7 @@ render() {
                 search={true}/>
             )
           })}
-
+          
           {wishlist.map(product => {
             return ( 
               <WishlistProduct 
@@ -116,7 +125,7 @@ render() {
                 handleDelete={this.handleDelete}/>
             )
           })}
-
+          
           <div 
             onClick={this.handleModal}
             className={`modal center 

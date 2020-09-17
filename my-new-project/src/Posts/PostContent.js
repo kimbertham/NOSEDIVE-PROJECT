@@ -2,42 +2,42 @@ import React from 'react'
 import { defaultImage } from '../lib/commonFiles'
 import PostSettings from './PostSettings'
 
-const PostContent = ({ posts, showComments, ratings ,updateProfile, currentUserId, showRatings }) => { 
+const PostContent = ({ post, showComments ,updateProfile, currentUserId, showRatings }) => { 
 
   return (
 
     <div className='post-view flex'>
       <img className='post-icon'
         alt='post-owner-pic'
-        src={posts.owner.profile_image ? 
-          posts.owner.profile_image : defaultImage}/>
+        src={post.owner.profile_image ? 
+          post.owner.profile_image : defaultImage}/>
 
       <div className='full-width'>
-        <h1> {posts.owner.first_name} {posts.owner.last_name}</h1>
+        <h1> {post.owner.first_name} {post.owner.last_name}</h1>
         <div className='flex post-settings'>
           <p className='date-text'>
-            {posts.created_at.split('-').reverse().join(' ')}</p>
+            {post.created_at.split('-').reverse().join(' ')}</p>
 
           <PostSettings
-            posts={posts}
+            post={post}
             currentUserId={currentUserId}
             updateProfile={updateProfile}/> 
         </div>
         
-        <p className='post-content italic'>{posts.content}</p>
+        <p className='post-content italic'>{post.content}</p>
           
         <div className='post-interactions'>
 
           <small 
             className='button pointer comment-button'
             onClick={() => {
-              showRatings(ratings)
-            }}>rated by {ratings.length}</small>
+              showRatings(post.ratings)
+            }}>rated by {post.ratings.length}</small>
 
           <small 
             onClick={showComments}
             className='button pointer comment-button'> 
-            Comments ({posts.comments.length})</small>
+            Comments ({post.comments ? post.comments.length : null})</small>
   
         </div>
       </div>

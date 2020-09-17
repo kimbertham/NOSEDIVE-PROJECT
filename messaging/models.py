@@ -25,3 +25,6 @@ class Messaging(models.Model):
 
     def __str__(self):
         return f' {self.sender} to {self.reciever}'
+
+    class Meta:
+        ordering = ('-created_at',)

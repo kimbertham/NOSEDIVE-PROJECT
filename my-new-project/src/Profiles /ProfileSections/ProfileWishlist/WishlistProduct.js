@@ -16,14 +16,15 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
               
       <a href={product.url}>
         <h1>{product.title}</h1>
-        <p>{product.price}</p>
+        <p>£{product.price.current_price ? 
+          product.price.current_price : product.price  }</p>
       </a>
 
       {search === true ? 
         <button className='wishlist-button button'
           onClick={() => {
             handleWishList(
-              product.price,
+              product.price.current_price,
               product.thumbnail,
               product.url,
               product.title)

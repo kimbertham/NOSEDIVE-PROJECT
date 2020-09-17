@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 from rest_framework.exceptions import NotFound,PermissionDenied
 from django.db.models import Count
-
+from django.db.models import Q
 
 from .models import Post
 from postRatings.models import PostRatings
@@ -35,6 +35,7 @@ class PostListView(APIView):
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['owner'] = request.user.id
+        print(request.data)
         created_post = PostSerializer(data=request.data)
         if created_post.is_valid():
             created_post.save()
@@ -59,6 +60,13 @@ class PostDetailView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
+class NewsfeedListView(APIView):
+    # get list of users followers id, sift through posts filting through for only posts by those users 
+    def get(self, request, pk):
+        followers = Contact.objects.filter(user_from=pk).values_list('user_to', flat=True)
+        posts = Post.objects.filter(Q(owner=pk) | Q(owner__in=followers)).order_by('created_at')
+        serailized_posts = PopulatedPostSerializer(posts, many=True)
+        return Response( serailized_posts.data)
 
 
 

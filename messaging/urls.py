@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import MessagingDetailView, MessagingListView
+from .views import MessagingDetailView
 
 
 urlpatterns = [
-    path('', MessagingListView.as_view()),
     path('<int:pk>/', MessagingDetailView.as_view()),
 ]

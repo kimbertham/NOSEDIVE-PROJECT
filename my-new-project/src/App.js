@@ -4,7 +4,7 @@ import { BrowserRouter , Switch, Route } from 'react-router-dom'
 import ProfilePage from './Profiles /ProfilePage'
 import ProfileBioEdit from './Profiles /ProfileSections/ProfileBio/ProfileBioEdit'
 import Sidebar from './common/sidebar/Sidebar'
-import  Login  from './Auth/Login'
+import Login  from './Auth/Login'
 import Register from './Auth/Register'
 import Stats from './Stats/Stats'
 import Forum from './Forum/Forum'
@@ -28,13 +28,13 @@ const App = () => {
         {token ?  <Route component={Sidebar}/> : ''}
 
         <Switch>
+
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/messages' component={Messages}/>
 
           <div className='left-section'>
-            <Route exact path='/profile/:id/edit' component={ProfileBioEdit}/>
-
+            <Route path='/edit' component={ProfileBioEdit}/>
             <Route path='/home/:id' component={Newsfeed}/>
             <Route path='/stats/:id' component={Stats}/>
             <Route path='/profile/:id' component={ProfilePage}/>

@@ -18,9 +18,10 @@ class MakeComments extends React.Component {
   
   handleSubmit = async event => {
     event.preventDefault()
+    const p = this.props.page
     try {
 
-      if (this.props.page === 'thread') {
+      if (p === 'thread') {
         const parent = this.props.parent === null ? 
           0 : this.props.parent
         const forum = this.props.forum
@@ -31,10 +32,9 @@ class MakeComments extends React.Component {
         this.props.toggleReplies(true)
         
       }
-
-      if (this.props.page === 'profile') {
-        const postOwner = this.props.posts.owner.id
-        const postId = this.props.posts.id
+      if (p === 'profile') {
+        const postOwner = this.props.post.owner.id
+        const postId = this.props.post.id
         await axios.post(`/api/comments/${postOwner}/${postId}/`,
           this.state.form, headers())
         this.props.updateProfile()
