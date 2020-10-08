@@ -13,7 +13,7 @@ const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) 
   if (!conv) return null
   return (
 
-    <div className='conv-container' >
+    <div className='conv-container bordered-box' >
 
       <button onClick={setNew} 
         className='button right'>
@@ -25,7 +25,7 @@ const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) 
       {conv.map((convo,index) => {
         return (
           <div key={convo.id}
-            className={`flex conv-field
+            className={`flex conv-field 
               ${convo.id === selectedChat ? 'selected-chat' : ''}` }
             onClick={()=> {
               setRead(convo.messages)

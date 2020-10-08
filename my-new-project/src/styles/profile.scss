@@ -61,22 +61,21 @@ padding:10px
 
 
 // ProfileIno.js 
+.profile-image {
+
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 20vh;
+  width: 20vh;
+  margin: 0 20px;
+}
 
 .profile-info {
   display: flex;
   justify-content: space-between;
 
-  .profile-image {
-
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 20vh;
-      width: 20vh;
-      margin: 0 20px;
-  }
-  
   .profile-text {
     h1 {
       font-size: 4em;

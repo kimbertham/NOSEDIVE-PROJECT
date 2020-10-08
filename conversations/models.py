@@ -7,8 +7,5 @@ User = get_user_model()
 class Conversations(models.Model):
     participants = models.ManyToManyField(User)
 
-    
-    
-
     def __str__(self):
         return f' {self.participants}'

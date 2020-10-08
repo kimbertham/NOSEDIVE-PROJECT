@@ -1,10 +1,12 @@
 .conv-container {
-  height:97vh;
   width:30vw;
+  margin:0;
+  padding:0;
 
   .conv-field {
     align-items: center;
     padding:10px 20px;
+    margin:2px;
   }
 
   .conv-header {

@@ -1,0 +1,24 @@
+.feed-post {
+width:60%;
+margin:0 10px;
+}
+
+
+.feed-left {
+  width:40%;
+}
+
+.feed-title {
+  text-decoration: underline;
+  font-weight: lighter;
+  margin: 10px
+}
+
+.feed-text{
+  flex-direction: column;
+  h1{
+    font-size: 4em;
+  }
+}
+
+

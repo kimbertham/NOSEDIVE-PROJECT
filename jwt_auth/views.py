@@ -66,7 +66,19 @@ class ProfileDetailView(APIView):
             print('test')
             user = User.objects.get(pk=pk)    
             serialized_user = UserSerializer(user)
-            return Response(serialized_user.data, status=HTTP_200_OK)
+            
+            user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+            user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+            if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
+                user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
+            elif not user_profile_ratings['rating__avg']:
+                user_rating_score = user_post_ratings['rating__avg']
+            elif not user_post_ratings['rating__avg']:
+                user_rating_score = user_profile_ratings['rating__avg']
+            else: 
+                user_rating_score = 0
+            return Response({'bio': serialized_user.data, 'rating': user_rating_score }, status=HTTP_200_OK)
+
         if action == 'full':
             user = User.objects.get(pk=pk)
             serialized_user = UserSerializer(user)
@@ -96,7 +108,6 @@ class ProfileDetailView(APIView):
                 user_rating_score = user_profile_ratings['rating__avg']
             else: 
                 user_rating_score = 0
-                
             users_ratings = Ratings.objects.filter(rated_id=pk).order_by('-created_at')
             serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
 

@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Forum, ForumComments
+from .models import Forum, ForumComments, ForumFollow
 from comments.serializers import PopulatedCommentSerializer
 from rest_framework_recursive.fields import RecursiveField
 User = get_user_model()
@@ -26,7 +26,11 @@ class PopulatedForumSerializer(ForumSerializer):
     forum_owner = UserSerializer()
 
 
+class ForumFollowSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = ForumFollow
+        fields = '__all__'
 
 #THREAD COMMENTS ----
 

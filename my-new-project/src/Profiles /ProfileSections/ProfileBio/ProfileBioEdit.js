@@ -2,20 +2,25 @@ import React from 'react'
 import axios from 'axios'
 import { headers } from '../../../lib/auth'
 import { getUserId } from '../../../lib/auth'
+import ImageUpload from '../../../common/ImageUpload'
 
 const userid = getUserId()
 
 class ProfileBioEdit extends React.Component {
     state = {
-      formData: {
+      profile: {
       }
     }
 
     async componentDidMount() {
-      const res = await axios.get(`/api/profile/${userid}/simple/`)
-      this.setState({ formData: res.data })
+      this.getData()
     }
   
+    getData = async () => { 
+      const res = await axios.get(`/api/profile/${userid}/simple/`)
+      this.setState({ profile: res.data.bio })
+    }
+
     handleChange = event => {
       try {
         const formData = { ...this.state.formData, [event.target.name]: event.target.value }
@@ -28,7 +33,8 @@ class ProfileBioEdit extends React.Component {
     handleSubmit = async event => {
       event.preventDefault()
       try {
-        const formData = await axios.put(`/api/profile/${userid}/edit/`, { ...this.state.formData }, headers())
+        const formData = await axios.put(`/api/profile/${userid}/edit/`, 
+          { ...this.state.formData }, headers())
         this.setState({ formData })
         this.props.history.push(`/profile/${userid}/bio`)
       } catch (err) {
@@ -39,7 +45,9 @@ class ProfileBioEdit extends React.Component {
   
     render(){
   
-      const { formData } = this.state
+      const { profile } = this.state
+      console.log(profile)
+      if (!profile) return
       return (
 
         <>
@@ -50,7 +58,7 @@ class ProfileBioEdit extends React.Component {
 
           <div className='auth-form edit-cont pop-up'>
             <div className='center'>
-              <img src={formData.profile_image} 
+              <img src={profile.profile_image} 
                 className='edit-img' alt='profile-img'/>
             </div>
 
@@ -63,7 +71,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="First Name"
                   name="first_name"
-                  value={formData.first_name}
+                  value={profile.first_name}
                   onChange={this.handleChange}
                 />
               </div>
@@ -76,9 +84,15 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Second Name"
                   name="second_name"
-                  value={formData.last_name}
+                  value={profile.last_name}
                   onChange={this.handleChange}
                 />
+              </div>
+
+              <div className='form-field'>            
+                <label className='label'>Profile Image</label>
+                <br/>
+                <ImageUpload/>
               </div>
 
               <div className='form-field'>            
@@ -89,7 +103,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Tagline"
                   name="tagline"
-                  value={formData.tagline}
+                  value={profile.tagline}
                   onChange={this.handleChange}
                 />
               </div>
@@ -102,7 +116,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Second Name"
                   name="second_name"
-                  value={formData.last_name}
+                  value={profile.last_name}
                   onChange={this.handleChange}
                 />
               </div>
@@ -115,7 +129,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Description"
                   name="description"
-                  value={formData.description}
+                  value={profile.description}
                   onChange={this.handleChange}
                 />
               </div>
@@ -128,7 +142,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Career"
                   name="career"
-                  value={formData.career}
+                  value={profile.career}
                   onChange={this.handleChange}
                 />
               </div>
@@ -141,7 +155,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Location"
                   name="location"
-                  value={formData.location}
+                  value={profile.location}
                   onChange={this.handleChange}
                 />
               </div>
@@ -149,7 +163,7 @@ class ProfileBioEdit extends React.Component {
               <div className='form-field'>   
                 <label className='label'>Relationship : </label>
                 <select 
-                  defaultValue={formData.relationship} 
+                  defaultValue={profile.relationship} 
                   onChange={this.handleChange}
                   name='Relationship'>
                   <option value="" disabled></option>
@@ -169,7 +183,7 @@ class ProfileBioEdit extends React.Component {
                   id='edit-input'
                   placeholder="Age"
                   name="age"
-                  value={formData.age}
+                  value={profile.age}
                   onChange={this.handleChange}
                 />
               </div>

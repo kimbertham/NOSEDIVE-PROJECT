@@ -68,7 +68,7 @@ class Stats extends React.Component{
   
 
   getAdvice = () => {
-    const weakness = this.state.feedback.reduce((x, y) => x.value > y.value ? x : x)
+    const weakness = this.state.feedback.reduce((x, y) => x.rating_count > y.rating_count ? x : y)
     let advice 
     switch (weakness.feedback) {
       case 'Impoverished Vibes':
@@ -97,14 +97,12 @@ class Stats extends React.Component{
   }
 
   handleModal = () => {
-    console.log('test')
     this.setState({ modal: !this.state.modal })
   }
 
   render() {
-    const win = window.innerWidth
-    console.log(win)
- 
+
+
     return (
       <>
         <button 

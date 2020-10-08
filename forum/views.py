@@ -6,13 +6,12 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.exceptions import NotFound,PermissionDenied
 from django.contrib.auth import get_user_model
 from .models import Forum, ForumComments
-from .serializers import PopulatedForumSerializer,ForumSerializer, ForumCommentSerializer, PopulatedForumCommentSerializer,ForumCommentSerializerPOST
+from .serializers import ForumFollowSerializer, PopulatedForumSerializer,ForumSerializer, ForumCommentSerializer, PopulatedForumCommentSerializer,ForumCommentSerializerPOST
 User = get_user_model()
 
 class  ForumListView(APIView):
 
     def post(self,request):
-        print(request.data)
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['forum_owner'] = request.user.id
@@ -22,14 +21,24 @@ class  ForumListView(APIView):
             return Response(created_forum.data, status=HTTP_201_CREATED)
         return Response(created_forum.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-
     def get(self, request):
         threads = Forum.objects.all().order_by('-id')
         serialized_forum = PopulatedForumSerializer(threads, many=True)
         return Response( serialized_forum.data , status=HTTP_200_OK)
 
+class ForumFollowView(APIView):
+    def post( self,request, pk):
 
-
+        if not request.POST._mutable:
+            request.POST._mutable = True
+        request.data['forum'] = pk
+        request.data['follower'] = request.user.id
+        cf = ForumFollowSerializer(data=request.data)
+        if cf.is_valid():
+            cf.save()
+            print('hello')
+            return Response( cf.data , status=HTTP_201_CREATED)
+        return Response(cf.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class  ThreadView(APIView):
     def get(self, request, pk):
@@ -39,7 +48,6 @@ class  ThreadView(APIView):
 
 
 class ThreadCommentView(APIView):
-
 #get all comments for one thread 
     def get(self,request,forum_id):
             Thread_comments = ForumComments.objects.filter(forum_id=forum_id)
@@ -69,5 +77,3 @@ class ThreadCommentView(APIView):
             created_comment.save()
             return Response(created_comment.data, status=HTTP_201_CREATED)
         return Response(created_comment.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-
-        

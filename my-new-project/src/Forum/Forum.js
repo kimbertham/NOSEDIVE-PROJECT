@@ -24,6 +24,11 @@ class Forum extends React.Component {
     this.setState({ modal: !this.state.modal })
   }
 
+  dontCloseModal = (e)=> {
+    e.stopPropagation()
+    this.setState({ gallery: true })
+  }
+
   render(){
     const { forum, modal } = this.state
     const modalClass = modal ? 'display-block' : 'display-none'
@@ -43,9 +48,13 @@ class Forum extends React.Component {
         </div>
 
         <div className={`${modalClass}`}>
-          <ForumNew
-            handleModal={this.handleModal}
-            updateForum={this.getData}/>
+          <div onClick={this.handleModal} className='modal center'>
+            <div onClick={this.dontCloseModal} className='modal-pop'>
+              <ForumNew
+                handleModal={this.handleModal}
+                updateForum={this.getData}/>
+            </div>
+          </div>
         </div>
 
         {forum.map(thread=>{
@@ -58,4 +67,5 @@ class Forum extends React.Component {
     )
   }
 }
+
 export default Forum
