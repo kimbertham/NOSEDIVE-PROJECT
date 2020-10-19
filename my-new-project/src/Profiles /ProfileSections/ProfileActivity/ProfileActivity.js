@@ -1,45 +1,62 @@
 import React from 'react'
+import axios from 'axios'
 import Posts from '../../../Posts/Posts'
 import MakePost from '../../../Posts/MakePost'
 import ProfileInteractions from './ProfileInteractions'
 
-const ProfileActivity = ({   user, updateProfile, currentUserId }) => {
+class ProfileActivity extends React.Component {
+state ={
+  posts: [],
+  ratings: []
+}
 
-  const { posts,ratings } = user
+componentDidMount() {
+  this.getPosts()
+}
 
+getPosts =  async () => {
+  const posts = await axios.get(`/api/post/${this.props.userProfile}/`)
+  this.setState({ posts: posts.data })
+}
+
+
+render() {
+  const { posts  } = this.state
+  const { user, currentUserId, userProfile, updateProfile } = this.props
   if (!posts) return ''
   return (
     <>
 
-      {currentUserId === user.bio.id ?
-        <MakePost 
-          updateProfile={updateProfile}
-          page='profile-post'/>
-        : ''}
+
+      <MakePost 
+        getPosts={this.getPosts}
+        page='profile-post'
+        profile={userProfile}
+      />
+      
 
 
       <div className='flex'>
         <div className=' profile-posts bordered-box'>
           {posts.slice(0).reverse().map(post => {
             return <Posts 
-              page='profile'
-              key={post.id} 
-              user={user}
+              key={post.id}
               post={post}
               currentUserId={currentUserId} 
+              getPosts={this.getPosts}
               updateProfile={updateProfile}/>
           })}
         </div>
 
         <div className='sticky'>
           <ProfileInteractions
-            user={user}
-            ratings={ratings}/>
+            user={user}/>
         </div>
       </div>
 
     </>
   )
+}
 }
 
 

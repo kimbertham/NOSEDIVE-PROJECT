@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
 
   return (
@@ -14,14 +14,15 @@ const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
 
         {ratingModal ? ratingPop.map(ratings => {
           return ( 
-            <div 
-              className='bordered-box flex center'
-              key={ratings.id}>
-              <img 
-                className='small-icon' alt='profile-img'
-                src={ratings.rating_owner.profile_image} />
-              <p>{ratings.rating_owner.first_name} 
-                {ratings.rating_owner.last_name} rated this post {ratings.rating} stars</p>
+
+            <div key={ratings.id}>
+              <Link to={`/profile/${ratings.rating_owner.id}/activity`} 
+                className=' center bordered-box flex'> 
+                <img 
+                  className='small-icon' alt='profile-img'
+                  src={ratings.rating_owner.profile_image} />
+                <p>{ratings.rating_owner.first_name} {ratings.rating_owner.last_name} rated this post {ratings.rating} stars</p>
+              </Link>
             </div>
           )
         }) : ''

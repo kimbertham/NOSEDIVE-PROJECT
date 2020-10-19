@@ -25,10 +25,10 @@ class PhotosListView(APIView):
 
 class PhotosDetailView(APIView):
             #get all one users photos 
-    def get(self, request, pk):
-        photos = Photos.objects.filter(owner=pk)
-        serailized_photos = PhotoSerializer(photos, many=True)
-        return Response( serailized_photos.data , status=HTTP_200_OK)
+    # def get(self, request, pk):
+    #     photos = Photos.objects.filter(owner=pk)
+    #     serailized_photos = PhotoSerializer(photos, many=True)
+    #     return Response( serailized_photos.data , status=HTTP_200_OK)
 
     def delete(self, request, pk):
         photo_to_delete = Photos.objects.get(pk=pk)

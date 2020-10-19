@@ -2,7 +2,7 @@ import React from 'react'
 import { defaultImage } from '../../../lib/commonFiles'
 
 
-const ProfileInteractions = ({ ratings ,user }) => {
+const ProfileInteractions = ({ user }) => {
 
 
   return (
@@ -10,7 +10,7 @@ const ProfileInteractions = ({ ratings ,user }) => {
       <div className='sticky int-h1'> <h1> Interactions</h1> </div>
       <div className='scroll'>
 
-        {ratings.map(interaction => {
+        {user.ratings.map(interaction => {
           return (
             <div key={interaction.id} 
               className='posts-interactions dark-border flex'>

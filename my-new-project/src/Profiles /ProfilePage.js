@@ -15,7 +15,6 @@ class ProfilePage extends React.Component {
 state = {
   user: {},
   rating: '',
-  wishlist: [],
   modal: false
 }
 
@@ -45,7 +44,6 @@ render(){
   const { user, modal } = this.state
   const userProfile = this.props.match.params.id
   const currentUserId = getUserId()
-
 
   if (!this.state.user.photos) return ''
   return (

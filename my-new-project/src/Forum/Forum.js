@@ -1,9 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-
-// import ForumThreads from '../Forum/ForumThreads'
 import ForumNew from './ForumNew'
 import ForumCard from './ForumCard'
+
 
 class Forum extends React.Component {
   state= {

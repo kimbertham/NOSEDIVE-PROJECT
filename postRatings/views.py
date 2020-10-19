@@ -2,13 +2,9 @@
 from rest_framework.views import APIView 
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY,HTTP_200_OK
-# from rest_framework.exceptions import NotFound
-# from datetime import datetime
 
 from .serializers import PostRatingSerializer
-# from posts.serializers import PopulatedPostSerializer
 from .models import PostRatings
-# from posts.models import Post
 
 
 class PostRatingListView(APIView):

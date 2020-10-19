@@ -26,6 +26,10 @@ class PopulatedForumSerializer(ForumSerializer):
     forum_owner = UserSerializer()
 
 
+
+# FORUM FOLLOW ------
+
+
 class ForumFollowSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -49,5 +53,6 @@ class ForumCommentSerializer(serializers.ModelSerializer):
 
 class PopulatedForumCommentSerializer(ForumCommentSerializer):
     comment_owner = UserSerializer()
+    forum = ForumSerializer()
 
 

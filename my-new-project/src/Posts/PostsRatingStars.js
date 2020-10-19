@@ -13,6 +13,7 @@ class PostsRatingStars extends React.Component {
 
   handleChange = async rating => {
     this.setState({ rating }, async ()  => {
+
       const userId = this.props.post.owner.id
       const postId = this.props.post.id
       await axios.post(`/api/postratings/${postId}/${userId}/`,this.state, headers())

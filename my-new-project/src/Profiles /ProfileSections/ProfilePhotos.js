@@ -64,6 +64,7 @@ state={
 
         {currentUserId === user.bio.id ? 
           <ImageUpload
+            page='photos'
             updateProfile={updateProfile}/>
           : ''}
         

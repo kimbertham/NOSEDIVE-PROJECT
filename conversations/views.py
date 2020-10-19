@@ -8,9 +8,6 @@ from rest_framework.exceptions import NotFound,PermissionDenied
 from .serializers import ConversationsSerializer, PopulatedConversationsSerializer
 from .models import Conversations
 
-# Create your views here.
-
-
 class ConversationsListView(APIView):   
     #get all conversations from one suer 
     def get(self, request, pk):
@@ -30,9 +27,3 @@ class ConversationsListView(APIView):
             created_convo.save()
             return Response(created_convo.data, status=HTTP_201_CREATED)
         return Response(created_convo.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-
-    # def delete(self,request,pk):
-    #     conv_to_delete = Conversations.objects.get(pk=pk)
-    #     conv_to_delete.delete()
-    #     return Response(status=HTTP_204_NO_CONTENT)
-

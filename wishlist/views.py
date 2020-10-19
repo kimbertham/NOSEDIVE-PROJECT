@@ -4,15 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 from rest_framework.exceptions import NotFound,PermissionDenied
-
-
 from .models import Wishlist
 from .serializers import WishlistSerializer
 
 User = get_user_model()
-
-# make a post
-# get all the posts from one user 
 
 class  WishlistView(APIView):
 
@@ -20,7 +15,6 @@ class  WishlistView(APIView):
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['owner'] = request.user.id
-        print(request.data)
         created_wish = WishlistSerializer(data=request.data)
         if created_wish.is_valid():
             created_wish.save()
@@ -28,10 +22,10 @@ class  WishlistView(APIView):
         return Response(created_wish.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class WishlistDetailView(APIView):
-    def get(self, request, pk):
-        wishlist = Wishlist.objects.filter(owner=pk)
-        serailized_wishlist = WishlistSerializer(wishlist, many=True)
-        return Response( serailized_wishlist.data , status=HTTP_200_OK)
+#     def get(self, request, pk):
+#         wishlist = Wishlist.objects.filter(owner=pk)
+#         serailized_wishlist = WishlistSerializer(wishlist, many=True)
+#         return Response( serailized_wishlist.data , status=HTTP_200_OK)
 
     def delete(self, request, pk):
         item_to_delete = Wishlist.objects.get(pk=pk)

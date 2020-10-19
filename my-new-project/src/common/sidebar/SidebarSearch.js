@@ -1,44 +1,68 @@
 import React from 'react'
+import axios from 'axios'
+import { getUserId } from '../../lib/auth'
+
+const user = getUserId()
 
 class SidebarSearch extends React.Component {
   state = {
     query: '',
-    data: ''
+    users: [],
+    searchUsers: []
   }
 
-  // handleChange = () => {
-  //   this.setState({ query: this.search.value },
-  //     () => {
-  //       if (this.state.query && this.state.query.length > 1) {
-  //         if (this.state.query.length % 2 === 0) {
-  //           this.handleSubmit()
-  //         }
-  //       }
-  //     }
-  //   )
-  // }
 
-  // async handleSubmit() {
-  //   axios.get(`${API_URL}?api_key=${API_KEY}&prefix=${this.state.query}&limit=7`)
-  //   const data = res.data
-  //   this.setState({ data })
-  // }
+  async componentDidMount() {
+    const res = await axios.get(`/api/profile/${user}/all/`)
+    this.setState({ users: res.data })
+  }
+
+  handleChange = async event => {
+    const value = event.target.value
+    if (value !== '') {
+      const usersFiltered = this.state.users.filter(user => {
+        const regex = new RegExp(value, 'i')
+        return user.first_name.match(regex) || user.last_name.match(regex)
+      })
+      this.setState({ searchUsers: usersFiltered, query: value  })
+    } else {
+      this.setState({ searchUsers: [] , query: value })
+    }
+  }
   
 
-
-
   render() {
+    const { query, searchUsers } = this.state
+    
     return (
       <div className='search-bar flex'>
-        <form className='full-width flex center'>
+
+        <form className='flex center'>
           <input
             className='search-input dark-border'
-            ref={input => this.search = input}
-            onChange={this.handleInputChange}
+            onChange={this.handleChange}
+            value={query}
           />
-          <p>{this.state.query}</p>
+    
           <button className='button'> Search</button>
         </form>
+
+        <div className='results-container side-results'>
+          {searchUsers.map(user => {
+            return (
+              <div 
+                key={user.id}
+                className='side-user dark-border pointer flex'
+                onClick={() => {
+                  this.handleNew(user.id)
+                }}>
+                <img src={user.profile_image}
+                  className='small-icon' alt='pp-img'/>
+                <p> {user.first_name} {user.last_name}</p>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }

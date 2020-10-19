@@ -2,11 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import MakePost from '../Posts/MakePost'
 import Posts from '../Posts/Posts'
-import { defaultImage } from '../lib/commonFiles'
+import ForumNews from '../Forum/ForumNews'
+import NewsfeedBio from './NewsfeedBio'
+import NewsfeedFriends from './NewsfeedFriends'
 
 class Newsfeed extends React.Component {
 state = {
   posts: [],
+  forums: [],
   profile: ''
 }
 
@@ -18,47 +21,44 @@ getPosts = async ()  => {
   const userId = this.props.match.params.id
   const posts = await axios.get(`/api/post/newsfeed/${userId}/`)
   const profile = await axios.get(`/api/profile/${userId}/simple/`)
-  this.setState({ posts: posts.data, profile: profile.data })
+  const forums = await axios.get(`/api/forum/newsfeed/${userId}/`)
+  this.setState({ posts: posts.data, profile: profile.data, forums: forums.data })
 }
 
 render() {
-  const { posts, profile }  = this.state
+  const { posts, profile,forums }  = this.state
   const currentUserId = parseInt(this.props.match.params.id)
   if (!profile) return null
   return (
     <>
-      {/* <div className='bordered-box'>
+      <div className='bordered-box'>
         <h2>NewsFeed</h2>
-      </div> */}
+      </div>
           
       <MakePost 
         page='newsfeed-post'
         updateProfile={this.getPosts}/>
 
       <div className='flex'>
-
         <div className='feed-left'>
-          <div className='bordered-box flex'>
-            <div 
-              style={{  
-                backgroundImage: `url(${profile.bio.profile_image})` }}
-              className='profile-image'/>
-            <div className='feed-text center'>
-              <h1>{profile.rating.toString().slice(0, 3)}
-                <small>{profile.rating.toString().slice(3,5)}</small> 
-              </h1>
-              <p>{profile.bio.first_name} {profile.bio.last_name}</p>
-              <p>@{profile.bio.username}</p>
-            </div> 
-          </div>
+
+          <NewsfeedBio 
+            profile={profile}/>
 
           <div className='bordered-box feed-forum'>
-            <h2 className='feed-title'> New Forums</h2>
+            <h2 className='feed-title dark-border'> New Forums</h2>
+            {forums.map(forum => {
+              return <ForumNews
+                key={forum.id}
+                thread={forum}/>
+            })}
           </div>
+
+          <NewsfeedFriends/>
         </div>
 
         <div className='bordered-box feed-post' >
-          <h2 className='feed-title'> Newest Posts </h2>
+          <h2 className='feed-title dark-border'> Newest Posts </h2>
           {posts.slice(0).reverse().map(post => {
             return <Posts 
               key={post.id} 
@@ -68,6 +68,9 @@ render() {
               updateProfile={this.getPosts}/>
           })}
         </div>
+
+
+        
       </div>
 
     </>

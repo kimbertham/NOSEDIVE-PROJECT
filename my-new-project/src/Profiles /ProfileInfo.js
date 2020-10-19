@@ -3,8 +3,6 @@ import { defaultImage } from '../lib/commonFiles'
 import ProfileRatingStars from './ProfileSections/ProfileActivity/ProfileRatingStars'
 import ProfileFollowAction from './ProfileSections/ProfileFollowing/ProfileFollowAction'
 
-
-
 const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
 
   const { bio, avg, followers } = user
@@ -14,7 +12,6 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
   
     <div className='profile-info'>
       <div className='flex'>
-
 
         <div 
           style={{  

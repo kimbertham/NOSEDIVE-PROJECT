@@ -12,6 +12,7 @@ class Forum(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     limitations= models.CharField(max_length=500, blank=True)
     image = models.CharField(max_length=500, default='https://i.imgur.com/ZNxb6AE.jpg', blank=True)
+    post_image= models.CharField(max_length=10000, blank=True)
     forum_owner = models.ForeignKey(
     'jwt_auth.User',
     related_name='forums', 
@@ -41,6 +42,7 @@ class ForumFollow(models.Model):
 class ForumComments(models.Model):
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    image= models.CharField(max_length=10000, blank=True)
 
     forum = models.ForeignKey(
     'forum.Forum',

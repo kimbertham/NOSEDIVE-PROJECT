@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
-
+  console.log(product)
   return (
     <div className='product-field dark-border'>
 
@@ -16,8 +16,7 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
               
       <a href={product.url}>
         <h1>{product.title}</h1>
-        <p>£{product.price.current_price ? 
-          product.price.current_price : product.price  }</p>
+        <p>{ product.price.current_price ?  `£${ product.price.current_price}` : null}</p>
       </a>
 
       {search === true ? 

@@ -34,9 +34,11 @@
 
 .thread-content{
   margin-top: 4%;
-  // font-size: 40px;
 }
 
+.thr-img {
+  width:100%;
+}
 .thread-btn {
   display: flex;
   justify-content: flex-end;
@@ -95,6 +97,3 @@
     background-color: rgba(223, 141, 153,0.9);
   }
 }
-
-
-

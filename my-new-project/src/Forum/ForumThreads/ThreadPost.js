@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ThreadPost = ({ modal, thread, owner }) =>  {
+const ThreadPost = ({ modal, thread, owner, follow, following  }) =>  {
 
   const modalClass = !modal ?  'display-none' : 'display:block'
   return (
@@ -34,13 +34,20 @@ const ThreadPost = ({ modal, thread, owner }) =>  {
         </div>
 
         <div className='full-width'>
-          <p className='thread-limits right'>
-            {thread.limitations ?
-              `NO ${thread.limitations} STARS ALLOWED` : 'PUBLIC'} </p>
+          <div className='right'>
+            <p className='thread-limits'>
+              {thread.limitations ?
+                `NO ${thread.limitations} STARS ALLOWED` : 'PUBLIC'} </p>
+            <button onClick={follow}> 
+              {following ? 'Unfollow' : 'Follow'} </button>
+          </div>
+  
           <h1>{thread.title}</h1>
           <p>{thread.description}</p>
           <p className='bordered-box thread-content'>
             {thread.content}</p>
+          <img src={thread.post_image} className='thr-img' alt='thread-img'/>
+          <p className='right'>{thread.created_at}</p>
         </div>
 
       </div>

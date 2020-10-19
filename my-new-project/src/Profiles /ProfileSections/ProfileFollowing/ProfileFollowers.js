@@ -2,9 +2,9 @@ import React from 'react'
 import { defaultImage } from '../../../lib/commonFiles'
 
 
-const ProfileFollowers = ({ user, getData }) => {
-
+const ProfileFollowers = ( { getData, user }) => {
   const { followers } = user
+
   if (!followers ) return ''
   return (
 

@@ -4,8 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 from rest_framework.exceptions import NotFound,PermissionDenied
+from django.db.models import Q
+
 from django.contrib.auth import get_user_model
-from .models import Forum, ForumComments
+from .models import Forum, ForumComments,ForumFollow
 from .serializers import ForumFollowSerializer, PopulatedForumSerializer,ForumSerializer, ForumCommentSerializer, PopulatedForumCommentSerializer,ForumCommentSerializerPOST
 User = get_user_model()
 
@@ -27,8 +29,8 @@ class  ForumListView(APIView):
         return Response( serialized_forum.data , status=HTTP_200_OK)
 
 class ForumFollowView(APIView):
-    def post( self,request, pk):
 
+    def post( self,request, pk):
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['forum'] = pk
@@ -36,9 +38,16 @@ class ForumFollowView(APIView):
         cf = ForumFollowSerializer(data=request.data)
         if cf.is_valid():
             cf.save()
-            print('hello')
             return Response( cf.data , status=HTTP_201_CREATED)
         return Response(cf.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+    def delete( self,request, pk):
+        print(pk)
+        print(request.user.id)
+        cf_to_delete=ForumFollow.objects.filter(Q(forum=pk) & Q(follower=request.user.id))
+        print(cf_to_delete)
+        cf_to_delete.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
 
 class  ThreadView(APIView):
     def get(self, request, pk):
@@ -77,3 +86,12 @@ class ThreadCommentView(APIView):
             created_comment.save()
             return Response(created_comment.data, status=HTTP_201_CREATED)
         return Response(created_comment.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+class ForumNewsfeedView(APIView):
+
+    def get(self,request,pk): 
+        forums = ForumFollow.objects.filter(follower=pk).values_list('forum_id', flat=True)
+        forum_comments = ForumComments.objects.filter(forum_id__in=forums).order_by('-created_at')[0:5]
+        serialized_comments = PopulatedForumCommentSerializer(forum_comments, many=True)
+        return Response( serialized_comments.data)

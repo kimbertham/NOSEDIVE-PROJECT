@@ -1,24 +1,57 @@
 .feed-post {
 width:60%;
-margin:0 10px;
+margin-left:10px;
 }
 
 
 .feed-left {
-  width:40%;
+  width:50%;
 }
 
 .feed-title {
-  text-decoration: underline;
+  font-style: italic;
   font-weight: lighter;
-  margin: 10px
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .feed-text{
   flex-direction: column;
+margin-bottom:1vh;
   h1{
-    font-size: 4em;
+    font-size: 4vw;
   }
 }
 
+.news-f-cont {
+  .news-f-title {
+    font-size: 120%;
+    margin-bottom:1%;
+  }
+  .news-f-content {
+    font-size: 100%;
+  }
+}
 
+.find-cont{
+  justify-content: space-evenly;
+  margin:3vh 1vh ;
+}
+
+.friend-cont{
+
+  flex-direction: column;
+
+  p{
+    text-align: center;
+    font-size: 1vw;
+  }
+
+  .friend-icon{
+  width:7vw;
+  height: 7vw;
+  border-radius: 10px;
+  margin:0.5vw 1vw;
+  }
+
+}

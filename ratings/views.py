@@ -16,7 +16,6 @@ from postRatings.models import PostRatings
 
 class RatingListView(APIView):
 
-    
     def post(self, request, pk):
         if not request.POST._mutable:
             request.POST._mutable = True
@@ -31,7 +30,11 @@ class RatingListView(APIView):
 
 class RatingDetailView(APIView):
 
-    def get(self, request,action,  pk):
+    def get(self, request,action, pk):
+        if action == 'all':
+            ratings = Ratings.objects.filter(rated_id=pk)
+            serialized_ratings = PopulatedRatingSerializer( ratings, many=True)
+            return Response(serialized_ratings.data, status=HTTP_200_OK)
         if action == 'ratedata':
             user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
             user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))

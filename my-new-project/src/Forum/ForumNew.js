@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { headers } from '../lib/auth'
+import ImageUpload from '../common/ImageUpload'
 
 
 class Register extends React.Component{
@@ -29,8 +30,13 @@ class Register extends React.Component{
     }
   }
 
+  handleImage = (img, e) => {
+    const formData = { ...this.state.formData, [e]: img  }
+    this.setState({ formData })
+  }
 
   render(){
+    console.log(this.state)
     return (
       <>
         <div className='auth-form center pop-up'>
@@ -58,15 +64,12 @@ class Register extends React.Component{
               />
             </div>
 
-            <div className='form-field'>            
+            <div className='form-field'>
               <label className='label'>Image (Optional)</label>
-              <br/>
-              <input
-                className='form-input'
-                placeholder="Image-link"
-                name="image"
-                onChange={this.handleChange}
-              />
+              <ImageUpload
+                image={this.handleImage}
+                page='forum'
+                field='image'/>
             </div>
 
             <div className='form-field'>            
@@ -86,8 +89,6 @@ class Register extends React.Component{
               </select>
             </div>
 
-          
-
             <div className='form-field'>            
               <label className='label'>Post</label>
               <br/>
@@ -97,6 +98,14 @@ class Register extends React.Component{
                 name="content"
                 onChange={this.handleChange}
               />
+            </div>
+
+            <div className='form-field'>
+              <label className='label'>Image (Optional)</label>
+              <ImageUpload
+                image={this.handleImage}
+                page='forum'
+                field='post_image'/>
             </div>
 
             <button className='form-button button'> Create New Thread</button>

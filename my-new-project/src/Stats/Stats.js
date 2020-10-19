@@ -132,7 +132,7 @@ class Stats extends React.Component{
                     options={this.state.dateOptions}
                     series={this.state.dateSeries}
                     type="line"
-                    width={window.innerWidth / 3.2}
+                    width={window.innerWidth / 3.0}
   
                   />
                 </div>
@@ -149,7 +149,7 @@ class Stats extends React.Component{
                     options={this.state.feedbackOptions}
                     series={this.state.feedbackSeries}
                     type="bar"
-                    width={window.innerWidth / 3.2}
+                    width={window.innerWidth / 3.0}
                   />
                 </div>
               </div>

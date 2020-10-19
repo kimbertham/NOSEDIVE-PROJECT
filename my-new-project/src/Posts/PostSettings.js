@@ -11,9 +11,9 @@ toggleSettings = () => {
   this.setState({ settings: !this.state.settings })
 }
 
-deletePost = (id) => {
-  axios.delete(`/api/post/${id}/`, headers())
-  this.props.updateProfile()
+deletePost = async (id) => {
+  await axios.delete(`/api/post/${id}/`, headers())
+  this.props.getPosts()
 }
 
 render() {

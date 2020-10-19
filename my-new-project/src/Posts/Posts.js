@@ -9,10 +9,10 @@ import RatingModal from './RatingModal'
 class Posts extends React.Component {
   state = {
     comments: false,
-    // ratings: [],
     ratingModal: false,
     ratingPop: ''
   }
+
 
   showComments = () => {
     this.setState({ comments: !this.state.comments })
@@ -26,7 +26,7 @@ class Posts extends React.Component {
   }
 
   render(){
-    const { post, updateProfile, currentUserId, user, page } = this.props
+    const { post, getPosts, currentUserId, updateProfile } = this.props
     const { comments, ratingModal,ratingPop } = this.state
 
     return (
@@ -35,6 +35,7 @@ class Posts extends React.Component {
         <div className='post-stars'>
           <PostsRatingStars
             post={post}
+            getPosts={ getPosts }
             updateProfile={updateProfile} />
         </div>
 
@@ -43,7 +44,7 @@ class Posts extends React.Component {
           showRatings={this.showRatings}
           showComments={this.showComments} 
           currentUserId={currentUserId}
-          updateProfile={updateProfile}/>
+          getPosts={ getPosts }/>
             
 
         <div className={comments ?
@@ -53,16 +54,15 @@ class Posts extends React.Component {
               <PostComments 
                 key={comment.id} 
                 comment={comment}
-                updateProfile={updateProfile}
+                getPosts={ getPosts }
                 page={'profile'}/>
             )
           }) : null}
 
           <MakeComments 
             post={post}
-            user={user}
-            updateProfile={updateProfile}
-            page={page}
+            getPosts={getPosts }
+            page={'profile'}
           />
         </div>
 

@@ -9,7 +9,9 @@ const userid = getUserId()
 class ProfileBioEdit extends React.Component {
     state = {
       profile: {
-      }
+        profile_image: ''
+      },
+      image: ''
     }
 
     async componentDidMount() {
@@ -23,8 +25,8 @@ class ProfileBioEdit extends React.Component {
 
     handleChange = event => {
       try {
-        const formData = { ...this.state.formData, [event.target.name]: event.target.value }
-        this.setState({ formData })
+        const profile = { ...this.state.profile, [event.target.name]: event.target.value }
+        this.setState({ profile })
       } catch (err) {
         console.log(err)
       }
@@ -33,20 +35,23 @@ class ProfileBioEdit extends React.Component {
     handleSubmit = async event => {
       event.preventDefault()
       try {
-        const formData = await axios.put(`/api/profile/${userid}/edit/`, 
-          { ...this.state.formData }, headers())
-        this.setState({ formData })
+        await axios.put(`/api/profile/${userid}/edit/`, 
+          this.state.profile , headers())
         this.props.history.push(`/profile/${userid}/bio`)
       } catch (err) {
         console.log(err.response.data)
       }
     }
+
+    handleImage = (img) => {
+      const profile = { ...this.state.profile, profile_image: img }
+      this.setState({ profile })
+    }
   
   
     render(){
-  
+
       const { profile } = this.state
-      console.log(profile)
       if (!profile) return
       return (
 
@@ -58,8 +63,12 @@ class ProfileBioEdit extends React.Component {
 
           <div className='auth-form edit-cont pop-up'>
             <div className='center'>
-              <img src={profile.profile_image} 
-                className='edit-img' alt='profile-img'/>
+
+              <div 
+                style={{  
+                  backgroundImage: `url(${profile.profile_image})`
+                }} className=' profile-image edit-img'/>
+
             </div>
 
             <form onSubmit= {this.handleSubmit}>
@@ -69,7 +78,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="First Name"
                   name="first_name"
                   value={profile.first_name}
                   onChange={this.handleChange}
@@ -82,7 +90,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Second Name"
                   name="second_name"
                   value={profile.last_name}
                   onChange={this.handleChange}
@@ -92,7 +99,9 @@ class ProfileBioEdit extends React.Component {
               <div className='form-field'>            
                 <label className='label'>Profile Image</label>
                 <br/>
-                <ImageUpload/>
+                <ImageUpload
+                  page='edit'
+                  image={this.handleImage}/>
               </div>
 
               <div className='form-field'>            
@@ -101,7 +110,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Tagline"
                   name="tagline"
                   value={profile.tagline}
                   onChange={this.handleChange}
@@ -114,7 +122,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Second Name"
                   name="second_name"
                   value={profile.last_name}
                   onChange={this.handleChange}
@@ -127,7 +134,6 @@ class ProfileBioEdit extends React.Component {
                 <textarea
                   className='form-input long-textarea '
                   id='edit-input'
-                  placeholder="Description"
                   name="description"
                   value={profile.description}
                   onChange={this.handleChange}
@@ -140,7 +146,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Career"
                   name="career"
                   value={profile.career}
                   onChange={this.handleChange}
@@ -153,7 +158,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Location"
                   name="location"
                   value={profile.location}
                   onChange={this.handleChange}
@@ -181,7 +185,6 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  placeholder="Age"
                   name="age"
                   value={profile.age}
                   onChange={this.handleChange}

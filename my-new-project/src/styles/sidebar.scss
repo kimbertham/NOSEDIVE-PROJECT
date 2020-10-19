@@ -19,6 +19,22 @@
   margin:10px;
 }
 
+
+.search-bar {
+  flex-direction: column;
+  .side-results {
+    position: absolute;
+    margin-top:5vh;
+    width:90%;
+  }
+  .side-user{
+    padding:2%;
+    background-color: rgba(255,255,255,0.9);
+  }
+}
+
+
+
   .search-input{
   width: 100%;
   background-color: rgba(255,255,255,0.5);

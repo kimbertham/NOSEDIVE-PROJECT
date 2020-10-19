@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { getUserId } from '../../lib/auth'
+import { getUserId, headers } from '../../lib/auth'
 import MakePost from '../../Posts/MakePost'
 import ThreadPost from './ThreadPost'
 import Recursive from './ThreadComments/Recursive'
@@ -14,18 +14,25 @@ class ForumThreads extends React.Component {
     rating: '',
     modal: false,
     owner: '',
-    comments: []
+    comments: [],
+    following: ''
   }
 
   async componentDidMount() {
+    this.getData()
+  }
+  
+  getData = async () => {
     this.getComments()
     const threadId = this.props.match.params.id
     const res = await axios.get(`/api/forum/${threadId}/`)
     const rating = await axios.get(`/api/ratings/ratedata/${user}/`)
+    const following = res.data[0].followers.includes(user)
     this.setState({ 
       thread: res.data[0],  
       rating: rating.data.avg,
-      owner: res.data[0].forum_owner },
+      owner: res.data[0].forum_owner,
+      following: following },
     () => {
       if (this.state.thread.limitations && 
           this.state.rating.toString().charAt(0) === 
@@ -41,9 +48,17 @@ class ForumThreads extends React.Component {
     this.setState({ comments: res.data })
   }
 
+  followForum = async () => {
+    const forumId = this.state.thread.id
+    this.state.following ? 
+      await axios.delete(`/api/forum/follow/${forumId}/`, headers())
+      : await axios.post(`/api/forum/follow/${forumId}/`, null , headers())
+    this.getData()
+  }
+
   render() {
 
-    const { modal, thread, owner , comments } = this.state
+    const { modal, thread, owner , comments, following } = this.state
     const threadId = this.props.match.params.id
     return (
       <>
@@ -51,7 +66,9 @@ class ForumThreads extends React.Component {
         <ThreadPost
           modal={modal}
           thread={thread}
-          owner={owner}/>
+          owner={owner}
+          follow={this.followForum}
+          following={following}/>
 
         
         <MakePost

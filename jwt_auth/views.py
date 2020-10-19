@@ -63,7 +63,6 @@ class ProfileDetailView(APIView):
             serialized_users = BasicUserSerializer(users, many=True)
             return Response(serialized_users.data, status=HTTP_200_OK)
         if action == 'simple':
-            print('test')
             user = User.objects.get(pk=pk)    
             serialized_user = UserSerializer(user)
             
@@ -95,9 +94,6 @@ class ProfileDetailView(APIView):
             followers = Contact.objects.filter(user_to=pk)
             serialized_followers = PopulatedFollowerSerializer(followers, many=True)
 
-            users_posts = Post.objects.filter(owner_id=pk)
-            serailized_posts = PopulatedPostSerializer(users_posts, many=True)
-
             user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
             user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
             if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
@@ -118,7 +114,6 @@ class ProfileDetailView(APIView):
                 'bio': serialized_user.data,
                 'ratings':serailized_ratings.data,
                 'avg':user_rating_score,
-                'posts': serailized_posts.data,
                 'comments':serailized_comments.data,
                 'photos':serailized_photos.data,
                 'following':serialized_following.data,

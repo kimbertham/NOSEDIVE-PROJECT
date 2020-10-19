@@ -16,10 +16,8 @@ from .serializers import PopulatedPostSerializer
 
 User = get_user_model()
 
-# make a post
-# get all the posts from one user 
+#SIDEBAR POSTS
 class PostListView(APIView):
-
     def get(self, request):
         newest_posts = Post.objects.all().order_by('-created_at')
         serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True)
@@ -31,27 +29,23 @@ class PostListView(APIView):
         serailized_top_posts = PopulatedPostSerializer(top_rated , many=True)
         return Response( { 'new_posts': serailized_newest_posts.data , 'top_posts': serailized_top_posts.data}, status=HTTP_200_OK)
 
-    def post(self,request):
+class PostDetailView(APIView):
+    def get(self, request, pk):
+        users_posts = Post.objects.filter(profile_owner=pk)
+        serailized_posts = PopulatedPostSerializer(users_posts, many=True)
+        return Response(serailized_posts.data, status=HTTP_200_OK)
+    
+    def post(self,request,pk):
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['owner'] = request.user.id
-        print(request.data)
+        request.data['profile_owner'] = pk
         created_post = PostSerializer(data=request.data)
         if created_post.is_valid():
             created_post.save()
             return Response(created_post.data, status=HTTP_201_CREATED)
         return Response(created_post.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-class PostDetailView(APIView):
-
-        #GET ALL POSTS FROM ONE USER
-    def get(self, request, pk):
-        users_posts = Post.objects.filter(owner_id=pk)
-        serailized_posts = PopulatedPostSerializer(users_posts, many=True)
-        return Response(serailized_posts.data, status=HTTP_200_OK)
-    
-    # DELETE POST 
-    #delete request, /api/posts/id
     def delete(self, request, pk):
         post_to_delete = Post.objects.get(pk=pk)
         if post_to_delete.owner.id != request.user.id:
