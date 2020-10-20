@@ -28,25 +28,31 @@ class RatingListView(APIView):
             return Response(created_rating.data,status=HTTP_201_CREATED)
         return Response( created_rating.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-class RatingDetailView(APIView):
-
-    def get(self, request,action, pk):
-        if action == 'all':
-            ratings = Ratings.objects.filter(rated_id=pk)
-            serialized_ratings = PopulatedRatingSerializer( ratings, many=True)
-            return Response(serialized_ratings.data, status=HTTP_200_OK)
-        if action == 'ratedata':
-            user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
-            user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+    def ratings(self, request, pk):
+        users_ratings = Ratings.objects.filter(rated_id=pk).order_by('-created_at')
+        serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
+        return serailized_ratings.data
+        
+    
+    def average(self, request, pk):
+        user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
+        user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
+        if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
             user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
-            users_ratings = Ratings.objects.filter(owner_id=pk)
-            serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
-            return Response(({'ratings':serailized_ratings.data, 'avg':user_rating_score }), status=HTTP_200_OK)
-        if action == 'statsdata':
-            num_by_feedback= Ratings.objects.filter(rated=pk).values('feedback').annotate(rating_count=Count('feedback')).exclude(feedback="")
-            num_by_date=Ratings.objects.filter(rated=pk).values('created_at').annotate(rating_count=Count('rating')).order_by('created_at')
-            return Response({'num_by_date': num_by_date, 'feedback': num_by_feedback }  , status=HTTP_200_OK)
+        elif not user_profile_ratings['rating__avg']:
+            user_rating_score = user_post_ratings['rating__avg']
+        elif not user_post_ratings['rating__avg']:
+            user_rating_score = user_profile_ratings['rating__avg']
+        else: 
+            user_rating_score = 0
+        return user_rating_score
 
 
 
+class RatingStatsView(APIView):
+    def get(self, request, pk):
+        print('got')
+        feedback= Ratings.objects.filter(rated=pk).values('feedback').annotate(rating_count=Count('feedback')).exclude(feedback="")
+        date=Ratings.objects.filter(rated=pk).values('created_at').annotate(rating_count=Count('rating')).order_by('created_at')
+        return Response({'date': date, 'feedback': feedback }  , status=HTTP_200_OK)
 

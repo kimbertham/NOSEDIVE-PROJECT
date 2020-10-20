@@ -2,7 +2,7 @@ import React from 'react'
 import { defaultImage } from '../lib/commonFiles'
 import PostSettings from './PostSettings'
 
-const PostContent = ({ post, showComments ,getPosts, currentUserId, showRatings }) => { 
+const PostContent = ({ post, showComments ,updateProfile, currentUserId,userProfile,showRatings }) => { 
   return (
     <>
 
@@ -21,7 +21,8 @@ const PostContent = ({ post, showComments ,getPosts, currentUserId, showRatings 
             <PostSettings
               post={post}
               currentUserId={currentUserId}
-              getPosts={getPosts}/> 
+              userProfile={userProfile}
+              updateProfile={updateProfile}/> 
           </div>
       
         

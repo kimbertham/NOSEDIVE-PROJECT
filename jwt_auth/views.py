@@ -8,27 +8,17 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 import jwt
-from django.db.models import Avg, Sum
 
 from .serializers import UserSerializer, EditUserSerializer, BasicUserSerializer
 from jwt_auth.models import User
-from photos.models import Photos
-from photos.serializers import PhotoSerializer
-from wishlist.models import Wishlist
-from wishlist.serializers import WishlistSerializer
-from follow.models import Contact
-from follow.serializers import PopulatedFollowerSerializer, PopulatedFollowingSerializer
-from posts.models import Post
-from posts.serializers import PopulatedPostSerializer
-from ratings.models import Ratings
-from ratings.serializers import RatingSerializer, PopulatedRatingSerializer
-from postRatings.models import PostRatings
-from comments.models import Comments
-from comments.serializers import PopulatedCommentSerializer
+from ratings.views import RatingListView
+from photos.views import PhotosDetailView
+from follow.views import FollowDetailView
+from wishlist.views import WishlistDetailView
+from posts.views import PostDetailView
 
 
 class RegisterView(APIView):
-    
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -56,70 +46,57 @@ class LoginView(APIView):
 
 
 class ProfileDetailView(APIView):
-    # get own profile 
+
     def get(self, request, pk, action):
         if action =='all': 
             users = User.objects.all()
             serialized_users = BasicUserSerializer(users, many=True)
             return Response(serialized_users.data, status=HTTP_200_OK)
-        if action == 'simple':
-            user = User.objects.get(pk=pk)    
+
+        if action == 'photos':
+            photos = PhotosDetailView.get(self, request, pk)
+            return Response({ 'photos': photos}, status=HTTP_200_OK)
+        if action == 'wishlist':
+            wishlist = WishlistDetailView.get(self,request,pk)
+            return Response({ 'wishlist': wishlist}, status=HTTP_200_OK)
+        if action == 'follow':
+            followers = FollowDetailView.get(self,request, 'contact', pk)
+            return Response({ 'follow': followers }, status=HTTP_200_OK)
+        if action == 'ratings':
+            ratings = RatingListView.ratings(self, request, pk)
+            return Response({ 'ratings': ratings}, status=HTTP_200_OK)
+        if action == 'average':
+            average = RatingListView.average(self, request, pk)
+            return Response({ 'average': average}, status=HTTP_200_OK)
+        if action == 'posts':
+            posts = PostDetailView.get(self, request, pk)
+            return Response({ 'posts': posts}, status=HTTP_200_OK)
+        if action == 'bio':
+            user = User.objects.get(pk=pk)
             serialized_user = UserSerializer(user)
-            
-            user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
-            user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
-            if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
-                user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
-            elif not user_profile_ratings['rating__avg']:
-                user_rating_score = user_post_ratings['rating__avg']
-            elif not user_post_ratings['rating__avg']:
-                user_rating_score = user_profile_ratings['rating__avg']
-            else: 
-                user_rating_score = 0
-            return Response({'bio': serialized_user.data, 'rating': user_rating_score }, status=HTTP_200_OK)
+            return Response({ 'bio': serialized_user.data}, status=HTTP_200_OK)
 
         if action == 'full':
             user = User.objects.get(pk=pk)
             serialized_user = UserSerializer(user)
+
+            wishlist = WishlistDetailView.get(self,request,pk)
+            followers = FollowDetailView.get(self,request, 'contact', pk)
+            photos = PhotosDetailView.get(self, request, pk)
+            ratings = RatingListView.ratings(self, request, pk)
+            average = RatingListView.average(self, request, pk)
+            posts = PostDetailView.get(self, request, pk)
             
-            photos = Photos.objects.filter(owner=pk)
-            serailized_photos = PhotoSerializer(photos, many=True)
-
-            wishlist = Wishlist.objects.filter(owner=pk)
-            serailized_wishlist = WishlistSerializer(wishlist, many=True)
-
-            following = Contact.objects.filter(user_from=pk)
-            serialized_following = PopulatedFollowingSerializer(following, many=True)
-
-            followers = Contact.objects.filter(user_to=pk)
-            serialized_followers = PopulatedFollowerSerializer(followers, many=True)
-
-            user_profile_ratings = Ratings.objects.filter(rated=pk).aggregate(Avg('rating'))
-            user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
-            if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
-                user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
-            elif not user_profile_ratings['rating__avg']:
-                user_rating_score = user_post_ratings['rating__avg']
-            elif not user_post_ratings['rating__avg']:
-                user_rating_score = user_profile_ratings['rating__avg']
-            else: 
-                user_rating_score = 0
-            users_ratings = Ratings.objects.filter(rated_id=pk).order_by('-created_at')
-            serailized_ratings = PopulatedRatingSerializer(users_ratings, many=True)
-
-            all_comments = Comments.objects.filter(comment_owner=pk)
-            serailized_comments = PopulatedCommentSerializer(all_comments, many=True)
-
             return Response({  
                 'bio': serialized_user.data,
-                'ratings':serailized_ratings.data,
-                'avg':user_rating_score,
-                'comments':serailized_comments.data,
-                'photos':serailized_photos.data,
-                'following':serialized_following.data,
-                'followers':serialized_followers.data,
-                'wishlist':serailized_wishlist.data} , status=HTTP_200_OK)
-        
+                'photos':photos,
+                'follow': followers,
+                'wishlist': wishlist,
+                'ratings':ratings,
+                'average': average,
+                'posts':posts
+                }, status=HTTP_200_OK)
+
 
     def put(self, request, pk, action):
         if action == 'edit':

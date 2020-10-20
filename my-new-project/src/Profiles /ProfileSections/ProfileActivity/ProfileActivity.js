@@ -1,50 +1,33 @@
 import React from 'react'
-import axios from 'axios'
 import Posts from '../../../Posts/Posts'
 import MakePost from '../../../Posts/MakePost'
 import ProfileInteractions from './ProfileInteractions'
 
-class ProfileActivity extends React.Component {
-state ={
-  posts: [],
-  ratings: []
-}
+const ProfileActivity = ( { user, currentUserId, userProfile, updateProfile, modal, handleModal }) => {
 
-componentDidMount() {
-  this.getPosts()
-}
-
-getPosts =  async () => {
-  const posts = await axios.get(`/api/post/${this.props.userProfile}/`)
-  this.setState({ posts: posts.data })
-}
-
-
-render() {
-  const { posts  } = this.state
-  const { user, currentUserId, userProfile, updateProfile } = this.props
+  const { posts } = user
   if (!posts) return ''
   return (
     <>
 
-
       <MakePost 
-        getPosts={this.getPosts}
         page='profile-post'
         profile={userProfile}
+        updateProfile={updateProfile}
+        userProfile={userProfile}
       />
       
-
-
       <div className='flex'>
         <div className=' profile-posts bordered-box'>
           {posts.slice(0).reverse().map(post => {
             return <Posts 
               key={post.id}
+              modal={modal}
+              handleModal={handleModal}
               post={post}
               currentUserId={currentUserId} 
-              getPosts={this.getPosts}
-              updateProfile={updateProfile}/>
+              updateProfile={updateProfile}
+              userProfile={userProfile}/>
           })}
         </div>
 
@@ -56,7 +39,6 @@ render() {
 
     </>
   )
-}
 }
 
 

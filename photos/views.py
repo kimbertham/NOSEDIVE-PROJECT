@@ -24,11 +24,11 @@ class PhotosListView(APIView):
         return Response(created_photo.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class PhotosDetailView(APIView):
-            #get all one users photos 
-    # def get(self, request, pk):
-    #     photos = Photos.objects.filter(owner=pk)
-    #     serailized_photos = PhotoSerializer(photos, many=True)
-    #     return Response( serailized_photos.data , status=HTTP_200_OK)
+
+    def get(self, request, pk):
+        photos = Photos.objects.filter(owner=pk)
+        serailized_photos = PhotoSerializer(photos, many=True)
+        return serailized_photos.data 
 
     def delete(self, request, pk):
         photo_to_delete = Photos.objects.get(pk=pk)

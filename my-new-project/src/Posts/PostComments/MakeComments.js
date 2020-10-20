@@ -37,7 +37,7 @@ class MakeComments extends React.Component {
         const postId = this.props.post.id
         await axios.post(`/api/comments/${postOwner}/${postId}/`,
           this.state.form, headers())
-        this.props.getPosts()
+        this.props.updateProfile(this.props.userProfile)
       }
 
       this.setState({ form: { content: '' } })

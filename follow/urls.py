@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import  FollowActionView
+from .views import  FollowDetailView
 
 
 urlpatterns = [
-    # path('<int:pk>',FollowListView.as_view()),
-    path('<str:action>/<int:pk>/',FollowActionView.as_view())
+    path('<str:action>/<int:pk>/',FollowDetailView.as_view())
 ]

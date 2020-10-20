@@ -37,7 +37,7 @@ class ImageUpload extends React.Component {
           this.props.image(photoRes.data.url, this.props.field)
         } if (this.props.page === 'photos') {
           await axios.post('/api/photos/', this.state.formData, headers())
-          this.props.updateProfile()
+          this.props.updateProfile( this.props.userProfile, 'photos')
         }
         this.toggleLoad()
       }

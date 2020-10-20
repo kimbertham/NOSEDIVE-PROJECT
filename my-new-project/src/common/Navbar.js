@@ -1,9 +1,5 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { getUserId } from '../lib/auth'
-
-
-const userId = getUserId()
 
 class Navbar extends React.Component {
   
@@ -14,26 +10,25 @@ handleLogout = () => {
 }
 
 handleProfileNav = () => {
-  this.props.history.push(`/profile/${userId}/activity`)
-  window.location.reload()
+  this.props.getData(this.props.cUserId)
+  console.log(this.props.cUserId)
 }
 
 render(){
+  const { cUserId } = this.props
   return (
     <div className='navbar'> 
     
-    
-
-      <div
+      <Link
+        to={`/profile/${this.props.cUserId}/activity`}
         onClick={this.handleProfileNav}>
         <img src='https://bit.ly/3h8vdNh'
           className='nav-icon'
           alt='user-profile'/>
-      </div>
+      </Link>
 
-   
       <Link 
-        to={`/home/${userId}`}> 
+        to={`/home/${cUserId}`}> 
         <img src='https://i.imgur.com/kkeEHVw.jpg'
           className='nav-icon'
           alt='home'/>
@@ -52,27 +47,24 @@ render(){
           className='nav-icon' alt='messages'/>
       </Link>
 
-      <Link to={`/stats/${userId}`}>
+      <Link to={`/stats/${cUserId}`}>
         <img src='https://i.imgur.com/rr5afgV.jpg'
           className='nav-icon'
           alt='stats'/>
       </Link>
 
       <Link
-        to={`/edit/${userId}`}>
+        to={`/edit/${cUserId}`}>
         <img src='https://i.imgur.com/BvhVhb3.jpg' 
           className='nav-icon'
           alt='user-profile'/>
       </Link>
       
-   
       <img 
         onClick={this.handleLogout}
         src='https://i.imgur.com/fgiTuvG.jpg' 
         className='nav-icon'
         alt='user-profile'/>
- 
-  
 
     </div>
   )

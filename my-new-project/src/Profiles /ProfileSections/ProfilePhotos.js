@@ -27,7 +27,7 @@ state={
   deleteImg = async () => {
     await axios.delete(`/api/photos/${this.state.image.id}/`, headers())
     this.openImage()
-    this.props.updateProfile()
+    this.props.updateProfile(this.props.userProfile, 'photos')
   }
 
   handleImage = (action) => {
@@ -53,7 +53,7 @@ state={
 
 
   render(){
-    const { updateProfile, currentUserId, user } = this.props
+    const { updateProfile, currentUserId, user, userProfile } = this.props
     const { photos } = user
     const { image, gallery } = this.state
 
@@ -65,6 +65,7 @@ state={
         {currentUserId === user.bio.id ? 
           <ImageUpload
             page='photos'
+            userProfile={userProfile}
             updateProfile={updateProfile}/>
           : ''}
         

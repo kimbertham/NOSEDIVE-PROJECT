@@ -44,9 +44,9 @@ class Stats extends React.Component{
     const feedbackCategories = []
     const feedbackData = []
 
-    const res = await axios.get(`/api/ratings/statsdata/${getUserId()}/`)
+    const res = await axios.get(`/api/ratings/stats/${getUserId()}/`)
 
-    res.data.num_by_date.map(item  => {
+    res.data.date.map(item  => {
       dateCategories.push(item.created_at)
       dateData.push(item.rating_count)
       return ''

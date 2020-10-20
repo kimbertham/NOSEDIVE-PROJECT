@@ -18,15 +18,17 @@ class Posts extends React.Component {
     this.setState({ comments: !this.state.comments })
   }
 
-  showRatings = (info) => {
-    if (info){
-      this.setState({ ratingPop: info }) 
+  showRatings = (i) => {
+
+    if (i) {
+      this.setState({ ratingPop: i }) 
     }
+
     this.setState({ ratingModal: !this.state.ratingModal })
   }
 
   render(){
-    const { post, getPosts, currentUserId, updateProfile } = this.props
+    const { post, userProfile, currentUserId, updateProfile } = this.props
     const { comments, ratingModal,ratingPop } = this.state
 
     return (
@@ -35,8 +37,8 @@ class Posts extends React.Component {
         <div className='post-stars'>
           <PostsRatingStars
             post={post}
-            getPosts={ getPosts }
-            updateProfile={updateProfile} />
+            updateProfile={ updateProfile}
+            userProfile={userProfile}/>
         </div>
 
         <PostContent 
@@ -44,7 +46,8 @@ class Posts extends React.Component {
           showRatings={this.showRatings}
           showComments={this.showComments} 
           currentUserId={currentUserId}
-          getPosts={ getPosts }/>
+          userProfile={userProfile}
+          updateProfile={ updateProfile }/>
             
 
         <div className={comments ?
@@ -54,22 +57,25 @@ class Posts extends React.Component {
               <PostComments 
                 key={comment.id} 
                 comment={comment}
-                getPosts={ getPosts }
+                userProfile={userProfile}
+                updateProfile={ updateProfile }
                 page={'profile'}/>
             )
           }) : null}
 
           <MakeComments 
             post={post}
-            getPosts={getPosts }
-            page={'profile'}
-          />
+            updateProfile={updateProfile}
+            userProfile={userProfile}
+            page={'profile'}/>
+            
         </div>
 
         <RatingModal
           ratingPop={ratingPop}
           ratingModal={ratingModal}
-          showRatings={this.showRatings}/>
+          showRatings={this.showRatings}
+          updateProfile={updateProfile}/>
 
       </div>
 

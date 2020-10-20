@@ -29,7 +29,7 @@ class ProfileFollowAction extends React.Component {
     const follow = this.state.following ? 'unfollowing' : 'following'
     await axios.post(`/api/follow/${follow}/${profileUser}/`,'', headers())
     this.setState({ following: !this.state.following })
-    this.props.updateProfile()
+    this.props.updateProfile(this.props.userProfile, 'follow')
   }
   
 

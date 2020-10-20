@@ -15,7 +15,7 @@ from jwt_auth.serializers import BasicUserSerializer
 
 User = get_user_model()
 
-class FollowActionView(APIView):
+class FollowDetailView(APIView):
     def post(self,request, action, pk):
         followed_user = User.objects.get(pk=pk)
         current_user= User.objects.get(pk=request.user.id)
@@ -26,7 +26,6 @@ class FollowActionView(APIView):
             Contact.objects.filter(user_from=current_user, user_to=followed_user).delete()
             return Response( f' {current_user.first_name} unfollowed {followed_user.first_name}', status=HTTP_200_OK)
 
-
     # GET ALL ONE USERS FOLLOWERS OR FOLLOWING
     def get(self, request, action, pk):
         following = Contact.objects.filter(user_from=pk)
@@ -34,7 +33,7 @@ class FollowActionView(APIView):
             serialized_following = PopulatedFollowingSerializer(following, many=True)
             followers = Contact.objects.filter(user_to=pk)
             serialized_followers = PopulatedFollowerSerializer(followers, many=True)
-            return Response(({'following':serialized_following.data, 'followers':serialized_followers.data}), status=HTTP_200_OK)
+            return {'following':serialized_following.data, 'followers':serialized_followers.data}
 # GET RANDOM FRIENDS FOR A USER 
         if action == 'find':
             ids = following.values_list('user_to', flat=True)

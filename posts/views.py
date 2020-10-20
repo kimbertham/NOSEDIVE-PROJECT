@@ -33,7 +33,7 @@ class PostDetailView(APIView):
     def get(self, request, pk):
         users_posts = Post.objects.filter(profile_owner=pk)
         serailized_posts = PopulatedPostSerializer(users_posts, many=True)
-        return Response(serailized_posts.data, status=HTTP_200_OK)
+        return serailized_posts.data
     
     def post(self,request,pk):
         if not request.POST._mutable:

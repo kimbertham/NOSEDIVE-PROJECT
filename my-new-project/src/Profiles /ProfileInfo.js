@@ -3,9 +3,9 @@ import { defaultImage } from '../lib/commonFiles'
 import ProfileRatingStars from './ProfileSections/ProfileActivity/ProfileRatingStars'
 import ProfileFollowAction from './ProfileSections/ProfileFollowing/ProfileFollowAction'
 
-const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
+const ProfileInfo = ({ user,handleModal, modal, updateProfile, userProfile }) => {
 
-  const { bio, avg, followers } = user
+  const { bio, average, follow } = user
 
   if (!user) return ''
   return (
@@ -24,13 +24,14 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
             <h1> {bio.first_name} {bio.last_name}</h1>
 
             <ProfileFollowAction
+              userProfile={userProfile}
               updateProfile={updateProfile}
-              following={followers}/>
+              following={follow.followers}/>
           </div>
 
           <div className='profile-details'>
-            <h1>{avg ? avg.toString().slice(0, 3) : 0}
-              <small>{avg ? avg.toString().slice(3,5) : 0}</small> 
+            <h1>{average ? average.toString().slice(0, 3) : 0}
+              <small>{average ? average.toString().slice(3,5) : 0}</small> 
             </h1>
             <p>{bio.tagline}</p>
           </div>
@@ -40,7 +41,7 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
       <div>
 
         <ProfileRatingStars 
-          user={user} 
+          userProfile={userProfile}
           updateProfile={updateProfile}
           modal={modal}
           handleModal={handleModal}/>

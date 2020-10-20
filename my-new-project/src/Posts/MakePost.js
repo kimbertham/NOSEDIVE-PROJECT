@@ -28,7 +28,7 @@ class MakePost extends React.Component {
       } 
       if (p === 'profile-post' || p === 'newsfeed-post'){
         await axios.post(`/api/post/${this.props.profile}/`, this.state.form, headers())
-        this.props.getPosts()
+        this.props.updateProfile(this.props.userProfile)
       }
       this.setState({ form: { content: '' } })
     } catch (err) {

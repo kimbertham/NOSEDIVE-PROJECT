@@ -65,12 +65,12 @@ handleWishList = async (price, thumbnail, url, title ) => {
       this.setState({ modal: 'Item Added to Wishlist' })
     })
   }
-  this.props.updateProfile()
+  this.props.updateProfile(this.props.userProfile, 'wishlist')
 }
 
 handleDelete = async (product) => {
   await axios.delete(`/api/wishlist/${product}/`, headers())
-  this.props.updateProfile()
+  this.props.updateProfile(this.props.userProfile, 'wishlist')
 }
 
 handleModal = () => {

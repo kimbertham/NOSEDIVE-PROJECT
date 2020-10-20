@@ -8,14 +8,15 @@ import { headers } from '../../../lib/auth'
 class ProfileRatingStars extends React.Component {
   state = {
     rating: 0 ,
-    feedback: ''
+    feedback: '',
+    modal: false
   }
 
   handleChange = async rating => {
     this.setState({ rating }, async ()  => {
-      const id = this.props.user.bio.id
-      await axios.post(`/api/ratings/${id}/`, this.state , headers() )
-      this.props.updateProfile()
+      await axios.post(`/api/ratings/${this.props.userProfile}/`, this.state , headers() )
+      this.props.updateProfile(this.props.userProfile, 'average')
+      this.props.updateProfile(this.props.userProfile, 'ratings')
     })
   }
 
@@ -23,8 +24,11 @@ class ProfileRatingStars extends React.Component {
     this.setState({ feedback: event.target.value })
   }
 
+  handleModal = () => {
+    this.setState({ modal: !this.state.modal })
+  }
   render(){
-    const { modal, handleModal } = this.props
+    const { modal } = this.state
     return (
       <div className='feedback-container'>
 
@@ -34,15 +38,13 @@ class ProfileRatingStars extends React.Component {
           onChange={this.handleChange}/>
 
         <div className='center' 
-          onClick={() => {
-            handleModal('feedback')
-          }}>
+          onClick={this.handleModal}>
           <button className='button'> 
           Leave feedback...
           </button>
         </div>
 
-        <div className={modal === 'feedback' ? 
+        <div className={modal ? 
           'center' : 'display-none'}>
           <select id="feedback"
             value={this.state.feedback}

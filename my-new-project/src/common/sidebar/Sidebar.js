@@ -22,8 +22,9 @@ async componentDidMount() {
 
 render(){
   const { newPosts, topPosts } = this.state
-  if (!newPosts || !topPosts) return ''
+  const { getData, cUserId } = this.props
 
+  if (!newPosts || !topPosts) return ''
   return (
 
     <div className='sidebar-container'>
@@ -31,7 +32,13 @@ render(){
         <img src='https://bit.ly/2MMLjiE'
           className='sidebar-logo '
           alt='logo'/>
-        <Navbar />
+
+
+        <Navbar 
+          cUserId={cUserId}
+          getData={getData}
+        />
+        
         <SidebarSearch />
 
         <h1 className='sidebar-title'> New Posts</h1>

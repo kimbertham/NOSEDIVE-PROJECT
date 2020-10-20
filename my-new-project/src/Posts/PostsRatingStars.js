@@ -17,7 +17,7 @@ class PostsRatingStars extends React.Component {
       const userId = this.props.post.owner.id
       const postId = this.props.post.id
       await axios.post(`/api/postratings/${postId}/${userId}/`,this.state, headers())
-      this.props.updateProfile()
+      this.props.updateProfile(this.props.userProfile)
     })
   }
 

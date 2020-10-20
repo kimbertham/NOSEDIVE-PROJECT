@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
+const RatingModal = ({ showRatings, ratingModal, ratingPop, updateProfile }) => {
 
   return (
 
@@ -15,7 +15,7 @@ const RatingModal = ({ showRatings, ratingModal, ratingPop }) => {
         {ratingModal ? ratingPop.map(ratings => {
           return ( 
 
-            <div key={ratings.id}>
+            <div key={ratings.id} onClick={()=> updateProfile(ratings.rating_owner.id)}>
               <Link to={`/profile/${ratings.rating_owner.id}/activity`} 
                 className=' center bordered-box flex'> 
                 <img 

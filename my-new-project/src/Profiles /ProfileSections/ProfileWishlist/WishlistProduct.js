@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
-  console.log(product)
+
   return (
     <div className='product-field dark-border'>
 

@@ -22,10 +22,10 @@ class  WishlistView(APIView):
         return Response(created_wish.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class WishlistDetailView(APIView):
-#     def get(self, request, pk):
-#         wishlist = Wishlist.objects.filter(owner=pk)
-#         serailized_wishlist = WishlistSerializer(wishlist, many=True)
-#         return Response( serailized_wishlist.data , status=HTTP_200_OK)
+    def get(self, request, pk):
+        wishlist = Wishlist.objects.filter(owner=pk)
+        serailized_wishlist = WishlistSerializer(wishlist, many=True)
+        return  serailized_wishlist.data 
 
     def delete(self, request, pk):
         item_to_delete = Wishlist.objects.get(pk=pk)
