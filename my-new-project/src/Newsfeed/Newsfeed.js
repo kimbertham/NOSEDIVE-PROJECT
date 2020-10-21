@@ -14,7 +14,7 @@ state = {
 }
 
 async componentDidMount(){
-  this.getData()
+  await this.getData()
 }
 
 getData = async () => {
@@ -24,14 +24,14 @@ getData = async () => {
   const posts =  await axios.get(`/api/post/newsfeed/${id}/`)
   const average =  await axios.get(`/api/profile/${id}/average/`)
   const friends =  await axios.get(`/api/follow/find/${id}/`)
-  console.log(user)
-
+  
+  
   this.setState({ 
     posts: posts.data, 
     forums: forums.data, 
     user: user.data,
-    friends: friends.data,
-    average: average.data.average })
+    average: average.data.average,
+    friends: friends.data })
 }
 
 render() {
@@ -39,6 +39,7 @@ render() {
   const { posts ,forums, friends, user, average }  = this.state
   const { currentUserId } = this.props
 
+  console.log(this.state)
   if (!posts) return null
   return (
     <>

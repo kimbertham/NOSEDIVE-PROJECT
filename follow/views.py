@@ -38,7 +38,7 @@ class FollowDetailView(APIView):
         if action == 'find':
             ids = following.values_list('user_to', flat=True)
             random_users = []
-            while len(random_users) < 2:
+            while len(random_users) < 1:
                 randoms_followers =  Contact.objects.filter(user_from=random.choice(ids))
                 if len(randoms_followers) > 0:
                     random_user = User.objects.get(pk=(random.choice(randoms_followers)).user_to.id)

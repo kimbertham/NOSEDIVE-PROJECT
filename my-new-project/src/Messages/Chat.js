@@ -2,7 +2,7 @@ import React from 'react'
 
 const Chat = ({ userId, convo } ) => {
   if (!convo) return ''
-  console.log(convo.messages)
+
   return (
     <>
   

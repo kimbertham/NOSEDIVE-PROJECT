@@ -36,7 +36,7 @@ class Register extends React.Component{
   }
 
   render(){
-    console.log(this.state)
+
     return (
       <>
         <div className='auth-form center pop-up'>
