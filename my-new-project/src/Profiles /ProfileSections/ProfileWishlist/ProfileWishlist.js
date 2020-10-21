@@ -49,7 +49,7 @@ handleSubmit =  event => {
 }
 
 handleWishList = async (price, thumbnail, url, title ) => {
-  const userLimit = this.props.user.avg * 10
+  const userLimit = this.props.user.average * 10
   if (price > userLimit) {
     this.setState({ modal: 'Your rating is not high enough for this action' })
   } else {
@@ -65,12 +65,12 @@ handleWishList = async (price, thumbnail, url, title ) => {
       this.setState({ modal: 'Item Added to Wishlist' })
     })
   }
-  this.props.updateProfile(this.props.userProfile, 'wishlist')
+  this.props.updateProfile(this.props.user.bio.id, 'wishlist')
 }
 
 handleDelete = async (product) => {
   await axios.delete(`/api/wishlist/${product}/`, headers())
-  this.props.updateProfile(this.props.userProfile, 'wishlist')
+  this.props.updateProfile(this.props.user.bio.id, 'wishlist')
 }
 
 handleModal = () => {
@@ -111,18 +111,23 @@ render() {
                 key={product.asin}
                 handleWishList={this.handleWishList}
                 product={product}
-                search={true}/>
+                search={true}
+                user={user}
+                currentUserId={currentUserId}/>
             )
           })}
           
           {wishlist.map(product => {
             return ( 
               <WishlistProduct 
+              
                 key={product.asin}
                 handleWishList={this.handleWishList}
                 product={product}
                 search={false}
-                handleDelete={this.handleDelete}/>
+                handleDelete={this.handleDelete}
+                user={user}
+                currentUserId={currentUserId}/>
             )
           })}
           

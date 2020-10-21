@@ -4,11 +4,11 @@ import { defaultImage } from '../../lib/commonFiles'
 import { headers,getUserId } from '../../lib/auth'
 const currentUserId = getUserId()
 
-const PostComments = ( { comment, updateProfile, userProfile }) => {
+const PostComments = ( { comment, updateProfile, user }) => {
 
   const deleteComment = async () => {
     await axios.delete(`/api/comments/${comment.id}/`, headers())
-    updateProfile(userProfile)
+    updateProfile(user.bio.id)
   }
 
   return (

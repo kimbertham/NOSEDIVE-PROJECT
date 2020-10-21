@@ -17,23 +17,18 @@ class ProfilePage extends React.Component {
   }
 
   render(){
-    const currentUserId = this.props.cUserId
-    const userProfile = this.props.match.params.id
-    const { user, modal, getData } = this.props
-    console.log(user)
-    if (!user.ratings) return null 
+
+    const { user, getData,currentUserId  } = this.props
+    if (!user.bio) return null 
     return (
       <>
         <div className='sticky profile-head'>
           <ProfileInfo 
             user={user} 
-            userProfile={userProfile}
-            updateProfile={getData} 
-            modal={modal}
-            handleModal={this.handleModal}/>
+            updateProfile={getData} />
 
           <ProfileNavbar 
-            userProfile={userProfile}/>
+            user={user}/>
         </div>
 
         <div className='profile-section full-width'>
@@ -45,7 +40,6 @@ class ProfilePage extends React.Component {
             <Route path='/profile/:id/activity'render={() => 
               <ProfileActivity 
                 user={user}
-                userProfile={userProfile}
                 currentUserId={currentUserId}
                 updateProfile={getData} /> }/>
 
@@ -53,7 +47,6 @@ class ProfilePage extends React.Component {
               <ProfilePhotos
                 user={user}
                 currentUserId={currentUserId}
-                userProfile={userProfile}
                 updateProfile={getData} /> }/>
 
             <Route path='/profile/:id/fans' render={() => 
@@ -64,7 +57,6 @@ class ProfilePage extends React.Component {
             <Route path='/profile/:id/wishlist' render={() => 
               <ProfileWishlist
                 user={user}
-                userProfile={userProfile}
                 currentUserId={currentUserId}
                 updateProfile={getData} /> }/>
           </Switch>

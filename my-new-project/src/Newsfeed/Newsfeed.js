@@ -10,25 +10,36 @@ class Newsfeed extends React.Component {
 state = {
   posts: [],
   forums: [],
-  profile: ''
+  friends: []
 }
 
 async componentDidMount(){
-  this.getPosts()
+  this.getData()
 }
 
-getPosts = async ()  => {
-  const userId = this.props.match.params.id
-  const posts = await axios.get(`/api/post/newsfeed/${userId}/`)
-  const profile = await axios.get(`/api/profile/${userId}/simple/`)
-  const forums = await axios.get(`/api/forum/newsfeed/${userId}/`)
-  this.setState({ posts: posts.data, profile: profile.data, forums: forums.data })
+getData = async () => {
+  const id = this.props.currentUserId
+  const user  =  await axios.get(`/api/profile/${id}/bio/`)
+  const forums = await axios.get(`/api/forum/newsfeed/${id}/`)
+  const posts =  await axios.get(`/api/post/newsfeed/${id}/`)
+  const average =  await axios.get(`/api/profile/${id}/average/`)
+  const friends =  await axios.get(`/api/follow/find/${id}/`)
+  console.log(user)
+
+  this.setState({ 
+    posts: posts.data, 
+    forums: forums.data, 
+    user: user.data,
+    friends: friends.data,
+    average: average.data.average })
 }
 
 render() {
-  const { posts, profile,forums }  = this.state
-  const currentUserId = parseInt(this.props.match.params.id)
-  if (!profile) return null
+
+  const { posts ,forums, friends, user, average }  = this.state
+  const { currentUserId } = this.props
+
+  if (!posts) return null
   return (
     <>
       <div className='bordered-box'>
@@ -36,14 +47,16 @@ render() {
       </div>
           
       <MakePost 
-        page='newsfeed-post'
-        updateProfile={this.getPosts}/>
+        page='profile-post'
+        user={user}
+        updateProfile={this.getData}/>
 
       <div className='flex'>
         <div className='feed-left'>
 
           <NewsfeedBio 
-            profile={profile}/>
+            user={user}
+            average={average}/>
 
           <div className='bordered-box feed-forum'>
             <h2 className='feed-title dark-border'> New Forums</h2>
@@ -54,18 +67,21 @@ render() {
             })}
           </div>
 
-          <NewsfeedFriends/>
+          <NewsfeedFriends
+            friends={friends}
+            user={user}/>
         </div>
 
         <div className='bordered-box feed-post' >
           <h2 className='feed-title dark-border'> Newest Posts </h2>
           {posts.slice(0).reverse().map(post => {
             return <Posts 
+              user={user}
               key={post.id} 
-              page='profile'
+              page='profile-post'
               post={post}
               currentUserId={currentUserId} 
-              updateProfile={this.getPosts}/>
+              updateProfile={this.getData}/>
           })}
         </div>
 

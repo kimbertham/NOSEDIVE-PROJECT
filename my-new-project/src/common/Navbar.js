@@ -10,17 +10,16 @@ handleLogout = () => {
 }
 
 handleProfileNav = () => {
-  this.props.getData(this.props.cUserId)
-  console.log(this.props.cUserId)
+  this.props.getData(this.props.currentUserId)
 }
 
 render(){
-  const { cUserId } = this.props
+  const { currentUserId } = this.props
   return (
     <div className='navbar'> 
     
       <Link
-        to={`/profile/${this.props.cUserId}/activity`}
+        to={`/profile/${this.props.currentUserId}/activity`}
         onClick={this.handleProfileNav}>
         <img src='https://bit.ly/3h8vdNh'
           className='nav-icon'
@@ -28,7 +27,7 @@ render(){
       </Link>
 
       <Link 
-        to={`/home/${cUserId}`}> 
+        to={`/home/${currentUserId}`}> 
         <img src='https://i.imgur.com/kkeEHVw.jpg'
           className='nav-icon'
           alt='home'/>
@@ -47,14 +46,14 @@ render(){
           className='nav-icon' alt='messages'/>
       </Link>
 
-      <Link to={`/stats/${cUserId}`}>
+      <Link to={`/stats/${currentUserId}`}>
         <img src='https://i.imgur.com/rr5afgV.jpg'
           className='nav-icon'
           alt='stats'/>
       </Link>
 
       <Link
-        to={`/edit/${cUserId}`}>
+        to={`/edit/${currentUserId}`}>
         <img src='https://i.imgur.com/BvhVhb3.jpg' 
           className='nav-icon'
           alt='user-profile'/>

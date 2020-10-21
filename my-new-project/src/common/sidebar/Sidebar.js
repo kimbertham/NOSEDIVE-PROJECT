@@ -22,7 +22,7 @@ async componentDidMount() {
 
 render(){
   const { newPosts, topPosts } = this.state
-  const { getData, cUserId } = this.props
+  const { getData, currentUserId } = this.props
 
   if (!newPosts || !topPosts) return ''
   return (
@@ -35,7 +35,7 @@ render(){
 
 
         <Navbar 
-          cUserId={cUserId}
+          currentUserId={currentUserId}
           getData={getData}
         />
         

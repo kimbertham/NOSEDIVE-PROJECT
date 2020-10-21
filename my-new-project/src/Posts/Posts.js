@@ -28,7 +28,7 @@ class Posts extends React.Component {
   }
 
   render(){
-    const { post, userProfile, currentUserId, updateProfile } = this.props
+    const { post, currentUserId, updateProfile, user } = this.props
     const { comments, ratingModal,ratingPop } = this.state
 
     return (
@@ -37,17 +37,17 @@ class Posts extends React.Component {
         <div className='post-stars'>
           <PostsRatingStars
             post={post}
-            updateProfile={ updateProfile}
-            userProfile={userProfile}/>
+            user={user}
+            updateProfile={ updateProfile}/>
         </div>
 
         <PostContent 
           post={post}
+          user={user}
+          updateProfile={updateProfile}
           showRatings={this.showRatings}
           showComments={this.showComments} 
-          currentUserId={currentUserId}
-          userProfile={userProfile}
-          updateProfile={ updateProfile }/>
+          currentUserId={currentUserId}/>
             
 
         <div className={comments ?
@@ -57,7 +57,7 @@ class Posts extends React.Component {
               <PostComments 
                 key={comment.id} 
                 comment={comment}
-                userProfile={userProfile}
+                user={user}
                 updateProfile={ updateProfile }
                 page={'profile'}/>
             )
@@ -66,7 +66,7 @@ class Posts extends React.Component {
           <MakeComments 
             post={post}
             updateProfile={updateProfile}
-            userProfile={userProfile}
+            user={user}
             page={'profile'}/>
             
         </div>

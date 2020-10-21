@@ -13,7 +13,7 @@ toggleSettings = () => {
 
 deletePost = async (id) => {
   await axios.delete(`/api/post/${id}/`, headers())
-  this.props.updateProfile(this.props.userProfile)
+  this.props.updateProfile(this.props.user.bio.id)
 }
 
 render() {

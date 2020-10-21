@@ -3,7 +3,7 @@ import Posts from '../../../Posts/Posts'
 import MakePost from '../../../Posts/MakePost'
 import ProfileInteractions from './ProfileInteractions'
 
-const ProfileActivity = ( { user, currentUserId, userProfile, updateProfile, modal, handleModal }) => {
+const ProfileActivity = ( { user, currentUserId, updateProfile, modal, handleModal }) => {
 
   const { posts } = user
   if (!posts) return ''
@@ -12,9 +12,8 @@ const ProfileActivity = ( { user, currentUserId, userProfile, updateProfile, mod
 
       <MakePost 
         page='profile-post'
-        profile={userProfile}
         updateProfile={updateProfile}
-        userProfile={userProfile}
+        user={user}
       />
       
       <div className='flex'>
@@ -27,7 +26,7 @@ const ProfileActivity = ( { user, currentUserId, userProfile, updateProfile, mod
               post={post}
               currentUserId={currentUserId} 
               updateProfile={updateProfile}
-              userProfile={userProfile}/>
+              user={user}/>
           })}
         </div>
 

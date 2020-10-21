@@ -18,7 +18,7 @@ import Messages from './Messages/Messages'
 
 
 const token = getToken()
-const cUserId = getUserId()
+const currentUserId = getUserId()
 
 
 class App extends React.Component {
@@ -26,20 +26,27 @@ class App extends React.Component {
     user: {}
   }
 
-  getData = async (profile, action) => {
-    const user = await axios.get(`/api/profile/${profile}/${action ? action : 'full'}/`)
+  getData = async ( profile, action ) => {
+    const user = await axios.get(`/api/profile/${profile}/${action ? action : 'user'}/`)
     const change = { ...this.state.user, [action]: user.data[action] } 
-    this.setState({ user: action ? change :  user.data })
+    action ? this.setState({ user: change }) : this.setState({ user: user.data })
+    
   }
 
   render(){
-    const { user, modal } = this.state 
+    const { user } = this.state 
+
     return (
       <>
         <BrowserRouter>
       
-          {token ?   <Route render={() => 
-            <Sidebar user= {user} cUserId={cUserId} getData={this.getData} /> }/> : ''}
+          {token ?   
+            <Route render={() => 
+              <Sidebar 
+                user= {user} 
+                currentUserId={currentUserId} 
+                getData={this.getData} /> }/> 
+            : ''}
 
           <Switch>
 
@@ -50,12 +57,17 @@ class App extends React.Component {
             <div className='left-section'>
 
               <Route path='/profile/:id/' render={() => 
-                <ProfilePage user= {user} cUserId={cUserId} modal={modal} handleModal={this.handleModal} getData={this.getData} /> }/>
-                
-              <Route path='/edit' component={ProfileBioEdit}/>
-              <Route path='/home/:id' component={Newsfeed}/>
-              <Route path='/stats/:id' component={Stats}/>
+                <ProfilePage 
+                  user={user}
+                  currentUserId={currentUserId} 
+                  getData={this.getData} /> }/>
 
+              <Route path='/home/:id' render={() => 
+                <Newsfeed 
+                  currentUserId={currentUserId} /> }/>
+
+              <Route path='/edit' component={ProfileBioEdit}/>
+              <Route path='/stats/:id' component={Stats}/>
               <Route path='/community' component={Forum} /> 
               <Route path='/forum/:id' component={ForumThreads} /> 
             </div>

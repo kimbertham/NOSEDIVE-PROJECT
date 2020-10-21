@@ -76,7 +76,7 @@ class ProfileDetailView(APIView):
             serialized_user = UserSerializer(user)
             return Response({ 'bio': serialized_user.data}, status=HTTP_200_OK)
 
-        if action == 'full':
+        if action == 'user':
             user = User.objects.get(pk=pk)
             serialized_user = UserSerializer(user)
 

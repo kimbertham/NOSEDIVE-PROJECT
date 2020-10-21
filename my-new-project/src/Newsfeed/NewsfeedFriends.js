@@ -1,21 +1,9 @@
 import React from 'react'
-import axios from 'axios'
-import { getUserId } from '../lib/auth'
 import { Link } from 'react-router-dom'
-const user = getUserId()
 
-class NewsfeedFriends extends React.Component  {
-state = {
-  friends: []
-}
+const NewsfeedFriends = ({ friends }) =>  {
 
-async componentDidMount(){
-  const res = await axios.get(`/api/follow/find/${user}/`)
-  this.setState({ friends: res.data })
-}
 
-render () {
-  const { friends } = this.state
   return (
     <div className='bordered-box'>
       <h2 className='feed-title dark-border'> Friends of friends</h2>
@@ -42,5 +30,5 @@ render () {
 
   )
 }
-}
+
 export default NewsfeedFriends

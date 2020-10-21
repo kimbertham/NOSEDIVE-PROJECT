@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
+const WishlistProduct = ({ product, search, handleWishList,handleDelete,currentUserId, user }) => {
 
   return (
     <div className='product-field dark-border'>
@@ -18,21 +18,22 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete }) => {
         <h1>{product.title}</h1>
         <p>{ product.price.current_price ?  `£${ product.price.current_price}` : null}</p>
       </a>
-
-      {search === true ? 
-        <button className='wishlist-button button'
-          onClick={() => {
-            handleWishList(
-              product.price.current_price,
-              product.thumbnail,
-              product.url,
-              product.title)
-          }}> Add to Wishlish </button> 
-        : 
-        <button className='wishlist-button button'
-          onClick={() => {
-            handleDelete(product.id)
-          }}> Delete </button>}
+      {currentUserId === user.bio.id ?
+        search === true ? 
+          <button className='wishlist-button button'
+            onClick={() => {
+              handleWishList(
+                product.price.current_price,
+                product.thumbnail,
+                product.url,
+                product.title)
+            }}> Add to Wishlish </button> 
+          : 
+          <button className='wishlist-button button'
+            onClick={() => {
+              handleDelete(product.id)
+            }}> Delete </button>
+        : '' }
 
     </div>
   )
