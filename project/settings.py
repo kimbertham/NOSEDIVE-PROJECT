@@ -27,7 +27,8 @@ SECRET_KEY = 'nd&-$iv()!xn97b@_$8mx&%f(!tr!%kfy@k^f&z(j%3u1w)r%c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['nosedive-ga.herokuapp.com']
 
 
 # Application definition

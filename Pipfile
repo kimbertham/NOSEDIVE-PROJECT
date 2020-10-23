@@ -14,7 +14,6 @@ djangorestframework = "*"
 pyjwt = "*"
 django-heroku = "*"
 djangorestframework-recursive = "*"
-django-mptt = "*"
 
 [requires]
 python_version = "3.7"
