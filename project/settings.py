@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'wishlist',
     'messaging',
     'conversations',
-    'forum'
+    # 'forum'
     
 ]
 

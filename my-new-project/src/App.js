@@ -70,10 +70,10 @@ class App extends React.Component {
 
               <Route path='/stats/:id' component={Stats}/>
 
-              <Route path='/community' render={() => 
+              {/* <Route path='/community' render={() => 
                 <Forum currentUserId={currentUserId}/> }/>
               <Route path='/forum/:id' render={() => 
-                <ForumThreads currentUserId={currentUserId}/> }/>
+                <ForumThreads currentUserId={currentUserId}/> }/> */}
 
             </div>
 
