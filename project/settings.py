@@ -8,8 +8,9 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
-"""
 
+"""
+import dj_database_url
 import os
 # import django_heroku
 
@@ -88,6 +89,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+DATABASES = {'default': dj_database_url.config()}
 
 DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
     'default': {
