@@ -11,9 +11,9 @@ pylint = "*"
 psycopg2-binary = "*"
 autopep8 = "*"
 djangorestframework = "*"
-rest_framework_recursive = "*"
 pyjwt = "*"
 django-heroku = "*"
+djangorestframework-recursive = "*"
 
 [requires]
 python_version = "3.7"
