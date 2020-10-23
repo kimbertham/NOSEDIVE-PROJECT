@@ -38,7 +38,7 @@ const ThreadPost = ({ modal, thread, owner, follow, following  }) =>  {
             <p className='thread-limits'>
               {thread.limitations ?
                 `NO ${thread.limitations} STARS ALLOWED` : 'PUBLIC'} </p>
-            <button onClick={follow}> 
+            <button className='button' onClick={follow}> 
               {following ? 'Unfollow' : 'Follow'} </button>
           </div>
   

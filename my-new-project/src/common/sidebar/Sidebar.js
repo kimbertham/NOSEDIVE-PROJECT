@@ -17,12 +17,11 @@ async componentDidMount() {
   this.setState({ 
     newPosts: res.data.new_posts,
     topPosts: res.data.top_posts })
-
 }
 
 render(){
   const { newPosts, topPosts } = this.state
-  const { getData, currentUserId } = this.props
+  const { getData, currentUserId, changeProfile } = this.props
 
   if (!newPosts || !topPosts) return ''
   return (
@@ -39,7 +38,9 @@ render(){
           getData={getData}
         />
         
-        <SidebarSearch />
+        <SidebarSearch 
+          currentUserId={currentUserId}
+          getData={getData}/>
 
         <h1 className='sidebar-title'> New Posts</h1>
         <div className='sidebar-section'>

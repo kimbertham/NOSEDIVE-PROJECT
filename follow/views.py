@@ -36,18 +36,26 @@ class FollowDetailView(APIView):
             return {'following':serialized_following.data, 'followers':serialized_followers.data}
 # GET RANDOM FRIENDS FOR A USER 
         if action == 'find':
-            ids = following.values_list('user_to', flat=True)
-            random_users = []
-            while len(random_users) < 1:
-                randoms_followers =  Contact.objects.filter(user_from=random.choice(ids))
-                if len(randoms_followers) > 0:
-                    random_user = User.objects.get(pk=(random.choice(randoms_followers)).user_to.id)
-                    if random_user.id != pk and not Contact.objects.filter(Q(user_from=pk) & Q(user_to=random_user.id)).exists() and not random_user in random_users:
-                        random_users.append(random_user)
-            serialized_users = BasicUserSerializer(random_users, many=True)
-        return Response( serialized_users.data, status=HTTP_200_OK)
-        
-        
+            users = User.objects.filter().exclude(id=request.user.id).values_list(flat=True)
+            print(request.user.id)
+            my_f = following.values_list('user_to', flat=True) #ALWAYS STAYS THE SAME
+            non_f = list(set(users).difference(my_f))
+            if len(non_f) > 0:
+                followers = User.objects.filter(pk__in=non_f)
+            if len(non_f) == 3:
+                chosen = random.sample( list(followers), 3)
+                serialized_followers= UserSerializer(chosen,many=True)
+                return Response( serialized_followers.data, status=HTTP_200_OK)
+            if len(non_f) == 2:
+                chosen = random.sample( list(followers), 2)
+                serialized_followers= UserSerializer(chosen,many=True)
+                return Response( serialized_followers.data, status=HTTP_200_OK)
+            if len(non_f) == 1:
+                chosen = random.sample( list(followers), 1)
+                serialized_followers= UserSerializer(chosen,many=True)
+                return Response( serialized_followers.data, status=HTTP_200_OK)
+            else:
+                return Response( None , status=HTTP_200_OK)
 
 
 

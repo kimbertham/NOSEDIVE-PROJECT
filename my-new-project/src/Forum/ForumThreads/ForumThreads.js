@@ -1,12 +1,11 @@
 import React from 'react'
 import axios from 'axios'
-import { getUserId, headers } from '../../lib/auth'
+import { headers } from '../../lib/auth'
+import { withRouter } from 'react-router-dom'
 import MakePost from '../../Posts/MakePost'
 import ThreadPost from './ThreadPost'
 import Recursive from './ThreadComments/Recursive'
 
-
-const user = getUserId()
 
 class ForumThreads extends React.Component {
   state={
@@ -23,14 +22,15 @@ class ForumThreads extends React.Component {
   }
   
   getData = async () => {
+    const id = this.props.currentUserId
     this.getComments()
     const threadId = this.props.match.params.id
-    const res = await axios.get(`/api/forum/${threadId}/`)
-    const rating = await axios.get(`/api/ratings/ratedata/${user}/`)
-    const following = res.data[0].followers.includes(user)
+    const res = await axios.get(`/api/forum/thread/${threadId}/`)
+    const rating = await axios.get(`/api/profile/${id}/average/`)
+    const following = res.data[0].followers.includes(id)
     this.setState({ 
       thread: res.data[0],  
-      rating: rating.data.avg,
+      rating: rating.data.average,
       owner: res.data[0].forum_owner,
       following: following },
     () => {
@@ -44,7 +44,7 @@ class ForumThreads extends React.Component {
 
   getComments = async () => {
     const threadId = this.props.match.params.id
-    const res = await axios.get(`/api/forum/${threadId}`)
+    const res = await axios.get(`/api/forum/${threadId}/`)
     this.setState({ comments: res.data })
   }
 
@@ -54,6 +54,7 @@ class ForumThreads extends React.Component {
       await axios.delete(`/api/forum/follow/${forumId}/`, headers())
       : await axios.post(`/api/forum/follow/${forumId}/`, null , headers())
     this.getData()
+    
   }
 
   render() {
@@ -91,4 +92,4 @@ class ForumThreads extends React.Component {
 
 }
 
-export default ForumThreads
+export default withRouter(ForumThreads)

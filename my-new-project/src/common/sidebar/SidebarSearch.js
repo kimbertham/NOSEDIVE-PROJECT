@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { getUserId } from '../../lib/auth'
+import { withRouter, Link } from 'react-router-dom'
 
-const user = getUserId()
+
 
 class SidebarSearch extends React.Component {
   state = {
@@ -11,9 +11,8 @@ class SidebarSearch extends React.Component {
     searchUsers: []
   }
 
-
   async componentDidMount() {
-    const res = await axios.get(`/api/profile/${user}/all/`)
+    const res = await axios.get(`/api/profile/${this.props.currentUserId}/all/`)
     this.setState({ users: res.data })
   }
 
@@ -29,7 +28,13 @@ class SidebarSearch extends React.Component {
       this.setState({ searchUsers: [] , query: value })
     }
   }
-  
+
+  changeProfile = (id) => {
+    this.props.getData(id)
+    this.props.history.push(`/profile/${id}/activity`)
+    this.setState({ query: '' , searchUsers: [] })
+  }  
+
 
   render() {
     const { query, searchUsers } = this.state
@@ -50,16 +55,19 @@ class SidebarSearch extends React.Component {
         <div className='results-container side-results'>
           {searchUsers.map(user => {
             return (
-              <div 
+              <Link 
                 key={user.id}
-                className='side-user dark-border pointer flex'
-                onClick={() => {
-                  this.handleNew(user.id)
-                }}>
-                <img src={user.profile_image}
-                  className='small-icon' alt='pp-img'/>
-                <p> {user.first_name} {user.last_name}</p>
-              </div>
+                to={`/profile/${user.id}/activity`}>
+                <div 
+                  className='side-user dark-border pointer flex'
+                  onClick={()=>{
+                    this.props.getData(user.id)               
+                  }}>
+                  <img src={user.profile_image}
+                    className='small-icon' alt='pp-img'/>
+                  <p> {user.first_name} {user.last_name}</p>
+                </div>
+              </Link>
             )
           })}
         </div>
@@ -67,4 +75,4 @@ class SidebarSearch extends React.Component {
     )
   }
 }
-export default SidebarSearch
+export default withRouter(SidebarSearch)

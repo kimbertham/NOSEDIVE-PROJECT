@@ -14,7 +14,7 @@ toggleReply = () => {
 }
 
 handleDelete = async (commentId) => {
-  await axios.delete(`/api/forum/${commentId}` , headers())
+  await axios.delete(`/api/forum/${commentId}/` , headers())
   this.props.getComments()
 }
 

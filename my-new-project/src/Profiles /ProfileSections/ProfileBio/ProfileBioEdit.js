@@ -1,10 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { headers } from '../../../lib/auth'
-import { getUserId } from '../../../lib/auth'
 import ImageUpload from '../../../common/ImageUpload'
+import { withRouter } from 'react-router-dom'
 
-const userid = getUserId()
 
 class ProfileBioEdit extends React.Component {
     state = {
@@ -19,7 +18,8 @@ class ProfileBioEdit extends React.Component {
     }
   
     getData = async () => { 
-      const res = await axios.get(`/api/profile/${userid}/simple/`)
+      const res = await axios.get(`/api/profile/${this.props.currentUserId}/bio/`)
+      console.log(res)
       this.setState({ profile: res.data.bio })
     }
 
@@ -35,11 +35,11 @@ class ProfileBioEdit extends React.Component {
     handleSubmit = async event => {
       event.preventDefault()
       try {
-        await axios.put(`/api/profile/${userid}/edit/`, 
+        await axios.put(`/api/profile/${this.props.currentUserId}/edit/`, 
           this.state.profile , headers())
-        this.props.history.push(`/profile/${userid}/bio`)
+        this.props.history.push(`/profile/${this.props.currentUserId}/bio`)
       } catch (err) {
-        console.log(err.response.data)
+        console.log(err)
       }
     }
 
@@ -52,7 +52,8 @@ class ProfileBioEdit extends React.Component {
     render(){
 
       const { profile } = this.state
-      if (!profile) return
+      console.log(this.state)
+      if (!profile) return null
       return (
 
         <>
@@ -72,6 +73,7 @@ class ProfileBioEdit extends React.Component {
             </div>
 
             <form onSubmit= {this.handleSubmit}>
+
               <div className='form-field'>            
                 <label className='label'>First Name</label>
                 <br/>
@@ -90,7 +92,7 @@ class ProfileBioEdit extends React.Component {
                 <input
                   className='form-input'
                   id='edit-input'
-                  name="second_name"
+                  name="last_name"
                   value={profile.last_name}
                   onChange={this.handleChange}
                 />
@@ -116,18 +118,6 @@ class ProfileBioEdit extends React.Component {
                 />
               </div>
 
-              <div className='form-field'>            
-                <label className='label'>Second Name</label>
-                <br/>
-                <input
-                  className='form-input'
-                  id='edit-input'
-                  name="second_name"
-                  value={profile.last_name}
-                  onChange={this.handleChange}
-                />
-              </div>
-  
               <div className='form-field'>            
                 <label className='label'>Description</label>
                 <br/>
@@ -201,4 +191,4 @@ class ProfileBioEdit extends React.Component {
 }
   
 
-export default ProfileBioEdit
+export default withRouter(ProfileBioEdit)

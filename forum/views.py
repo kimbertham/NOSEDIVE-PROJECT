@@ -42,10 +42,7 @@ class ForumFollowView(APIView):
         return Response(cf.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
     def delete( self,request, pk):
-        print(pk)
-        print(request.user.id)
         cf_to_delete=ForumFollow.objects.filter(Q(forum=pk) & Q(follower=request.user.id))
-        print(cf_to_delete)
         cf_to_delete.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
@@ -64,7 +61,6 @@ class ThreadCommentView(APIView):
             serialized_comments = PopulatedForumCommentSerializer(comments, many=True)
             return Response ( serialized_comments.data , status=HTTP_200_OK)
 
-
     def delete(self, request, forum_id):
         comment_to_delete = ForumComments.objects.get(pk=forum_id)
         if comment_to_delete.comment_owner.id != request.user.id:
@@ -81,7 +77,6 @@ class ThreadCommentView(APIView):
             parent_id = None
         request.data['parent'] = parent_id
         created_comment = ForumCommentSerializerPOST(data=request.data)
-        print(request.data)
         if created_comment.is_valid():
             created_comment.save()
             return Response(created_comment.data, status=HTTP_201_CREATED)
@@ -91,7 +86,8 @@ class ThreadCommentView(APIView):
 class ForumNewsfeedView(APIView):
 
     def get(self,request,pk): 
-        forums = ForumFollow.objects.filter(follower=pk).values_list('forum_id', flat=True)
-        forum_comments = ForumComments.objects.filter(forum_id__in=forums).order_by('-created_at')[0:5]
-        serialized_comments = PopulatedForumCommentSerializer(forum_comments, many=True)
-        return Response( serialized_comments.data)
+            forums = ForumFollow.objects.filter(follower=pk).values_list('forum_id', flat=True)
+            forum_comments = ForumComments.objects.filter(forum_id__in=forums).order_by('-created_at')[0:5]
+            serialized_comments = PopulatedForumCommentSerializer(forum_comments, many=True)
+            return Response( serialized_comments.data)
+

@@ -5,13 +5,14 @@ const NewsfeedFriends = ({ friends }) =>  {
 
 
   return (
-    <div className='bordered-box'>
-      <h2 className='feed-title dark-border'> Friends of friends</h2>
+    <div className='bordered-box italic'>
+      <h2 className='feed-title dark-border'> Find New Friends</h2>
       <div className= 'find-cont center'>
-        {friends.map(friend => {
+
+        {friends ? friends.map(friend => {
           return <div 
             key={friend.id}
-            className='friend-cont center italic '>
+            className='friend-cont center  '>
             <Link to={`/profile/${friend.id}/activity`}>
               <div style={{
                 backgroundImage: `url(${friend.profile_image})`
@@ -22,9 +23,9 @@ const NewsfeedFriends = ({ friends }) =>  {
             </Link>
             <button className='button follow-button'>Follow</button>
           </div>
-        
-  
-        })}
+        }) :
+          <div> Follow more users to make more connections </div>
+        }
       </div>
     </div>
 

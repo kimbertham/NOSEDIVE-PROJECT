@@ -30,7 +30,6 @@ class App extends React.Component {
     const user = await axios.get(`/api/profile/${profile}/${action ? action : 'user'}/`)
     const change = { ...this.state.user, [action]: user.data[action] } 
     action ? this.setState({ user: change }) : this.setState({ user: user.data })
-    
   }
 
   render(){
@@ -45,7 +44,8 @@ class App extends React.Component {
               <Sidebar 
                 user= {user} 
                 currentUserId={currentUserId} 
-                getData={this.getData} /> }/> 
+                getData={this.getData}
+                changeProfile={this.changeProfile} /> }/> 
             : ''}
 
           <Switch>
@@ -62,14 +62,19 @@ class App extends React.Component {
                   currentUserId={currentUserId} 
                   getData={this.getData} /> }/>
 
-              <Route path='/home/:id' render={() => 
-                <Newsfeed 
-                  currentUserId={currentUserId} /> }/>
+              <Route path='/edit' render={() => 
+                <ProfileBioEdit currentUserId={currentUserId}/> }/>
 
-              <Route path='/edit' component={ProfileBioEdit}/>
+              <Route path='/home/:id' render={() => 
+                <Newsfeed currentUserId={currentUserId} /> }/>
+
               <Route path='/stats/:id' component={Stats}/>
-              <Route path='/community' component={Forum} /> 
-              <Route path='/forum/:id' component={ForumThreads} /> 
+
+              <Route path='/community' render={() => 
+                <Forum currentUserId={currentUserId}/> }/>
+              <Route path='/forum/:id' render={() => 
+                <ForumThreads currentUserId={currentUserId}/> }/>
+
             </div>
 
           </Switch>
