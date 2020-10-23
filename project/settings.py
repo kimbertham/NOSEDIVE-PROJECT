@@ -91,14 +91,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {'default': dj_database_url.config()}
 
-DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nosedive-database',
-        'HOST': 'localhost',
-        'PORT': 5432
-    }
-}
+# DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'nosedive-database',
+#         'HOST': 'localhost',
+#         'PORT': 5432
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
