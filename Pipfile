@@ -11,6 +11,7 @@ pylint = "*"
 psycopg2-binary = "*"
 autopep8 = "*"
 djangorestframework = "*"
+rest_framework_recursive = "*"
 pyjwt = "*"
 django-heroku = "*"
 
