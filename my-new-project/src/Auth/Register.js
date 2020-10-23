@@ -12,8 +12,7 @@ class Register extends React.Component{
   handleChange = event => {
     try {
       const formData = { ...this.state.formData, [event.target.name]: event.target.value }
-      const errors = { ...this.state.errors, [event.target.name]: '' }
-      this.setState({ formData, errors })
+      this.setState({ formData })
     } catch (err) {
       console.log(err)
     }
@@ -23,11 +22,12 @@ class Register extends React.Component{
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      await axios.post('/api/register/', { ...this.state.formData })
+      const res = await axios.post('/api/register/', { ...this.state.formData })
+      console.log(res.data)
       this.props.history.push('/login') 
     } catch (err) {
-      console.log(err.response.data)
-      this.getSubmitErrors(err.response.data)
+      console.log(err)
+
     }
   }
 

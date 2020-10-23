@@ -28,7 +28,7 @@ SECRET_KEY = 'nd&-$iv()!xn97b@_$8mx&%f(!tr!%kfy@k^f&z(j%3u1w)r%c'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['nosedive-ga.herokuapp.com']
+
 
 
 # Application definition
@@ -90,16 +90,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config()}
+# DATABASES = {'default': dj_database_url.config()}
 
-# DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'nosedive-database',
-#         'HOST': 'localhost',
-#         'PORT': 5432
-#     }
-# }
+DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'nosedive-database',
+        'HOST': 'localhost',
+        'PORT': 5432
+    }
+}
+# ALLOWED_HOSTS = ['localhost' '[127.0.0.1:8000]' 'nosedive-ga.herokuapp.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
