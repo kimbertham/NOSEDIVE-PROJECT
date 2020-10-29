@@ -12,7 +12,7 @@ class Post(models.Model):
     image= models.CharField(max_length=10000, blank=True)
     profile_owner = models.ForeignKey('jwt_auth.User',
     related_name='page_posts', 
-    on_delete=models.CASCADE)
+    on_delete=models.CASCADE, blank=True)
 
     owner = models.ForeignKey(
     'jwt_auth.User',
