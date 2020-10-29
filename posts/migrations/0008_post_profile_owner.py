@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='profile_owner',
-            field=models.ForeignKey(default=3, on_delete=django.db.models.deletion.CASCADE, related_name='page_posts', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='page_posts', to=settings.AUTH_USER_MODEL),
             preserve_default=False,
         ),
     ]
