@@ -39,8 +39,8 @@ render() {
 
   const { posts ,forums, friends, user, average }  = this.state
   const { currentUserId } = this.props
-
-  if (!posts) return null
+  console.log(this.state)
+  if (!user) return null
   return (
     <>
       <div className='bordered-box'>

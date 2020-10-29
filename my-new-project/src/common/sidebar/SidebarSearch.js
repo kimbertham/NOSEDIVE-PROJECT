@@ -31,7 +31,6 @@ class SidebarSearch extends React.Component {
 
   changeProfile = (id) => {
     this.props.getData(id)
-    this.props.history.push(`/profile/${id}/activity`)
     this.setState({ query: '' , searchUsers: [] })
   }  
 
@@ -61,7 +60,7 @@ class SidebarSearch extends React.Component {
                 <div 
                   className='side-user dark-border pointer flex'
                   onClick={()=>{
-                    this.props.getData(user.id)               
+                    this.changeProfile(user.id)  
                   }}>
                   <img src={user.profile_image}
                     className='small-icon' alt='pp-img'/>

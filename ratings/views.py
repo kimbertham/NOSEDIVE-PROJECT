@@ -39,12 +39,12 @@ class RatingListView(APIView):
         user_post_ratings = PostRatings.objects.filter(post_owner=pk).aggregate(Avg('rating'))
         if user_profile_ratings['rating__avg'] and user_post_ratings['rating__avg']:
             user_rating_score = (user_profile_ratings['rating__avg'] + user_post_ratings['rating__avg']) / 2
+        elif not user_profile_ratings['rating__avg'] and not user_post_ratings['rating__avg']:
+            user_rating_score = 0
         elif not user_profile_ratings['rating__avg']:
             user_rating_score = user_post_ratings['rating__avg']
         elif not user_post_ratings['rating__avg']:
             user_rating_score = user_profile_ratings['rating__avg']
-        else: 
-            user_rating_score = 0
         return user_rating_score
 
 
