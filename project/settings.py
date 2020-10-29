@@ -101,7 +101,8 @@ DATABASES = {'default': dj_database_url.config()}
 #     }
 # }
 
-ALLOWED_HOSTS = ['localhost' '[127.0.0.1:8000]' 'nosedive-ga.herokuapp.com']
+ALLOWED_HOSTS = [ 'nosedive-ga.herokuapp.com']
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
