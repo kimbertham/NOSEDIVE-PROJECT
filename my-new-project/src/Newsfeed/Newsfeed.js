@@ -44,7 +44,7 @@ render() {
   return (
     <>
       <div className='bordered-box'>
-        <h2>NewsFeed</h2>
+        <h2>NewsFeed TEST</h2>
       </div>
           
       <MakePost 
