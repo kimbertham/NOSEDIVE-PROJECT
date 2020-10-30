@@ -34,8 +34,7 @@ render(){
 
   const modalClass = modal ? 'display-block' : 'display-none'
   const follow = fButton ?  'All-threads' : 'Followed Threads' 
-  // console.log(forum)
-  // if (!forum.id) return null
+
   return (
     <>
       <h1 className='bordered-box dark-border'> 
@@ -62,7 +61,7 @@ render(){
         </div>
       </div>
 
-      {forum ? 
+      {forum[0] ? 
         <>
           {fButton ? followed.map(thread=>{
             return <ForumCard 
