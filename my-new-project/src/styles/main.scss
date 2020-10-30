@@ -55,6 +55,21 @@ position: relative;
   border: 1px solid rgba(159, 115, 115, 0.7);
 }
 
+.shake-text {
+  margin: 0.5vh;
+  font-size: 15px;
+  color: red;
+  text-align: center;
+  animation: .10s shake alternate;
+}
+
+@keyframes shake{ 
+  0%{ transform: translateX(0)} 
+  25%{ transform: translateX(25px)} 
+  50%{ transform: translateX(-25px)} 
+  100%{ transform: translateX(0px)} 
+} 
+
 .long-textarea{
   height: 100px !important;
 }
@@ -83,6 +98,10 @@ position: relative;
 
 .flex{
   display: flex;
+}
+
+.column {
+  flex-direction: column;
 }
 
 .dark-border {

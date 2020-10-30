@@ -7,10 +7,10 @@ import { headers } from '../lib/auth'
 
 class PostsRatingStars extends React.Component {
   state = {
-    rating: 0
+    rating: 0,
+    message: false
 
   }
-
   handleChange = async rating => {
     this.setState({ rating }, async ()  => {
 
@@ -22,13 +22,23 @@ class PostsRatingStars extends React.Component {
     })
   }
 
+  showText = () => {
+    this.setState({ message: true })
+    setTimeout(() => this.setState({ message: false }), 1000)
+  }
+  
+
   render(){
+    const { post , currentUserId , userProfile } = this.props
+    const ave = post.ratings.reduce((a,b) => a + b.rating, 0) / post.ratings.length
     return (
-      <BeautyStars
-        value={this.state.rating}
-        size={'12px'}
-        onChange={this.handleChange}
-      />
+      <div className='flex column'>
+        <BeautyStars
+          value={this.state.rating ? this.state.rating : ave}
+          size={'12px'}
+          onChange={currentUserId === userProfile ? this.showText : this.handleChange}/>
+        <p className={this.state.message ? 'shake-text italic' : 'display-none'}> &#9432; You cannot rate yourself</p>
+      </div>
     )
   }
 }

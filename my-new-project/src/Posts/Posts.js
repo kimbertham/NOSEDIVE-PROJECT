@@ -30,7 +30,7 @@ class Posts extends React.Component {
   render(){
     const { post, currentUserId, updateProfile, user } = this.props
     const { comments, ratingModal,ratingPop } = this.state
-
+    
     return (
       <div className='posts'>
           

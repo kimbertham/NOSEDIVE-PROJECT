@@ -9,7 +9,8 @@ class ProfileRatingStars extends React.Component {
   state = {
     rating: 0 ,
     feedback: '',
-    modal: false
+    modal: false,
+    message: false
   }
 
   handleChange = async rating => {
@@ -27,38 +28,60 @@ class ProfileRatingStars extends React.Component {
   handleModal = () => {
     this.setState({ modal: !this.state.modal })
   }
+
+  showText = () => {
+    this.setState({ message: true })
+    setTimeout(() => this.setState({ message: false }), 1000)
+  
+  }
+
   render(){
-    const { modal } = this.state
+    const { modal, message } = this.state
+    const { currentUserId, userProfile, average } = this.props
     return (
-      <div className='feedback-container'>
+      <>
+        <div className='feedback-container'>
 
-        <BeautyStars
-          value={this.state.rating}
-          size={'30px'}
-          onChange={this.handleChange}/>
+          {currentUserId === userProfile ? 
+            <>
+              <BeautyStars
+                value={average}
+                size={'30px'}
+                onChange={this.showText}/>
+              <p className={message ? 'shake-text italic' : 'display-none'}> &#9432; You cannot rate yourself</p>
+            </>
+            :
+            <>
+              <BeautyStars
+                value={this.state.rating}
+                size={'30px'}
+                onChange={this.handleChange}/>
 
-        <div className='center' 
-          onClick={this.handleModal}>
-          <button className='button'> 
-          Leave feedback...
-          </button>
+              <div className='center' 
+                onClick={this.handleModal}>
+                <button className='button'> 
+            Leave feedback...
+                </button>
+              </div>
+            </>
+          }
+
+          <div className={modal ? 
+            'center' : 'display-none'}>
+            <select id="feedback"
+              value={this.state.feedback}
+              onChange={this.handleFeedback} >
+              <option value=''></option>
+              <option value="Unpleasant Smell">Unpleasant Smell</option>
+              <option value="Rude Interaction">Rude Interaction</option>
+              <option value="Unattractive">Unattractive</option>
+              <option value="Impoverished Vibes">Impoverished Vibes</option>
+              <option value="Discriminatory">Discriminatory</option>
+            </select>
+          </div>
         </div>
-
-        <div className={modal ? 
-          'center' : 'display-none'}>
-          <select id="feedback"
-            value={this.state.feedback}
-            onChange={this.handleFeedback} >
-            <option value=''></option>
-            <option value="Unpleasant Smell">Unpleasant Smell</option>
-            <option value="Rude Interaction">Rude Interaction</option>
-            <option value="Unattractive">Unattractive</option>
-            <option value="Impoverished Vibes">Impoverished Vibes</option>
-            <option value="Discriminatory">Discriminatory</option>
-          </select>
-        </div>
-
-      </div>
+        
+      </>
     )
   }
 }

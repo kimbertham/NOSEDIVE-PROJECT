@@ -57,6 +57,12 @@ class ForumThreads extends React.Component {
     
   }
 
+  deleteThread = (id) => {
+    axios.delete(`/api/forum/thread/${id}/`, headers())
+    this.props.getData()
+    this.props.history.push('/community')
+  }
+
   render() {
 
     const { modal, thread, owner , comments, following } = this.state
@@ -69,7 +75,8 @@ class ForumThreads extends React.Component {
           thread={thread}
           owner={owner}
           follow={this.followForum}
-          following={following}/>
+          following={following}
+          deleteThread={this.deleteThread}/>
 
         
         <MakePost

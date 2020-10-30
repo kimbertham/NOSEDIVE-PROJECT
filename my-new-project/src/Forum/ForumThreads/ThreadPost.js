@@ -1,6 +1,7 @@
 import React from 'react'
 
-const ThreadPost = ({ modal, thread, owner, follow, following  }) =>  {
+
+const ThreadPost = ({ modal, thread, owner, follow, following, deleteThread }) =>  {
 
   const modalClass = !modal ?  'display-none' : 'display:block'
   return (
@@ -40,13 +41,18 @@ const ThreadPost = ({ modal, thread, owner, follow, following  }) =>  {
                 `NO ${thread.limitations} STARS ALLOWED` : 'PUBLIC'} </p>
             <button className='button' onClick={follow}> 
               {following ? 'Unfollow' : 'Follow'} </button>
+            <button className='button' onClick={()=>{
+              deleteThread(thread.id)
+            }}>
+              Delete
+            </button>
           </div>
   
           <h1>{thread.title}</h1>
           <p>{thread.description}</p>
           <p className='bordered-box thread-content'>
             {thread.content}</p>
-          <img src={thread.post_image} className='thr-img' alt='thread-img'/>
+          { thread.post_image ? <img src={thread.post_image} className='thr-img' alt='thread-img'/> : null}
           <p className='right'>{thread.created_at}</p>
         </div>
 
@@ -55,4 +61,5 @@ const ThreadPost = ({ modal, thread, owner, follow, following  }) =>  {
     </>
   )
 }
+
 export default ThreadPost

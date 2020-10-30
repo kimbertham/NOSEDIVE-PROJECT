@@ -18,13 +18,14 @@ class ProfilePage extends React.Component {
 
   render(){
 
-    const { user, getData,currentUserId  } = this.props
+    const { user, getData,currentUserId } = this.props
     if (!user.bio) return null 
     return (
       <>
         <div className='sticky profile-head'>
           <ProfileInfo 
             user={user} 
+            currentUserId={currentUserId}
             updateProfile={getData} />
 
           <ProfileNavbar 

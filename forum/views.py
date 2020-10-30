@@ -52,6 +52,13 @@ class  ThreadView(APIView):
         serialized_forum = PopulatedForumSerializer(thread,many=True)
         return Response( serialized_forum.data , status=HTTP_200_OK)
 
+    def delete(self,request,pk):
+        thread_t_d = Forum.objects.get(pk=pk)
+        if thread_t_d.forum_owner.id != request.user.id:
+            raise PermissionDenied()
+        thread_t_d.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
 
 class ThreadCommentView(APIView):
 #get all comments for one thread 

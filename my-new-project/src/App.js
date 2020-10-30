@@ -23,7 +23,9 @@ const currentUserId = getUserId()
 
 class App extends React.Component {
   state = {
-    user: {}
+    user: {},
+    forum: {},
+    followed: []
   }
 
   getData = async ( profile, action ) => {
@@ -32,8 +34,18 @@ class App extends React.Component {
     action ? this.setState({ user: change }) : this.setState({ user: user.data })
   }
 
+  getDataForum = async () => {
+
+    console.log('called')
+    const res = await axios.get('/api/forum/')
+    const followed = res.data.filter(t => 
+      t.followers.includes(currentUserId))
+    this.setState({ forum: res.data, followed })
+
+  }
+
   render(){
-    const { user } = this.state 
+    const { user, forum, followed } = this.state 
 
     return (
       <>
@@ -71,9 +83,15 @@ class App extends React.Component {
               <Route path='/stats/:id' component={Stats}/>
 
               <Route path='/community' render={() => 
-                <Forum currentUserId={currentUserId}/> }/>
+                <Forum 
+                  currentUserId={currentUserId}
+                  getData={this.getDataForum}
+                  forum={forum}
+                  followed={followed}/> }/>
               <Route path='/forum/:id' render={() => 
-                <ForumThreads currentUserId={currentUserId}/> }/>
+                <ForumThreads 
+                  currentUserId={currentUserId}
+                  getData={this.getDataForum}/> }/>
 
             </div>
 

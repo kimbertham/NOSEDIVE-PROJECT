@@ -3,7 +3,7 @@ import { defaultImage } from '../lib/commonFiles'
 import ProfileRatingStars from './ProfileSections/ProfileActivity/ProfileRatingStars'
 import ProfileFollowAction from './ProfileSections/ProfileFollowing/ProfileFollowAction'
 
-const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
+const ProfileInfo = ({ user,handleModal, modal, updateProfile, currentUserId }) => {
 
   const { bio, average, follow } = user
 
@@ -42,6 +42,8 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile }) => {
 
         <ProfileRatingStars 
           userProfile={bio.id}
+          average={average}
+          currentUserId={currentUserId}
           updateProfile={updateProfile}
           modal={modal}
           handleModal={handleModal}/>

@@ -1,27 +1,17 @@
 import React from 'react'
-import axios from 'axios'
 import ForumNew from './ForumNew'
 import ForumCard from './ForumCard'
 
 
 class Forum extends React.Component {
   state= {
-    forum: [],
-    followed: [],
     modal: false,
     fButton: false
   }
 
   async componentDidMount() {
-    this.getData()
-  }
-
-  getData = async () => {
-    const res = await axios.get('/api/forum/')
-    const followed = res.data.filter(t => 
-      t.followers.includes(this.props.currentUserId))
-    this.setState({ forum: res.data, followed })
-
+    this.props.getData()
+    console.log('called')
   }
 
   handleModal =() => {
@@ -39,12 +29,13 @@ toggleFollowed = () => {
 
 render(){
 
-  const { forum, modal, followed, fButton } = this.state
-  const { currentUserId } = this.props
+  const {  modal, fButton } = this.state
+  const { currentUserId, forum, followed, getData } = this.props
 
   const modalClass = modal ? 'display-block' : 'display-none'
   const follow = fButton ?  'All-threads' : 'Followed Threads' 
-
+  console.log(followed)
+  if (!forum[0]) return null
   return (
     <>
       <h1 className='bordered-box dark-border'> 
@@ -66,7 +57,7 @@ render(){
           <div onClick={this.dontCloseModal} className='modal-pop'>
             <ForumNew
               handleModal={this.handleModal}
-              updateForum={this.getData}/>
+              getData={getData}/>
           </div>
         </div>
       </div>

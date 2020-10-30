@@ -24,9 +24,9 @@ class Register extends React.Component{
     try {
       await axios.post('/api/forum/', { ...this.state.formData }, headers())
       this.props.handleModal()
-      this.props.updateForum()
+      this.props.getData()
     } catch (err) {
-      console.log(err.response.data)
+      console.log(err)
     }
   }
 
@@ -65,7 +65,7 @@ class Register extends React.Component{
             </div>
 
             <div className='form-field'>
-              <label className='label'>Image (Optional)</label>
+              <label className='label'>Icon (Optional)</label>
               <ImageUpload
                 image={this.handleImage}
                 page='forum'
@@ -101,7 +101,7 @@ class Register extends React.Component{
             </div>
 
             <div className='form-field'>
-              <label className='label'>Image (Optional)</label>
+              <label className='label'>Post-Image (Optional)</label>
               <ImageUpload
                 image={this.handleImage}
                 page='forum'

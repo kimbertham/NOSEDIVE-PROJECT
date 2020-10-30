@@ -85,8 +85,6 @@ render() {
               updateProfile={this.getData}/>
           })}
         </div>
-
-
         
       </div>
 

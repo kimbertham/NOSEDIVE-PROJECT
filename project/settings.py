@@ -93,14 +93,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {'default': dj_database_url.config()}
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
-# DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'nosedive-database',
-#         'HOST': 'localhost',
-#         'PORT': 5432
-#     }
-# }
+DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'nosedive-database',
+        'HOST': 'localhost',
+        'PORT': 5432
+    }
+}
 
 ALLOWED_HOSTS = [ 'nosedive-ga.herokuapp.com']
 
