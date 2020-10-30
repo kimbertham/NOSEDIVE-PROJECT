@@ -35,7 +35,7 @@ render(){
   const modalClass = modal ? 'display-block' : 'display-none'
   const follow = fButton ?  'All-threads' : 'Followed Threads' 
   console.log(followed)
-  if (!forum[0]) return null
+  if (!forum) return null
   return (
     <>
       <h1 className='bordered-box dark-border'> 
