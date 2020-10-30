@@ -172,12 +172,10 @@ position: relative;
   display: flex;
   justify-content: space-between;
   margin: 0 30px 10px 0;
-  
-  .nav-icon {
-    width:2vw;
-    margin:0 5px;
-    
-  }
+}
+.nav-icon {
+  width:2vw;
+  margin:0 5px;
 }
 
 
@@ -185,9 +183,7 @@ position: relative;
   position: relative;
   margin: 80px auto;
   align-self: center;
-
 }
-
 
 .blockquote h1 {
   position: relative; 
