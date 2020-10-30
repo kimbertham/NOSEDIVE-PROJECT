@@ -49,17 +49,12 @@ class MakeComments extends React.Component {
   }
 
   render () {
-    const { user } = this.props
     return (
       <>
         
         <form onSubmit={this.handleSubmit}
         
           className='bordered-box make-comment center'>
-          <div className={user ? 'display-block' : 'display-none'}>
-            <img src={user ? user.bio.profile_image : null} 
-              className='small-icon' alt='profile-img' />
-          </div>
 
           <input
             name='content'

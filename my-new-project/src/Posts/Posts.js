@@ -38,7 +38,8 @@ class Posts extends React.Component {
           <PostsRatingStars
             post={post}
             user={user}
-            updateProfile={ updateProfile}/>
+            updateProfile={ updateProfile}
+            currentUserId={currentUserId}/>
         </div>
 
         <PostContent 
