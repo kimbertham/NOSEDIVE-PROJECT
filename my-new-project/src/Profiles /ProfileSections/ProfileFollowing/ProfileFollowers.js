@@ -4,13 +4,16 @@ import { Link } from  'react-router-dom'
 
 
 const ProfileFollowers = ( { getData, user }) => {
-  const { followers } = user.follow
+  const { followers, following } = user.follow
+  
 
   if (!followers ) return ''
   return (
 
     <div className='followers-container fill-width flex'>
       
+      <button className='button'> Follow</button>
+
       {followers.map(follower => {
         return (
 
