@@ -29,17 +29,17 @@ class PostsRatingStars extends React.Component {
   
 
   render(){
-    const { post , currentUserId , user } = this.props
+    const { post , currentUserId } = this.props
     const ave = post.ratings.reduce((a,b) => a + b.rating, 0) / post.ratings.length
-
-    console.log(currentUserId)
-    console.log(user.bio.id)
+    const rated = post.ratings.some(obj => obj.rating_owner.id === currentUserId)
+    const con = (currentUserId === post.owner.id) ? this.showText : (!rated) ?  this.handleChange : null
+   
     return (
       <div className='flex column'>
         <BeautyStars
           value={this.state.rating ? this.state.rating : ave}
           size={'12px'}
-          onChange={currentUserId === user.bio.id ? this.showText : this.handleChange}/>
+          onChange={con}/>
         <p className={this.state.message ? 'shake-text italic' : 'display-none'}> &#9432; You cannot rate yourself</p>
       </div>
     )
