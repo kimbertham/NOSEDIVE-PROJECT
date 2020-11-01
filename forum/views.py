@@ -76,6 +76,7 @@ class ThreadCommentView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
     def post(self, request, forum_id, parent_id):
+        print('called')
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['comment_owner'] = request.user.id

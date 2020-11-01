@@ -23,7 +23,7 @@ class MakePost extends React.Component {
     try {
       if (p === 'thread-post') {
         const threadId = this.props.threadId
-        await axios.post(`/api/forum/${threadId}/0`, this.state.form, headers())
+        await axios.post(`/api/forum/${threadId}/0/`, this.state.form, headers())
         this.props.getComments()
       } 
       if (p === 'profile-post'){
