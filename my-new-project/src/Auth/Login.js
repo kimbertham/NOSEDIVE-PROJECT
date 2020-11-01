@@ -70,7 +70,8 @@ class Login extends React.Component{
               hey
         </div>
 
-        <img src='https://i.imgur.com/KC7u7fn.jpg'
+        <img 
+        // src='https://i.imgur.com/KC7u7fn.jpg'
           className='auth-logo center'
           alt='logo'/>
 
