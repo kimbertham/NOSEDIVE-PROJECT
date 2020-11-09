@@ -1,18 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProfileBio = ( { user }) => {
+const ProfileBio = ( { user,currentUserId }) => {
 
   const { bio } = user
   if (!user) return ''
 
   return (
     <>
-      <Link to={`/edit/${user.bio.id}`}>
-        <img src='https://i.imgur.com/BvhVhb3.jpg' 
-          className='nav-icon right'
-          alt='settings'/>
-      </Link>
+      {currentUserId === user.bio.id ?
+        <Link to={`/edit/${user.bio.id}`}>
+          <img src='https://i.imgur.com/BvhVhb3.jpg' 
+            className='nav-icon right'
+            alt='settings'/>
+        </Link>
+        : ''}
 
       <div className='profile-bio-container'>
         <div className='profile-bio-info'>

@@ -39,7 +39,6 @@ render() {
 
   const { posts ,forums, friends, user, average }  = this.state
   const { currentUserId } = this.props
-  console.log(this.state)
   if (!user) return null
   return (
     <>

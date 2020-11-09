@@ -36,11 +36,13 @@ class FollowDetailView(APIView):
             return {'following':serialized_following.data, 'followers':serialized_followers.data}
 # GET RANDOM FRIENDS FOR A USER 
         if action == 'find':
-            users = User.objects.filter().exclude(id=request.user.id).values_list(flat=True)
+            users = User.objects.all().exclude(id=request.user.id).values_list(flat=True)
             my_f = following.values_list('user_to', flat=True) #ALWAYS STAYS THE SAME
             non_f = list(set(users).difference(my_f))
+            print(non_f)
             if len(non_f) > 0:
                 followers = User.objects.filter(pk__in=non_f)
+                # print(followers)
             if len(non_f) == 3:
                 chosen = random.sample( list(followers), 3)
                 serialized_followers= UserSerializer(chosen,many=True)

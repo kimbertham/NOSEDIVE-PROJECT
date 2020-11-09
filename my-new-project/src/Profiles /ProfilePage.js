@@ -36,7 +36,8 @@ class ProfilePage extends React.Component {
           <Switch>
             <Route path='/profile/:id/bio' render={() => 
               <ProfileBio 
-                user= {user} /> }/>
+                user= {user}
+                currentUserId={currentUserId} /> }/>
 
             <Route path='/profile/:id/activity'render={() => 
               <ProfileActivity 
