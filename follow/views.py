@@ -37,7 +37,6 @@ class FollowDetailView(APIView):
 # GET RANDOM FRIENDS FOR A USER 
         if action == 'find':
             users = User.objects.filter().exclude(id=request.user.id).values_list(flat=True)
-            print(request.user.id)
             my_f = following.values_list('user_to', flat=True) #ALWAYS STAYS THE SAME
             non_f = list(set(users).difference(my_f))
             if len(non_f) > 0:
