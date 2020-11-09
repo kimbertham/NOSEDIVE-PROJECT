@@ -17,7 +17,7 @@ render() {
   const { comment, getComments } = this.props
   const { comment_owner } = comment
   const { replies } = this.state
-
+  console.log(comment)
   return (
     <>
       <div className='tcom-top dark-border'>
@@ -44,6 +44,7 @@ render() {
           <div className='full-width'>
             <div className='bordered-box tcom-cont'>
               <p>{comment.content}</p>
+
             </div>
             <ThreadOptions 
               comment={comment}

@@ -66,12 +66,13 @@ class Login extends React.Component{
 
         <div 
           className={`changing-bg  ${changingBg}`}
-          style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}>
-              hey
+          // style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}
+        >
+
         </div>
 
         <img 
-        // src='https://i.imgur.com/KC7u7fn.jpg'
+          src='https://i.imgur.com/KC7u7fn.jpg'
           className='auth-logo center'
           alt='logo'/>
 
@@ -109,3 +110,4 @@ class Login extends React.Component{
 }
 
 export default withRouter(Login)
+

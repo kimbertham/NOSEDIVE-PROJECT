@@ -30,7 +30,6 @@ class ImageUpload extends React.Component {
         if ( this.props.page === 'edit') {
           this.props.image(photoRes.data.url)
         } if (this.props.page === 'post') {
-          console.log('called')
           this.props.post(photoRes.data.url)
           this.props.toggleImg()
         } if (this.props.page === 'forum') {

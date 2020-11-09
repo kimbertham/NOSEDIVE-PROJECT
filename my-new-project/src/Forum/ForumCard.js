@@ -12,8 +12,11 @@ const ForumCard = ({ thread }) => {
           className='forum-thread bordered-box dark-border flex'>
 
           <div className='flex full-width'>
-            <img src={thread.image} alt='forum-pic'
-              className='forum-icon dark-border'/>
+            
+            <div 
+              style={{  
+                backgroundImage: `url(${thread.image})`
+              }} className=' dark-border forum-icon '/>
 
             <div className='full-width'>
               <div className='flex-between'> 

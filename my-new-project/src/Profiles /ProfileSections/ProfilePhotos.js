@@ -13,8 +13,9 @@ state={
 
 
   openImage = (image , i) => {
+    i = i + 1
     if (image && i) {
-      this.setState({ image, i, gallery: true })
+      this.setState({ image, i , gallery: true })
     } else 
       this.setState({ gallery: !this.state.gallery })
   }
@@ -60,7 +61,7 @@ state={
     return (
       <>
 
-        <h1> Kimberleys Photos </h1>
+        <h1>{user.bio.first_name}&apos;s Photos</h1>
 
         {currentUserId === user.bio.id ? 
           <ImageUpload

@@ -99,3 +99,4 @@ class ForumNewsfeedView(APIView):
             serialized_comments = PopulatedForumCommentSerializer(forum_comments, many=True)
             return Response( serialized_comments.data)
 
+
