@@ -21,7 +21,6 @@ const NewsfeedFriends = ({ friends }) =>  {
               <p> {friend.first_name} {friend.last_name}</p>
               <p>@{friend.username}</p>
             </Link>
-            <button className='button follow-button'>Follow</button>
           </div>
         }) :
           <div> Follow more users to make more connections </div>

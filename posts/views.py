@@ -55,12 +55,11 @@ class PostDetailView(APIView):
 
 
 class NewsfeedListView(APIView):
-    # get list of users followers id, sift through posts filting through for only posts by those users 
-    def get(self, request, pk):
-        followers = Contact.objects.filter(user_from=pk).values_list('user_to', flat=True)
-        posts = Post.objects.filter(Q(owner=pk) | Q(owner__in=followers)).order_by('created_at')
+    def post(self, request, pk):
+        followers = Contact.objects.filter(user_from=pk).values_list('user_to', flat=True) 
+        posts = Post.objects.filter(Q(owner=pk) | Q(owner__in=followers)).order_by('created_at') [request.data['page'][0]: request.data['page'][1]]
         serailized_posts = PopulatedPostSerializer(posts, many=True)
-        return Response( serailized_posts.data)
+        return Response(serailized_posts.data)
 
 
 
