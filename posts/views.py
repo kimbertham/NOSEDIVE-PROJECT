@@ -19,9 +19,9 @@ User = get_user_model()
 #SIDEBAR POSTS
 class PostListView(APIView):
     def get(self, request):
-        newest_posts = Post.objects.all().order_by('-created_at')
-        serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True)
-        top_rated_posts = PostRatings.objects.filter(rating=5).values('post').annotate(itemcount=Count('post')).order_by('-itemcount')
+        newest_posts = Post.objects.all().order_by('-created_at') [:10]
+        serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True) 
+        top_rated_posts = PostRatings.objects.filter(rating=5).values('post').annotate(itemcount=Count('post')).order_by('-itemcount') [:10]
         top_rated = []
         postValues =  [li['post'] for li in top_rated_posts]
         for value in postValues:

@@ -2,7 +2,7 @@ import React from 'react'
 import BeautyStars from 'beauty-stars'
 
 const NewsfeedBio = ({ user, average  }) => {
-  console.log(user)
+
   if (!user) return null
   return ( 
 
