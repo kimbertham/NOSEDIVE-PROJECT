@@ -43,15 +43,15 @@ class FollowDetailView(APIView):
                 followers = User.objects.filter(pk__in=non_f)
             if len(non_f) >= 3:
                 chosen = random.sample( list(followers), 3)
-                serialized_followers= UserSerializer(chosen,many=True)
+                serialized_followers= BasicUserSerializer(chosen,many=True)
                 return Response( serialized_followers.data, status=HTTP_200_OK)
             if len(non_f) == 2:
                 chosen = random.sample( list(followers), 2)
-                serialized_followers= UserSerializer(chosen,many=True)
+                serialized_followers= BasicUserSerializer(chosen,many=True)
                 return Response( serialized_followers.data, status=HTTP_200_OK)
             if len(non_f) == 1:
                 chosen = random.sample( list(followers), 1)
-                serialized_followers= UserSerializer(chosen,many=True)
+                serialized_followers= BasicUserSerializer(chosen,many=True)
                 return Response( serialized_followers.data, status=HTTP_200_OK)
             else:
                 return Response( None , status=HTTP_200_OK)

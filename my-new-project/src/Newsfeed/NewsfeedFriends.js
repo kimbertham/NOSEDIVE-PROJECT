@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 const NewsfeedFriends = ({ friends }) =>  {
 
-
   return (
     <div className='bordered-box italic'>
       <h2 className='feed-title dark-border'> Find New Friends</h2>

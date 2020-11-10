@@ -116,11 +116,11 @@ position: relative;
 .modal{
   background-color: rgba(0,0,0, 0.6);
   position: fixed;
-  height:110%;
-  width: 105%;
-  top:10px;
+  height:100%;
+  width: 100%;
+  top:0;
   z-index: 10;
-  margin:-50px -50px;
+  left: 0;
 }
 
 .dots-container {

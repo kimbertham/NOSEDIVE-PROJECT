@@ -9,7 +9,7 @@ from django.conf import settings
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 import jwt
 
-from .serializers import UserSerializer, EditUserSerializer
+from .serializers import UserSerializer, EditUserSerializer, BasicUserSerializer
 from jwt_auth.models import User
 from ratings.views import RatingListView
 from photos.views import PhotosDetailView
@@ -51,7 +51,7 @@ class ProfileDetailView(APIView):
     def get(self, request, pk, action):
         if action =='all': 
             users = User.objects.all()
-            serialized_users = EditUserSerializer(users, many=True)
+            serialized_users = BasicUserSerializer(users, many=True)
             return Response(serialized_users.data, status=HTTP_200_OK)
 
         if action == 'photos':
