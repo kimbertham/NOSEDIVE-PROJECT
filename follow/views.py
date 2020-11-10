@@ -45,7 +45,7 @@ class FollowDetailView(APIView):
             if len(non_f) > 0:
                 followers = User.objects.filter(pk__in=non_f)
                 print(followers)
-            if len(non_f) == 3:
+            if len(non_f) >= 3:
                 chosen = random.sample( list(followers), 3)
                 serialized_followers= UserSerializer(chosen,many=True)
                 print(chosen)
