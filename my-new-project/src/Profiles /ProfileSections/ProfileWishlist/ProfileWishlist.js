@@ -89,6 +89,7 @@ render() {
       <div className='wishlist-section scroll'>
       
         <h1>{user.bio.first_name}&apos;s Wishlist</h1>
+        <p className='bordered-box'> Add items to your wishlist, you can only add items ten times your current rating!</p>
 
         <ProfileWishlistAdd 
           user={user}
@@ -96,7 +97,6 @@ render() {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           search={search}/>
-
 
         {loading === true ? 
           <div className='center wish-loader'> 
