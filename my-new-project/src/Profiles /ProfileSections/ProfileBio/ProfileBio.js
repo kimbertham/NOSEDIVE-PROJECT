@@ -5,7 +5,7 @@ const ProfileBio = ( { user,currentUserId }) => {
 
   const { bio } = user
   if (!user) return ''
-
+  console.log(bio)
   return (
     <>
       {currentUserId === user.bio.id ?

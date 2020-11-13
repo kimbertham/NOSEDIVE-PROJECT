@@ -19,7 +19,9 @@ const PostContent = ({ post, showComments ,updateProfile, currentUserId, user, s
             }}/>
         </Link>
         <div className='full-width'>
-          <h1> {post.owner.first_name} {post.owner.last_name}</h1>
+          <h1> {post.owner.first_name} {post.owner.last_name} 
+            <span> {post.owner.id !== post.profile_owner.id ? `  >>  ${post.profile_owner.first_name}${post.profile_owner.last_name} ` : ''} </span>
+          </h1>
           <div className='flex post-settings'>
             <p className='date-text'>
               {post.created_at.split('-').reverse().join(' ')}</p>

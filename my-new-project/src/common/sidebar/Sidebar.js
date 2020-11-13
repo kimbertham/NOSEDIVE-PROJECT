@@ -21,7 +21,7 @@ async componentDidMount() {
 
 render(){
   const { newPosts, topPosts } = this.state
-  const { getData, currentUserId, changeProfile } = this.props
+  const { getData, currentUserId } = this.props
 
   if (!newPosts || !topPosts) return ''
   return (

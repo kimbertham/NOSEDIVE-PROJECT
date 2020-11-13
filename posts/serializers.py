@@ -25,4 +25,4 @@ class PopulatedPostSerializer(PostSerializer):
     owner = UserSerializer()
     comments = PopulatedCommentSerializer(many=True)
     ratings = PopulatedPostRatingSerializer(many=True)
-
+    profile_owner = UserSerializer()

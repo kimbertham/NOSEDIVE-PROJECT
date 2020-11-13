@@ -24,6 +24,7 @@ class ProfileBioEdit extends React.Component {
     }
 
     handleChange = event => {
+      console.log(event.target.value)
       try {
         const profile = { ...this.state.profile, [event.target.name]: event.target.value }
         this.setState({ profile })
@@ -157,10 +158,9 @@ class ProfileBioEdit extends React.Component {
               <div className='form-field'>   
                 <label className='label'>Relationship : </label>
                 <select 
-                  defaultValue={profile.relationship} 
                   onChange={this.handleChange}
-                  name='Relationship'>
-                  <option value="" disabled></option>
+                  name='relationship'>
+                  <option value=""></option>
                   <option value="Single">Single</option>
                   <option value="Relationship">In a Relationship</option>
                   <option value="Complicated">Complicated</option>

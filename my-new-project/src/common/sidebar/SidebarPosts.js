@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const SidebarPosts = ({ posts }) => {
-
+  console.log(posts)
   if (!posts) return ''
   return (
     <>
@@ -11,7 +11,10 @@ const SidebarPosts = ({ posts }) => {
           <div 
             key={post.id}
             className='sidebar-post-field'>
-            <h1>{post.owner.first_name} {post.owner.last_name}</h1>
+            <h1>{post.owner.first_name} {post.owner.last_name} 
+              <span className='small-side'>{post.owner.id !== post.profile_owner.id ? ` >> ${post.profile_owner.first_name}${post.profile_owner.last_name} ` : ''} </span>
+            </h1>
+            
             <p>{post.content}</p>
             <p> {post.ratings.length === 1 ? 
               `${post.ratings.length} PERSON RATED THIS POST` :
