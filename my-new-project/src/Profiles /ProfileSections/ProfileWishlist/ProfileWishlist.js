@@ -30,6 +30,10 @@ state = {
 }
 
 componentDidMount () {
+  this.checkRating()
+}
+
+checkRating = () => {
   const wishlist = this.props.user.wishlist
   wishlist.map(item => {
     if  (item.price > this.props.user.average * 10 ) {
@@ -74,15 +78,19 @@ handleWishList = async (price, thumbnail, url, title ) => {
       } },
     async () => {
       await axios.post('/api/wishlist/', this.state.postForm , headers())
-      this.setState({ modal: 'Item Added to Wishlist' })
+      this.setState({ modal: 'Item Added to Wishlist' }, 
+        async () => {
+          await this.props.updateProfile(this.props.user.bio.id, 'wishlist')
+        })
     })
   }
-  this.props.updateProfile(this.props.user.bio.id, 'wishlist')
+  this.checkRating()
 }
 
 handleDelete = async (product) => {
   await axios.delete(`/api/wishlist/${product}/`, headers())
-  this.props.updateProfile(this.props.user.bio.id, 'wishlist')
+  await this.props.updateProfile(this.props.user.bio.id, 'wishlist')
+  this.checkRating()
 }
 
 handleModal = () => {
@@ -100,7 +108,10 @@ render() {
       <div className='wishlist-section scroll'>
       
         <h1>{user.bio.first_name}&apos;s Wishlist</h1>
-        <p className='bordered-box'> Add items to your wishlist, you can only add items ten times your current rating!</p>
+        
+        <p className='bordered-box'> Add items to your wishlist, you can only add items ten times your current rating.
+      Items no longer in your rating range will not be shown </p>
+      
 
         <ProfileWishlistAdd 
           user={user}

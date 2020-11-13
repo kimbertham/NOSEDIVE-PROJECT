@@ -24,8 +24,7 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete,currentU
               
       <a href={product.url}>
         <h1>{product.title}</h1>
-        <p>{ product.price.current_price ?  `£${ product.price.current_price}` : null}</p>
-        <p>{ product.price ?  `£${ product.price}` : null}</p>
+        <p>{ product.price.current_price >= 0 ?  `£${ product.price.current_price}` : product.price ?  `£${ product.price}` : null}</p>
       </a>
       {currentUserId === user.bio.id ?
         search === true ? 

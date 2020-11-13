@@ -32,11 +32,10 @@ class App extends React.Component {
     const user = await axios.get(`/api/profile/${profile}/${action ? action : 'user'}/`)
     const change = { ...this.state.user, [action]: user.data[action] } 
     action ? this.setState({ user: change }) : this.setState({ user: user.data })
+    console.log('called')
   }
 
   getDataForum = async () => {
-
-    console.log('called')
     const res = await axios.get('/api/forum/')
     const followed = res.data.filter(t => 
       t.followers.includes(currentUserId))

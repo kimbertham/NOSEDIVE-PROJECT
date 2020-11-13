@@ -58,6 +58,7 @@ class ProfileDetailView(APIView):
             photos = PhotosDetailView.get(self, request, pk)
             return Response({ 'photos': photos}, status=HTTP_200_OK)
         if action == 'wishlist':
+            print('called')
             wishlist = WishlistDetailView.get(self,request,pk)
             return Response({ 'wishlist': wishlist}, status=HTTP_200_OK)
         if action == 'follow':
