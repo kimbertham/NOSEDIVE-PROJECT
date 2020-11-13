@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) => {
+const Conversations = ({ conv, setChat, setNew, setRead, userId }) => {
 
   const unread  = (messages) => {
     const u = messages.filter(m => 
@@ -13,7 +13,7 @@ const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) 
   if (!conv) return null
   return (
 
-    <div className='conv-container bordered-box' >
+    <div className='conv-container scroll bordered-box' >
 
       <button onClick={setNew} 
         className='button right'>
@@ -25,8 +25,7 @@ const Conversations = ({ conv, setChat, selectedChat,setNew, setRead, userId }) 
       {conv.map((convo,index) => {
         return (
           <div key={convo.id}
-            className={`flex conv-field 
-              ${convo.id === selectedChat ? 'selected-chat' : ''}` }
+            className='flex conv-field '
             onClick={()=> {
               setRead(convo.messages)
               setChat(index)

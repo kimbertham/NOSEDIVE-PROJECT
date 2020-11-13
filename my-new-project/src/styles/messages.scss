@@ -2,6 +2,8 @@
   width:30vw;
   margin:0;
   padding:0;
+  border:2px solid red;
+width: 100vh;
 
   .conv-field {
     align-items: center;
@@ -61,11 +63,6 @@ margin:2vh;
   display: flex;
   align-items: center;
 }
-
-// .selected-chat {
-//   background-color:  rgba(205, 154, 154, 0.4);
-//   border-right:1px solid rgba(249,215,205,1) ;
-// }
 
 .msg-post{
   height:10vh;

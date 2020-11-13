@@ -76,7 +76,8 @@ class ForumThreads extends React.Component {
           owner={owner}
           follow={this.followForum}
           following={following}
-          deleteThread={this.deleteThread}/>
+          deleteThread={this.deleteThread}
+          currentUserId={this.props.currentUserId}/>
 
         
         <MakePost

@@ -1,8 +1,9 @@
 import React from 'react'
 
 
-const ThreadPost = ({ modal, thread, owner, follow, following, deleteThread }) =>  {
+const ThreadPost = ({ modal, thread, owner, follow, following, deleteThread, currentUserId }) =>  {
 
+  console.log(owner)
   const modalClass = !modal ?  'display-none' : 'display:block'
   return (
     <>
@@ -41,12 +42,17 @@ const ThreadPost = ({ modal, thread, owner, follow, following, deleteThread }) =
                 `NO ${thread.limitations} STARS ALLOWED` : 'PUBLIC'} </p>
             <button className='button' onClick={follow}> 
               {following ? 'Unfollow' : 'Follow'} </button>
-            <button className='button' onClick={()=>{
-              deleteThread(thread.id)
-            }}>
+
+            {owner.id === currentUserId ? 
+              <button className='button' onClick={()=>{
+                deleteThread(thread.id)
+              }}>
               Delete
-            </button>
+              </button>
+              : ''}
+              
           </div>
+          
   
           <h1>{thread.title}</h1>
           <p>{thread.description}</p>
