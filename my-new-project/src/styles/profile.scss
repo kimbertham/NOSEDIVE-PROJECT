@@ -239,7 +239,6 @@ flex-wrap: wrap;
 .products-container {
   flex-wrap: wrap;
   padding:10px;
-
   h1{
     margin:10px 0;
     font-size: 15px;
@@ -254,6 +253,7 @@ flex-wrap: wrap;
     min-height:100%;
     border-radius: 10px;
     background-color: rgba(255,255,255, 0.6);
+    position: relative;
   }
 }
 
@@ -277,3 +277,20 @@ flex-wrap: wrap;
 margin: 100px;
 }
 
+.block-wish {
+  height:98%;
+  width: 98%;
+  position: absolute;
+  margin-left:-10px;
+  border-radius: 10%;
+}
+
+.cross {
+  background-image: url('../styles/assets/Untitled-1.jpg');
+  background-position: center;
+  background-size: cover;
+  height:100%;
+  width: 100%;
+  position: absolute;
+  opacity: 0.3;
+}

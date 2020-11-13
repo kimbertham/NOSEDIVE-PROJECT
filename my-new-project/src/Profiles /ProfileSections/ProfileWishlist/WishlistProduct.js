@@ -4,10 +4,18 @@ import React from 'react'
 
 const WishlistProduct = ({ product, search, handleWishList,handleDelete,currentUserId, user }) => {
 
+  if (!product) return null
   return (
-    <div className='product-field dark-border'>
+  
 
-      <div className='product-img-container'>     
+    <div className='product-field dark-border'>
+      
+      <div className={`block-wish ${product.block ? 'center wish-block blurred' : 'display-none'}`}>
+        <div className='cross'/>
+        <p> Rating no longer higher enough </p>
+      </div>
+
+      <div className='product-img-container'>  
         <img
           src={product.thumbnail}
           className="product-photo" 
@@ -17,6 +25,7 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete,currentU
       <a href={product.url}>
         <h1>{product.title}</h1>
         <p>{ product.price.current_price ?  `£${ product.price.current_price}` : null}</p>
+        <p>{ product.price ?  `£${ product.price}` : null}</p>
       </a>
       {currentUserId === user.bio.id ?
         search === true ? 
@@ -36,6 +45,7 @@ const WishlistProduct = ({ product, search, handleWishList,handleDelete,currentU
         : '' }
 
     </div>
+
   )
 }
 

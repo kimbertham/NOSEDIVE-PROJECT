@@ -7,6 +7,7 @@ import ProfileWishlistAdd from './ProfileWishlistAdd'
 import WishlistProduct from './WishlistProduct'
 import Loading from '../../../common/Loader'
 
+
 class ProfileWish extends React.Component {
 state = {
   products: [],
@@ -28,6 +29,17 @@ state = {
   loading: false
 }
 
+componentDidMount () {
+  const wishlist = this.props.user.wishlist
+  wishlist.map(item => {
+    if  (item.price > this.props.user.average * 10 ) {
+      item.block = true
+    } else {
+      item.block = false
+    }
+  })
+  this.setState({ wishlist })
+}
 
 handleChange = event => {
   const form = { ...this.state.form, [event.target.name]: event.target.value }
@@ -79,9 +91,8 @@ handleModal = () => {
 
 render() {
 
-  const { products, modal, search, loading } = this.state
+  const { products, modal, search, loading, wishlist } = this.state
   const { user,currentUserId } = this.props
-  const { wishlist } = user
 
   if (!wishlist) return ''
   return (
@@ -120,8 +131,7 @@ render() {
           {wishlist.map(product => {
             return ( 
               <WishlistProduct 
-              
-                key={product.asin}
+                key={product.id}
                 handleWishList={this.handleWishList}
                 product={product}
                 search={false}

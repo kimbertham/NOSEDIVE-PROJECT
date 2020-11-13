@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const SidebarPosts = ({ posts }) => {
-  console.log(posts)
+
   if (!posts) return ''
   return (
     <>
