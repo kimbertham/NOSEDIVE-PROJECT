@@ -13,8 +13,8 @@ class Post(models.Model):
     profile_owner = models.ForeignKey('jwt_auth.User',
     related_name='page_posts', 
     on_delete=models.CASCADE,
-     blank=True, 
-     null=True)
+    blank=True, 
+    null=True)
 
     owner = models.ForeignKey(
     'jwt_auth.User',

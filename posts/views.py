@@ -7,6 +7,7 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.exceptions import NotFound,PermissionDenied
 from django.db.models import Count
 from django.db.models import Q
+from django.db.models import F
 
 from .models import Post
 from postRatings.models import PostRatings
@@ -19,7 +20,7 @@ User = get_user_model()
 #SIDEBAR POSTS
 class PostListView(APIView):
     def get(self, request):
-        newest_posts = Post.objects.all().order_by('-created_at') [:10]
+        newest_posts = Post.objects.all().order_by('-created_at').exclude(~Q(owner=F('profile_owner'))) [:10]
         serailized_newest_posts = PopulatedPostSerializer(newest_posts, many=True) 
         top_rated_posts = PostRatings.objects.filter(rating=5).values('post').annotate(itemcount=Count('post')).order_by('-itemcount') [:10]
         top_rated = []
