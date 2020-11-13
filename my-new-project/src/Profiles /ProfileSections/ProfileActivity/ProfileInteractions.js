@@ -1,8 +1,9 @@
 import React from 'react'
 import { defaultImage } from '../../../lib/commonFiles'
+import { Link } from 'react-router-dom'
 
 
-const ProfileInteractions = ({ user }) => {
+const ProfileInteractions = ({ user, updateProfile }) => {
 
 
   return (
@@ -12,19 +13,25 @@ const ProfileInteractions = ({ user }) => {
 
         {user.ratings.map(interaction => {
           return (
-            <div key={interaction.id} 
-              className='posts-interactions dark-border flex'>
+            <Link key={interaction.id}
+              to={`/profile/${interaction.owner.id}/activity`} >
+              <div
+                className='posts-interactions dark-border flex'
+                onClick={()=>{
+                  updateProfile(interaction.owner.id)
+                }}>
 
-              <img 
-                src={interaction.owner.profile_image ?
-                  interaction.owner.profile_image : defaultImage}
-                className='small-icon'
-                alt='profile-pic'/>
+                <img 
+                  src={interaction.owner.profile_image ?
+                    interaction.owner.profile_image : defaultImage}
+                  className='small-icon'
+                  alt='profile-pic'/>
 
-              <p> {`${interaction.owner.username} 
+                <p> {`${interaction.owner.username} 
               rated ${user.bio.username}
               ${interaction.rating} stars `} </p>
-            </div>
+              </div>
+            </Link>
           )
         })}
 

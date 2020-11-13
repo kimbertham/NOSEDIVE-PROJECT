@@ -32,7 +32,8 @@ const ProfileActivity = ( { user, currentUserId, updateProfile, modal, handleMod
 
         <div className='sticky'>
           <ProfileInteractions
-            user={user}/>
+            user={user}
+            updateProfile={updateProfile}/>
         </div>
       </div>
 

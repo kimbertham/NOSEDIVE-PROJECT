@@ -18,19 +18,19 @@ render(){
   const { fbutton } = this.state
   const { getData, user } = this.props
   const { followers, following } = user.follow
-  const section = fbutton ? 'Followers' : 'Following'
+  const section = fbutton ? 'Followed' :  'Followers'
 
   if (!followers ) return ''
   return (
     <>
 
       <button onClick={this.handleButton} className='button right'> 
-        {section} </button>
+        {fbutton ? 'Followers' : 'Followed' } </button>
 
       <h1> {user.bio.first_name}&#39;s {section} </h1>
 
       <div className='followers-container flex center-text full-width'>
-        {fbutton ? 
+        {!fbutton ? 
           <>
             {followers.map(follower => {
               return (
