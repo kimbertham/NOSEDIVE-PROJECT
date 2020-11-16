@@ -1,10 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { defaultImage } from '../../lib/commonFiles'
-import { headers,getUserId } from '../../lib/auth'
-const currentUserId = getUserId()
+import { headers } from '../../lib/auth'
 
-const PostComments = ( { comment, updateProfile, user }) => {
+const PostComments = ( { comment, updateProfile, user, currentUserId }) => {
 
   const deleteComment = async () => {
     await axios.delete(`/api/comments/${comment.id}/`, headers())

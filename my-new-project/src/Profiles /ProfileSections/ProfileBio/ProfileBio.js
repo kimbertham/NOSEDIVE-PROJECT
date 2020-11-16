@@ -5,7 +5,6 @@ const ProfileBio = ( { user,currentUserId }) => {
 
   const { bio } = user
   if (!user) return ''
-  console.log(bio)
   return (
     <>
       {currentUserId === user.bio.id ?
@@ -25,7 +24,7 @@ const ProfileBio = ( { user,currentUserId }) => {
           </div>
           
           <div className='flex'>
-            <img src={bio.profile_image} className='bio-img'/>
+            <img src={bio.profile_image} className='bio-img' alt='bio-img'/>
             <div> 
               <h1> {bio.first_name} {bio.last_name}</h1>
               <h2> @{bio.username} </h2>

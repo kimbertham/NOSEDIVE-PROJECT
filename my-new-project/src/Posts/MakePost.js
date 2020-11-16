@@ -61,7 +61,7 @@ class MakePost extends React.Component {
             value={this.state.form.content}/>
           <div className='center'>
             <button className='post-button button'> Send!</button>
-            <img src={'https://i.imgur.com/WPwXvQU.jpg'} className='camera-button'
+            <img src={'https://i.imgur.com/WPwXvQU.jpg'} className='camera-button' alt='camera'
               onClick={this.toggleImage}/>
           </div>
         </form>

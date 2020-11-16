@@ -18,6 +18,7 @@
     margin-bottom: 20px;
   }
 
+  
   .form-input{
     width: 500px;
     height: 30px;
@@ -25,6 +26,11 @@
     border-radius: 10px;
     border: 1px solid rgba(159, 115, 115, 0.7);
     }
+
+    .invalid-auth {
+      border: 1px solid red;
+    }
+  
 
   .form-button{
     width:100%;
@@ -45,11 +51,100 @@
 }
 
 .changing-bg{
-  height: 110vh;
-  width: 110vw;
+  height: 100vh;
+  width: 100vw;
   background-size: contain;
-  margin:-100px;
   position:absolute;
+  z-index: 100;
+}
+
+.toggle-text{
+  margin: 12px 0;
+  color:rgb(182, 140, 140);
+  font-size: 15px;
+}
+
+.toggle {
+right:0;
+}
+
+.switch-position {
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  display: flex;
+  justify-content:flex-end ;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin:10px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  border-radius: 34px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(225, 168, 168, 0.9);
+
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(255, 255, 255);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(182, 140, 140);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.logo-set{
+  width: 42vw;
+  margin:3vh;
+  .logo-o {
+    margin: 3vh 6.5vw;
+    animation: 5s logo-anim infinite linear;
+  }
+  @keyframes logo-anim { 
+    0%{transform: rotate(0deg);}
+    25% {transform: translate(0) rotate(90deg)}
+    50% {transform: translate(0) rotate(180deg)}
+    75% {transform: translate(0) rotate(270deg)}
+    100% {transform: translate(0) rotate(360deg)}
+  } 
 }
 
 

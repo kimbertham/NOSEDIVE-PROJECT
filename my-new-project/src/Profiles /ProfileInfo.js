@@ -7,7 +7,8 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile, currentUserId }) 
 
   const { bio, average, follow } = user
 
-  if (!user) return ''
+
+  if (!user.bio) return null
   return (
   
     <div className='profile-info'>
@@ -26,7 +27,8 @@ const ProfileInfo = ({ user,handleModal, modal, updateProfile, currentUserId }) 
             <ProfileFollowAction
               userProfile={bio.id}
               updateProfile={updateProfile}
-              following={follow.followers}/>
+              following={follow.followers}
+              currentUserId={currentUserId}/>
           </div>
 
           <div className='profile-details'>

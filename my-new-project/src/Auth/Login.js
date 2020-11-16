@@ -8,20 +8,23 @@ import { getUserId } from '../lib/auth'
 
 class Login extends React.Component{
   state = {
-    formData: {},
-    color: false
+    formData: {
+      username: 'DemoAccount',
+      password: 'pass'
+    },
+    color: false,
+    invalid: false,
+    flashing: true
   }
-
 
   handleChange = event => {
     try {
       const formData = { ...this.state.formData, [event.target.name]: event.target.value }
-      this.setState({ formData, error: '' })
+      this.setState({ formData })
     } catch (err) {
       console.log(err)
     }
   }
-
 
   handleSubmit = async event => {
     event.preventDefault()
@@ -29,84 +32,98 @@ class Login extends React.Component{
       const res = await axios.post('/api/login/', { ...this.state.formData })
       setToken(res.data.token)
       this.props.history.push(`/profile/${getUserId()}/activity`)
-      window.location.reload(false)
     } catch (err) {
       console.log(err)
-      this.setState({ error: 'Invalid Credentials' })
+      this.setState({ invalid: true })
     }
   }
 
-  
+  componentDidMount() {
+    this.handleChangeColor()
+  }
 
   handleChangeColor = () => {
-    this.setState({ color: !this.state.color })
-    this.timer = setInterval(this.changeback,500)
-    
-  }
-
-  changeback = () => {
-    this.setState({ color: false })
-  }
-
-  componentDidMount() {
-    this.timer = setInterval(this.handleChangeColor,100)
-  }
-
-  componentWillUnmount() {
+    console.log('called')
     clearTimeout(this.timer)
+    this.setState({ color: true })
+    this.timer = setTimeout(this.changeback,100)
+  }
+  changeback = () => {
+    clearTimeout(this.timer)
+    this.setState({ color: false })
+    this.timer = setTimeout(this.handleChangeColor,2000)
   }
 
+toggleFlash = () => {
+  this.state.flashing ? clearTimeout(this.timer) : this.handleChangeColor()
+  this.setState({ flashing: !this.state.flashing })
+}
+
+componentWillUnmount() {
+  clearTimeout(this.timer)
+}
+
+render() {
+
+  const changingBg = this.state.color ? 'display-block' : 'display-none'
+  const invalid = this.state.invalid ?  'invalid-auth' :  null
+  return (
+    <> 
+
+      <div 
+        className={`changing-bg  ${changingBg}`}
+        style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}/>
+
+      <div className='absolute toggle flex'>
+        <p className='toggle-text italic'> Flashing Img </p>
+        <label className="switch">
+          <input 
+            onClick={this.toggleFlash}
+            type="checkbox"/>
+          <span className="slider round"></span>
+        </label>
+      </div> 
+        
+
+      <img 
+        src='https://i.imgur.com/KC7u7fn.jpg'
+        className='auth-logo center'
+        alt='logo'/>
+
+      <div className='auth-form center pop-up'>
+        <form onSubmit= {this.handleSubmit}>
+          <div className='form-field'>            
+            <h1>Log in</h1>
+            <input
+              className={`${invalid} form-input`}
+              placeholder="Username"
+              name="username"
+              onChange={this.handleChange}
+              value={this.state.formData.username}
+            />
+          </div>
+
+          <div className='form-field'>       
+            <input
+              className={`${invalid} form-input`}
+              type='password'
+              placeholder="Password"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.formData.password}
+            />
+          </div>
+          <p className={this.state.invalid ? 'shake-text' : 'display-none' }> Invalid username or password</p>
+
+          <button className='form-button button'> Login </button>
+          <Link to='/register'> <p>Register here</p></Link> 
+        </form>
+      </div>
 
 
-  render() {
-
-    const changingBg = this.state.color ? 'display-block' : 'display-none'
-    return (
-      <> 
-
-        <div 
-          className={`changing-bg  ${changingBg}`}
-          // style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}
-        >
-
-        </div>
-
-        <img 
-          src='https://i.imgur.com/KC7u7fn.jpg'
-          className='auth-logo center'
-          alt='logo'/>
-
-        <div className='auth-form center pop-up'>
-          <form onSubmit= {this.handleSubmit}>
-            <div className='form-field'>            
-              <h1>Log in</h1>
-              <input
-                className='form-input'
-                placeholder=" Username"
-                name="username"
-                onChange={this.handleChange}
-              />
-            </div>
-
-            <div className='form-field'>       
-              <input
-                className='form-input'
-                type='password'
-                placeholder=" Password"
-                name="password"
-                onChange={this.handleChange}
-              />
-            </div>
-
-            <button className='form-button button'> Login </button>
-            <Link to='/register'> <p>Register .....here</p></Link> 
-          </form>
-        </div>
-
-
-      </>
-    )
-  }
+    </>
+  )
+}
 }
 
 export default withRouter(Login)

@@ -36,7 +36,7 @@ const PostContent = ({ post, showComments ,updateProfile, currentUserId, user, s
 
           <p className='post-content italic'>{post.content}</p>
           
-          <img src={post.image} className='post-image' />
+          {post.image ? <img src={post.image} className='post-image' alt='post-img'/> : null}
           
           <div className='post-interactions'>
             <small 

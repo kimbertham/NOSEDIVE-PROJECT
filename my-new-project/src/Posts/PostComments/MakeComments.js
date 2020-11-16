@@ -25,7 +25,6 @@ class MakeComments extends React.Component {
         const parent = this.props.parent === null ? 
           0 : this.props.parent
         const forum = this.props.forum
-        console.log(forum)
         await axios.post(`/api/forum/${forum.id}/${parent}/`, 
           this.state.form, headers())
         this.props.getComments()

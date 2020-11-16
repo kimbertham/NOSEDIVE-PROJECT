@@ -17,7 +17,6 @@ render() {
   const { comment, getComments } = this.props
   const { comment_owner } = comment
   const { replies } = this.state
-  console.log(comment)
   return (
     <>
       <div className='tcom-top dark-border'>

@@ -33,7 +33,7 @@ class PostsRatingStars extends React.Component {
     const ave = post.ratings.reduce((a,b) => a + b.rating, 0) / post.ratings.length
     const rated = post.ratings.some(obj => obj.rating_owner.id === currentUserId)
     const con = (currentUserId === post.owner.id) ? this.showText : (!rated) ?  this.handleChange : null
-   
+
     return (
       <div className='flex column'>
         <BeautyStars

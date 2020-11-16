@@ -19,12 +19,10 @@ class ProfileBioEdit extends React.Component {
   
     getData = async () => { 
       const res = await axios.get(`/api/profile/${this.props.currentUserId}/bio/`)
-      console.log(res)
       this.setState({ profile: res.data.bio })
     }
 
     handleChange = event => {
-      console.log(event.target.value)
       try {
         const profile = { ...this.state.profile, [event.target.name]: event.target.value }
         this.setState({ profile })
@@ -53,7 +51,6 @@ class ProfileBioEdit extends React.Component {
     render(){
 
       const { profile } = this.state
-      console.log(this.state)
       if (!profile) return null
       return (
 

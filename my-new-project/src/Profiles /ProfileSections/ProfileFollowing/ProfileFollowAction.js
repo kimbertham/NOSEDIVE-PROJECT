@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import { getUserId,headers } from '../../../lib/auth'
-const currentUserId = getUserId()
+import { headers } from '../../../lib/auth'
+
 
 class ProfileFollowAction extends React.Component {
   state= {
@@ -16,7 +16,7 @@ class ProfileFollowAction extends React.Component {
   checkFollow = () => {
     const following = this.props.following
     for (let i = 0; i < following.length; i++) {
-      if (following[i].user_from.id === currentUserId) {
+      if (following[i].user_from.id === this.props.currentUserId) {
         this.setState({ following: true })
       } else {
         this.setState({ following: false })
@@ -36,9 +36,10 @@ class ProfileFollowAction extends React.Component {
   render(){
     const { following } = this.state
     const profileUser = this.props.match.params.id
+    const { currentUserId } = this.props
     return (
       
-      <div className={currentUserId.toString() === profileUser ?
+      <div className={currentUserId === profileUser ?
         'display-none' : 'follow-button-container'}>
 
         <button 

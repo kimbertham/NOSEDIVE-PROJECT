@@ -34,7 +34,8 @@ class Register extends React.Component{
   render(){
     return (
       <>
-        <img src='https://i.imgur.com/QEUu6V8.jpg'
+        <img 
+          src='https://i.imgur.com/KC7u7fn.jpg'
           className='auth-logo center'
           alt='logo'/>
 

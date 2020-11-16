@@ -23,7 +23,6 @@ getData = async () => {
   const id = this.props.currentUserId
   const user  =  await axios.get(`/api/profile/${id}/bio/`)
   const forums = await axios.get(`/api/forum/newsfeed/${id}/`)
-  // const posts =  await axios.get(`/api/post/newsfeed/${id}/`)
   const posts = await axios.post(`/api/post/newsfeed/${this.props.currentUserId}/`, this.state.page)
   const average =  await axios.get(`/api/profile/${id}/average/`)
   const friends =  await axios.get(`/api/follow/find/${id}/`, headers())
@@ -53,7 +52,7 @@ render() {
 
   const { posts ,forums, friends, user, average }  = this.state
   const { currentUserId } = this.props
-  console.log(this.state)
+
   if (!user) return null
   return (
     <>

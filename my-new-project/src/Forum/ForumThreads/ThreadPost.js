@@ -3,7 +3,6 @@ import React from 'react'
 
 const ThreadPost = ({ modal, thread, owner, follow, following, deleteThread, currentUserId }) =>  {
 
-  console.log(owner)
   const modalClass = !modal ?  'display-none' : 'display:block'
   return (
     <>

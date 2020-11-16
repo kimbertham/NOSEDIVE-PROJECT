@@ -37,9 +37,9 @@ checkRating = () => {
   const wishlist = this.props.user.wishlist
   wishlist.map(item => {
     if  (item.price > this.props.user.average * 10 ) {
-      item.block = true
+      return item.block = true
     } else {
-      item.block = false
+      return item.block = false
     }
   })
   this.setState({ wishlist })

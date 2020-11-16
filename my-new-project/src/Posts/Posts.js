@@ -60,6 +60,7 @@ class Posts extends React.Component {
                 comment={comment}
                 user={user}
                 updateProfile={ updateProfile }
+                currentUserId={currentUserId}
                 page={'profile'}/>
             )
           }) : null}

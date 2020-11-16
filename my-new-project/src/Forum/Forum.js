@@ -11,7 +11,6 @@ class Forum extends React.Component {
 
   async componentDidMount() {
     this.props.getData()
-    console.log('called')
   }
 
   handleModal =() => {
