@@ -68,12 +68,11 @@ render() {
   const changingBg = this.state.color ? 'display-block' : 'display-none'
   const invalid = this.state.invalid ?  'invalid-auth' :  null
   return (
-    <> 
-
+    <>
+      
       <div 
         className={`changing-bg  ${changingBg}`}
         style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}/>
-
       <div className='absolute toggle flex'>
         <p className='toggle-text italic'> Flashing Img </p>
         <label className="switch">
@@ -83,43 +82,52 @@ render() {
           <span className="slider round"></span>
         </label>
       </div> 
-        
 
-      <img 
-        src='https://i.imgur.com/KC7u7fn.jpg'
-        className='auth-logo center'
-        alt='logo'/>
+      <div className=' auth center'>
+        <div className='center column'>
 
-      <div className='auth-form center pop-up'>
-        <form onSubmit= {this.handleSubmit}>
-          <div className='form-field'>            
-            <h1>Log in</h1>
-            <input
-              className={`${invalid} form-input`}
-              placeholder="Username"
-              name="username"
-              onChange={this.handleChange}
-              value={this.state.formData.username}
-            />
+          <div className='logo-set'>
+            <img 
+              src={require('../styles/assets/logo-sins.jpg')}
+              className='absolute'
+              alt='logo'/>
+            <img 
+              src={require('../styles/assets/o.jpg')}
+              className='logo-o'
+              alt='logo'/>
           </div>
 
-          <div className='form-field'>       
-            <input
-              className={`${invalid} form-input`}
-              type='password'
-              placeholder="Password"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.formData.password}
-            />
-          </div>
-          <p className={this.state.invalid ? 'shake-text' : 'display-none' }> Invalid username or password</p>
+          <div className='auth-form center pop-up'>
+            <form onSubmit= {this.handleSubmit}>
+              <div className='form-field'>            
+                <h1>Log in</h1>
+                <input
+                  className={`${invalid} form-input`}
+                  placeholder="Username"
+                  name="username"
+                  onChange={this.handleChange}
+                  value={this.state.formData.username}
+                />
+              </div>
 
-          <button className='form-button button'> Login </button>
-          <Link to='/register'> <p>Register here</p></Link> 
-        </form>
+              <div className='form-field'>       
+                <input
+                  className={`${invalid} form-input`}
+                  type='password'
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.handleChange}
+                  value={this.state.formData.password}
+                />
+              </div>
+              <p className={this.state.invalid ? 'shake-text' : 'display-none' }> Invalid username or password</p>
+              <button className='form-button button'> Login </button>
+              <Link to='/register'> <p>Register here</p></Link>
+              
+            </form>
+          </div>
+        </div>
       </div>
-
 
     </>
   )

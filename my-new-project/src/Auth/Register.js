@@ -34,88 +34,99 @@ class Register extends React.Component{
   render(){
     return (
       <>
-        <img 
-          src='https://i.imgur.com/KC7u7fn.jpg'
-          className='auth-logo center'
-          alt='logo'/>
+        
+        <div className='center column'>
 
-        <div className='auth-form center pop-up'>
-          <form onSubmit= {this.handleSubmit}>
-            <h1>Register</h1>
-            <div className='form-field'>            
-              <label className='label'>First Name</label>
-              <br/>
-              <input
-                className='form-input'
-                placeholder="First name"
-                name="first_name"
-                onChange={this.handleChange}
-              />
-            </div>
+          <div className='logo-set'>
+            <img 
+              src={require('../styles/assets/logo-sins.jpg')}
+              className='absolute'
+              alt='logo'/>
+            <img 
+              src={require('../styles/assets/o.jpg')}
+              className='logo-o'
+              alt='logo'/>
+          </div>
 
-            <div className='form-field'>            
-              <label className='label'>Last name</label>
-              <br/>
-              <input
-                className='form-input'
-                placeholder="Last name"
-                name="last_name"
-                onChange={this.handleChange}
-              />
-            </div>
+          <div className='auth-form center pop-up'>
+            <form onSubmit= {this.handleSubmit}>
+              <h1>Register</h1>
+              <div className='form-field'>            
+                <label className='label'>First Name</label>
+                <br/>
+                <input
+                  className='form-input'
+                  placeholder="First name"
+                  name="first_name"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <div className='form-field'>            
-              <label className='label'>Username</label>
-              <br/>
-              <input
-                className='form-input'
-                placeholder="username"
-                name="username"
-                onChange={this.handleChange}
-              />
-            </div>
+              <div className='form-field'>            
+                <label className='label'>Last name</label>
+                <br/>
+                <input
+                  className='form-input'
+                  placeholder="Last name"
+                  name="last_name"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <div className='form-field'>            
-              <label className='label'>Email</label>
-              <br/>
-              <input
-                className='form-input'
-                placeholder="Email"
-                name="email"
-                onChange={this.handleChange}
-              />
-            </div>
+              <div className='form-field'>            
+                <label className='label'>Username</label>
+                <br/>
+                <input
+                  className='form-input'
+                  placeholder="username"
+                  name="username"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <div className='form-field'>       
-              <label className='label'>Password</label>
-              <br/>
-              <input
-                className='form-input'
-                type='password'
-                placeholder="password"
-                name="password"
-                onChange={this.handleChange}
-              />
-            </div>
+              <div className='form-field'>            
+                <label className='label'>Email</label>
+                <br/>
+                <input
+                  className='form-input'
+                  placeholder="Email"
+                  name="email"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <div className='form-field'>       
-              <label className='label'>Password Confirmation</label>
-              <br/>
-              <input
-                className='form-input'
-                type='password'
-                placeholder="password confirmation"
-                name="password_confirmation"
-                onChange={this.handleChange}
-              />
-            </div>
+              <div className='form-field'>       
+                <label className='label'>Password</label>
+                <br/>
+                <input
+                  className='form-input'
+                  type='password'
+                  placeholder="password"
+                  name="password"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <button className='form-button button'> Register Now </button>
+              <div className='form-field'>       
+                <label className='label'>Password Confirmation</label>
+                <br/>
+                <input
+                  className='form-input'
+                  type='password'
+                  placeholder="password confirmation"
+                  name="password_confirmation"
+                  onChange={this.handleChange}
+                />
+              </div>
 
-            <Link to='/login'> <p>Already a member?</p></Link> 
+              <button className='form-button button'> Register Now </button>
 
-          </form>
+              <Link to='/login'> <p>Already a member?</p></Link> 
+
+            </form>
+          </div>
         </div>
+  
       </>
     )
   }

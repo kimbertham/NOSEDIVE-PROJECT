@@ -39,7 +39,7 @@ class ProfileFollowAction extends React.Component {
     const { currentUserId } = this.props
     return (
       
-      <div className={currentUserId === profileUser ?
+      <div className={currentUserId.toString() === profileUser ?
         'display-none' : 'follow-button-container'}>
 
         <button 
