@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import Logo from '../common/Logo'
+
 import { setToken } from '../lib/auth'
 import { Link, withRouter } from 'react-router-dom'
 import { getUserId } from '../lib/auth'
@@ -85,17 +87,8 @@ render() {
 
       <div className=' auth center'>
         <div className='center column'>
-
-          <div className='logo-set'>
-            <img 
-              src={require('../styles/assets/logo-sins.jpg')}
-              className='absolute'
-              alt='logo'/>
-            <img 
-              src={require('../styles/assets/o.jpg')}
-              className='logo-o'
-              alt='logo'/>
-          </div>
+          
+          <Logo/>
 
           <div className='auth-form center pop-up'>
             <form onSubmit= {this.handleSubmit}>

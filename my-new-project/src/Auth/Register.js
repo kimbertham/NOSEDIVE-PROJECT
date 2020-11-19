@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Logo from '../common/Logo'
 
 
 class Register extends React.Component{
@@ -36,17 +37,7 @@ class Register extends React.Component{
       <>
         
         <div className='center column'>
-
-          <div className='logo-set'>
-            <img 
-              src={require('../styles/assets/logo-sins.jpg')}
-              className='absolute'
-              alt='logo'/>
-            <img 
-              src={require('../styles/assets/o.jpg')}
-              className='logo-o'
-              alt='logo'/>
-          </div>
+          <Logo/>
 
           <div className='auth-form center pop-up'>
             <form onSubmit= {this.handleSubmit}>
