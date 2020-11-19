@@ -3,6 +3,7 @@ import axios from 'axios'
 import SidebarSearch from './SidebarSearch'
 import SidebarPosts from './SidebarPosts'
 import Navbar from '../../common/Navbar'
+import { Link } from 'react-router-dom'
 
 
 class Sidebar extends React.Component {
@@ -27,17 +28,20 @@ render(){
   return (
 
     <div className='sidebar-container'>
+
       <section className='sidebar'>
         <img src='https://bit.ly/2MMLjiE'
           className='sidebar-logo '
           alt='logo'/>
 
 
+
         <Navbar 
           currentUserId={currentUserId}
           getData={getData}
         />
-        
+      
+
         <SidebarSearch 
           currentUserId={currentUserId}
           getData={getData}/>
@@ -52,6 +56,7 @@ render(){
         <div className='sidebar-section'>
           <SidebarPosts 
             posts={topPosts}/>
+
         </div>
 
       </section>

@@ -71,7 +71,7 @@ render() {
   const invalid = this.state.invalid ?  'invalid-auth' :  null
   return (
     <>
-      
+            
       <div 
         className={`changing-bg  ${changingBg}`}
         style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}/>
@@ -84,6 +84,10 @@ render() {
           <span className="slider round"></span>
         </label>
       </div> 
+
+      <Link to='/demo'>
+        <button className='demo-button center absolute'> DEMO/INFO</button>
+      </Link>
 
       <div className=' auth center'>
         <div className='center column'>
