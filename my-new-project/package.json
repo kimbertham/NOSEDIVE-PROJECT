@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "apexcharts": "^3.19.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "beauty-stars": "^1.1.0",
     "eslint-plugin-react": "^7.18.3",
     "http-proxy-middleware": "^1.0.4",
