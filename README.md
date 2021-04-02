@@ -45,6 +45,8 @@
         return user_rating_score
 ```
 <h4> Wishlist </h4> 
+  <img src='https://i.imgur.com/uBbY9J3.png' width='400' alt='messaging'/>
+
 <p> Having written the ratings portion of the website I was then able to move on to the sections of the website that relied on this information. I decided to create a wishlist that allowed users to only add items of a certain price dependent on their rating. This was taken from the episode, in which the main character was unable to rent out higher end cars due to a drop in her ratings. To achieve this I used the amazon API, which provides details, such as price and description, of all the items currently listed for sale. I wrote an if else statement that only allows a post request to be sent, leading to an item being added to their wishlist, if the price of the item costs within ten times their current user rating, otherwise they would be alerted their rating is not currently high enough. 
   
   ```
@@ -72,7 +74,10 @@
 }
   ```
   
-  <h4> Stats </h4> 
+  <h4> Stats </h4>     
+  
+  <img src='  https://i.imgur.com/q1Mo5cE.png' width='400' alt='messaging'/>
+
  <p> The stats section of the website provides the user with information on their daily number of ratings, their feedback results and an advice slip. The graphs displaying these were achieved using a third party package, react-stack-grid. It allowed me to input all the users individuals  ratings and insert them into an array which would then present the data into a specififed graph type. The advice slip takes in the any of the ratings with feedback and links the user to information on how they can potentioally increase their rating depending on which of their feedback trait is most prevelant. 
   
   ```
