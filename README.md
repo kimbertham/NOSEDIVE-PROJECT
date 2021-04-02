@@ -76,7 +76,7 @@
   
   <h4> Stats </h4>     
   
-  <img src='  https://i.imgur.com/q1Mo5cE.png' width='400' alt='messaging'/>
+  <img src='https://i.imgur.com/q1Mo5cE.png' width='400' alt='messaging'/>
 
  <p> The stats section of the website provides the user with information on their daily number of ratings, their feedback results and an advice slip. The graphs displaying these were achieved using a third party package, react-stack-grid. It allowed me to input all the users individuals  ratings and insert them into an array which would then present the data into a specififed graph type. The advice slip takes in the any of the ratings with feedback and links the user to information on how they can potentioally increase their rating depending on which of their feedback trait is most prevelant. 
   
