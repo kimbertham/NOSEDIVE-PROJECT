@@ -143,8 +143,9 @@
 
     class Meta:
         ordering = ('-created_at',)
-        ```
         
+ ```
+       
  <h2> Wins/Blockers</h2>
  
  <h4> Wins </h4>
@@ -170,3 +171,4 @@ I had quite a bit of trouble working with manytomany and populated fields, in wh
 <p> Currently the feedback system is a little strange to navigate, having to select from the drop down menu first before selecting on the star insteading of pressng the button. In future i might want to adjust this to a method that seems less ambigious. 
  
  <h2>Experience and key takeaways </h2>
+ <p> Overall this project taught me a lot about what goes into a more full, multip component web application and how to pull data in ways that can be used across multiple sections of a website effectively. Learning more about the backend side of a website as well as developing my experiencing in python has positively affected my understanding in web development fundamentals and language.
