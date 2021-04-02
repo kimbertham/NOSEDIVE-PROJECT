@@ -16,6 +16,10 @@
 </ul>
 
 <h2> Process </h2> 
+<p> Planning </p> 
+<img src='https://i.imgur.com/6a5Om9V.png' width='500' alt='plan'/>
+<p> Before putting down any code I began mapping out what id like to achieve in my given time and hoped to have the basis of my profile and stats sections done by the third day. Going through there I planned to be begin working on the forum and untill the sixth, with a day to fix bugs and stlye before presentation. I created a wireframe on figma with a basic idea of styling and also noted down the relationships id expect in the backend. 
+  
 <h4> Profile </h4> 
 <p> The first step was building profiles for the users, which included a lot of the standard sections seen in most social media websites: bio, photos, followers and activities. 
   This involved creating an initial user model in Python and building further on it by creating foreign key fields to create relationships between the profile details and the user. Backend requests were written in a way that allowed profile details to be pulled from their models as long as the user id number field was supplied in the frontend request. Once the backend was set up I began building the frontend and pulling the appropriate data for each section component. 
