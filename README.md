@@ -106,6 +106,11 @@
   ```
   
   <h4> Forum </h4>
+    <p float='left'>
+  <img src='https://i.imgur.com/X9WBNhL.png' width='400' alt='messaging'/>
+    <img src='https://i.imgur.com/91GjYvN.png' width='400' alt='messaging'/>
+  </p>
+
 <p> The forum section of the website is designed to allow users to discuss common topics with each other but gives the creator of threads the option to ban certain ratings from accessing. This is an optional feature and would result in the user unable to see the content if they anywhere within the interger provided in the create form. Users granted access are able to make posts and comments on posts/comments.Comments are made using djangorestframework-recursive, a package that provides RecursiveField that enables you to serialize a tree, and fed into a reusable component in the frontend. 
   
   ```
