@@ -99,3 +99,48 @@
   ```
   
   <h4> Forum </h4>
+<p> The forum section of the website is designed to allow users to discuss common topics with each other but gives the creator of threads the option to ban certain ratings from accessing. This is an optional feature and would result in the user unable to see the content if they anywhere within the interger provided in the create form. Users granted access are able to make posts and comments on posts/comments.Comments are made using djangorestframework-recursive, a package that provides RecursiveField that enables you to serialize a tree, and fed into a reusable component in the frontend. 
+  
+  ```
+  from rest_framework_recursive.fields import RecursiveField
+
+
+  class ForumCommentSerializer(serializers.ModelSerializer):
+    children = RecursiveField(many=True)
+    
+    class Meta:
+        model = ForumComments
+        fields = ('id','content','created_at','comment_owner','forum','parent','children')
+  ```
+  
+  <h4> AFTER PROJECT: home, messaging, edit </h4> 
+  <p> After completing the project week I found time to complete the home and edit sections of the website. The messaging system was also created after this week and involved creating a manytomany conversations field for chats between two users to be created. Once the chats were made, messages were posted into chats and connected with foriegn key field to the conversations. Read recipets were added as a boolean field and would intially be set to false. Clicking on the chat would trigger a put request to be sent from the frontend, turning it to true, leading to the removal of the number of unread message notification being shown. 
+  
+  ```
+  class Messaging(models.Model):
+    
+    reciever = models.ForeignKey(
+    'jwt_auth.User',
+    related_name='sender', 
+    on_delete=models.CASCADE)
+
+    sender= models.ForeignKey(
+    'jwt_auth.User',
+    related_name='reciever', 
+    on_delete=models.CASCADE)
+
+    conversation = models.ForeignKey(
+        'conversations.Conversations',
+        related_name='messages',
+        on_delete=models.CASCADE)
+
+    read = models.BooleanField(default=False)
+    content = models.CharField(max_length=5000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f' {self.sender} to {self.reciever}'
+
+    class Meta:
+        ordering = ('-created_at',)
+        ```
