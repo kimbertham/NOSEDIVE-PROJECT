@@ -1,9 +1,12 @@
 <h1> NOSEDIVE</h1>
-<p> Link: </p>
+<p> Link: https://nosedive-ga.herokuapp.com/login </p>
+<p> Demo: https://nosedive-ga.herokuapp.com/demo </p>
 
+<img src='https://i.imgur.com/969OblG.png' alt='nose' width='600'/>
 <h2> Overview </h2>
 <p> General Assembly: 1 week solo project - Create a full stack web application.</p>
 <p> Social media website focusing on users ratings of each other, as seen on television series Black Mirror. In the episode, user's reputation and social standing heavily rely on 5 star ratings that are given after most interactions and those with higher ratings are often seen benefiting from this in real life. On top of the profile based website, I decided to expand on this idea and added a few other sections in the website that would be relevant to the hierarchical system, such as a wishlist, forum and feedback statistics. 
+  
 <h2> Technologies </h2>
 <ul> 
 <li><p> JavaScript </p></li>
