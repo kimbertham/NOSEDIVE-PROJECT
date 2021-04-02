@@ -37,4 +37,34 @@
             user_rating_score = user_profile_ratings['rating__avg']
         return user_rating_score
 ```
+<h4> Wishlist </h4> 
+<p> Having written the ratings portion of the website I was then able to move on to the sections of the website that relied on this information. I decided to create a wishlist that allowed users to only add items of a certain price dependent on their rating. This was taken from the episode, in which the main character was unable to rent out higher end cars due to a drop in her ratings. To achieve this I used the amazon API, which provides details, such as price and description, of all the items currently listed for sale. I wrote an if else statement that only allows a post request to be sent, leading to an item being added to their wishlist, if the price of the item costs within ten times their current user rating, otherwise they would be alerted their rating is not currently high enough. 
+  
+  ```
+  handleWishList = async (price, thumbnail, url, title ) => {
+  const userLimit = this.props.user.average * 10
+  if (price > userLimit) {
+    this.setState({ modal: 'Your rating is not high enough for this action' })
+  } else {
+    this.setState({ 
+      postForm: { 
+        price: price,
+        thumbnail: thumbnail,
+        url: url,
+        title: title
+      } },
+    async () => {
+      await axios.post('/api/wishlist/', this.state.postForm , headers())
+      this.setState({ modal: 'Item Added to Wishlist' }, 
+        async () => {
+          await this.props.updateProfile(this.props.user.bio.id, 'wishlist')
+        })
+    })
+  }
+  this.checkRating()
+}
+  ```
+  
+  <h4> Stats </h4> 
+  
         
