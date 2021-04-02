@@ -121,6 +121,11 @@
   ```
   
   <h4> AFTER PROJECT: home, messaging, edit </h4> 
+  <p float='left'>
+  <img src='https://i.imgur.com/iMtoOSg.png' width='400' alt='messaging'/>
+    <img src='https://i.imgur.com/Nh9cBhx.png' width='400' alt='messaging'/>
+  </p>
+  
   <p> After completing the project week I found time to complete the home and edit sections of the website. The messaging system was also created after this week and involved creating a manytomany conversations field for chats between two users to be created. Once the chats were made, messages were posted into chats and connected with foriegn key field to the conversations. Read recipets were added as a boolean field and would intially be set to false. Clicking on the chat would trigger a put request to be sent from the frontend, turning it to true, leading to the removal of the number of unread message notification being shown. 
   
   ```
