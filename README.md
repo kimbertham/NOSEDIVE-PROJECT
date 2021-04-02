@@ -144,3 +144,29 @@
     class Meta:
         ordering = ('-created_at',)
         ```
+        
+ <h2> Wins/Blockers</h2>
+ 
+ <h4> Wins </h4>
+ <ul>
+ <li><p>
+ I found this project gave me a change to really understand the way in which a RESTful api works and how python can be used in the backend for this. Having not worked much in the backend before, I was anxious having to start the project here but instantly felt like the way in which requests work and how data can be manipulated on either side made much more sense once I started coding. 
+ </p></li>
+  <li><p> My realistic expectations and time manangement have been affected greatly after completing this project. I particularly found that the areas in which I had more of a solid plan set up before starting were much faster completed than expected and learnt the hard way that it is often much better to begin styling towards the end of the process. 
+ </p></li>
+ </ul>
+ 
+  <h4> Blockers </h4>
+ <ul>
+ <li><p>
+I had quite a bit of trouble working with manytomany and populated fields, in which i would occasionaly end up in loops where data be getting called indefinetly in these systems. I was better able to keep track of all of this later on in the project when i better understood the difference between relationships and where it was appropriate to use each type. 
+ </p></li>
+  <li><p> 
+  Styling was an issue at times due to having so many different component with different positions, keeping track of which was relative to which and at the top of the tree became hard to manage at some points. on reflection it would have been better to separate out my compnents in ways that would take this into consideration.
+ </p></li>
+ </ul>
+ 
+ <h2> Bugs and future works </h2>
+<p> Currently the feedback system is a little strange to navigate, having to select from the drop down menu first before selecting on the star insteading of pressng the button. In future i might want to adjust this to a method that seems less ambigious. 
+ 
+ <h2>Experience and key takeaways </h2>
