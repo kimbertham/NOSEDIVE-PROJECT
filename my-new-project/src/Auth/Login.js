@@ -33,7 +33,7 @@ class Login extends React.Component{
     try {
       const res = await axios.post('/api/login/', { ...this.state.formData })
       setToken(res.data.token)
-      this.props.history.push(`/profile/${getUserId()}/activity`)
+      window.location.replace(`/profile/${getUserId()}/activity`)
     } catch (err) {
       console.log(err)
       this.setState({ invalid: true })
@@ -45,7 +45,6 @@ class Login extends React.Component{
   }
 
   handleChangeColor = () => {
-    console.log('called')
     clearTimeout(this.timer)
     this.setState({ color: true })
     this.timer = setTimeout(this.changeback,100)
@@ -74,7 +73,8 @@ render() {
             
       <div 
         className={`changing-bg  ${changingBg}`}
-        style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}/>
+        // style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}
+      />
       <div className='absolute toggle flex'>
         <p className='toggle-text italic'> Flashing Img </p>
         <label className="switch">

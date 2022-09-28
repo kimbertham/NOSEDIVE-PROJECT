@@ -3,8 +3,6 @@ import axios from 'axios'
 import SidebarSearch from './SidebarSearch'
 import SidebarPosts from './SidebarPosts'
 import Navbar from '../../common/Navbar'
-import { Link } from 'react-router-dom'
-
 
 class Sidebar extends React.Component {
 state = {
@@ -23,7 +21,7 @@ async componentDidMount() {
 render(){
   const { newPosts, topPosts } = this.state
   const { getData, currentUserId } = this.props
-
+  console.log(currentUserId)
   if (!newPosts || !topPosts) return ''
   return (
 

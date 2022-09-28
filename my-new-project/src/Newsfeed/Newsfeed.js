@@ -5,7 +5,7 @@ import Posts from '../Posts/Posts'
 import ForumNews from '../Forum/ForumNews'
 import NewsfeedBio from './NewsfeedBio'
 import NewsfeedFriends from './NewsfeedFriends'
-import { headers } from '../lib/auth'
+// import { headers } from '../lib/auth'
 
 class Newsfeed extends React.Component {
 state = {
@@ -25,7 +25,7 @@ getData = async () => {
   const forums = await axios.get(`/api/forum/newsfeed/${id}/`)
   const posts = await axios.post(`/api/post/newsfeed/${this.props.currentUserId}/`, this.state.page)
   const average =  await axios.get(`/api/profile/${id}/average/`)
-  const friends =  await axios.get(`/api/follow/find/${id}/`, headers())
+  const friends =  await axios.get(`/api/follow/find/${id}/`)
   
   this.setState({ 
     posts: posts.data, 

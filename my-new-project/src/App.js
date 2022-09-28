@@ -15,16 +15,15 @@ import ForumThreads from './Forum/ForumThreads/ForumThreads'
 import Messages from './Messages/Messages'
 import Demo from './Auth/Demo'
 
-
-const token = getToken()
 const currentUserId = getUserId()
-
+const token = getToken()
 
 class App extends React.Component {
   state = {
     user: {},
     forum: {},
-    followed: []
+    followed: [],
+    token: null
   }
 
   getData = async ( profile, action ) => {
@@ -38,25 +37,21 @@ class App extends React.Component {
     const followed = res.data.filter(t => 
       t.followers.includes(currentUserId))
     this.setState({ forum: res.data, followed })
-
   }
 
   render(){
     const { user, forum, followed } = this.state 
-
     return (
       <>
         <BrowserRouter>
-      
-          {token ?   
-            <Route render={() => 
-              <Sidebar 
-                user= {user} 
-                currentUserId={currentUserId} 
-                getData={this.getData}
-                changeProfile={this.changeProfile} /> }/> 
+          {token ?
+            <Sidebar 
+              user= {user} 
+              currentUserId={currentUserId} 
+              getData={this.getData}
+              changeProfile={this.changeProfile} />
             : ''}
-
+          
           <Switch>
 
             <Route path='/login' component={Login} />

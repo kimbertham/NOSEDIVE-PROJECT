@@ -28,6 +28,7 @@ class FollowDetailView(APIView):
 
     # GET ALL ONE USERS FOLLOWERS OR FOLLOWING
     def get(self, request, action, pk):
+        print('testing recieve')
         following = Contact.objects.filter(user_from=pk)
         if action == 'contact':
             serialized_following = PopulatedFollowingSerializer(following, many=True)
@@ -39,6 +40,7 @@ class FollowDetailView(APIView):
             users = User.objects.all().exclude(id=request.user.id).values_list(flat=True)
             my_f = following.values_list('user_to', flat=True)
             non_f = list(set(users).difference(my_f))
+            print(my_f)
             if len(non_f) > 0:
                 followers = User.objects.filter(pk__in=non_f)
             if len(non_f) >= 3:
