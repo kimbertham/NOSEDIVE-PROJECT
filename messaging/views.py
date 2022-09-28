@@ -11,7 +11,6 @@ from .models import Messaging
 
 class MessagingDetailView(APIView):
     def post(self,request, pk):
-        print(request)
         request.data['reciever'] = pk
         request.data['sender'] = request.user.id
         created_message = MessagingSerializer(data=request.data)
@@ -23,7 +22,6 @@ class MessagingDetailView(APIView):
     def put(self, request, pk):
         message_to_read = Messaging.objects.get(pk=pk)
         update_message = MessagingSerializer(message_to_read, data=request.data)
-        print(request.data)
         if update_message.is_valid():
             update_message.save()
             return Response(update_message.data, status=HTTP_200_OK)

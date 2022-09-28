@@ -77,7 +77,6 @@ class Stats extends React.Component{
         break
       case 'Unattractive' :
         advice = 'https://bit.ly/2znjGJS'
-        
         break
       case 'Unpleasant Smell' : 
         advice = 'https://bit.ly/37kknQK'

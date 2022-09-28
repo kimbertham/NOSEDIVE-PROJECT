@@ -37,6 +37,8 @@ class ProfileFollowAction extends React.Component {
     const { following } = this.state
     const profileUser = this.props.match.params.id
     const { currentUserId } = this.props
+
+    if (!currentUserId) return null
     return (
       
       <div className={currentUserId.toString() === profileUser ?

@@ -10,7 +10,6 @@ const Logo = () => {
         <img  src={require('../styles/assets/logo-sins.jpg')}
           alt='logo'/>
       </div>
-      <p className='logo-head'> Black Mirror S03E01</p>
     </div>
   )
 }
