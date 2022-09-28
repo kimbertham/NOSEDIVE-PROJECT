@@ -73,7 +73,7 @@ render() {
             
       <div 
         className={`changing-bg  ${changingBg}`}
-        // style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}
+        style ={ { backgroundImage: 'url(https://bit.ly/37ovt7y)' }}
       />
       <div className='absolute toggle flex'>
         <p className='toggle-text italic'> Flashing Img </p>
