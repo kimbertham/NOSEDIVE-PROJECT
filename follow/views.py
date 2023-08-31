@@ -15,6 +15,8 @@ from jwt_auth.serializers import BasicUserSerializer
 
 User = get_user_model()
 
+'TEsTINGGG'
+
 class FollowDetailView(APIView):
     def post(self,request, action, pk):
         followed_user = User.objects.get(pk=pk)
